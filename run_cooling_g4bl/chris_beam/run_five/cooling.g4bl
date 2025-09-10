@@ -1,0 +1,91 @@
+# The lattice file fires a beam of muons through a cell. First the beam gets
+# slowed by a decelerating pulse, which stops the muons. Then the beam gets
+# reaccelerated by a second pulse, which picks the muons up and reaccelerates
+# them. The aim is that the muons "surf" the second pulse, at about 0.5 % speed of
+# light, so that they stay at the frictional cooling velocity.
+#
+# This is not carefully optimised - feel free to mess with the parameters
+#
+
+# Helium density
+param density_factor=0.005
+# physics and administrative parameters
+param epsMax=1e-3
+param c_light=300 # mm/ns
+param beam_filename=beam.bltrk
+param do_zntuple=1
+
+# Controls the reacceleration pulse
+param rf1_pulse_beta_rel=0.005 # speed at which the rf pulse moves along device [fraction of c_light]
+param dt1_device=100.0 # ns, time before rf starts switching on
+param dt1_ramp_up=10 # ns, time for ramp up of each rf cell
+param dt1_flattop=10 # ns. flat top time for each rf cell
+param dt1_ramp_dn=10 # ns, time for ramp down of each rf cell
+param ez1=1.0 # MV/m
+
+# Controls the deceleration pulse (at the moment ez set to 0 - i.e. no deceleration)
+param rf2_pulse_beta_rel=0.2 # speed at which the rf pulse moves along device [fraction of c_light]
+param dt2_device=50.0 # ns, time before rf starts switching on
+param dt2_ramp_up=10 # ns, time for ramp up of each rf cell
+param dt2_flattop=10 # ns. flat top time for each rf cell
+param dt2_ramp_dn=10 # ns, time for ramp down of each rf cell
+param ez2=-0.0 # MV/m
+
+# Cell parameters
+param full_length=1000 # mm, length of the entire device
+param rf_length=10 # mm, length of an individual rf cell
+param n_cells=100
+param n_events=1000
+
+physics QGSP_BIC disable=Decay # Muon decays are switched off
+trackcuts keep=mu+ steppingVerbose=1
+
+reference particle=mu+ beamZ=0.0 referenceMomentum=1.0
+
+# helium volume - note there is no beam pipe (muons can wander off in radial
+# direction, not realistic!)
+material tubeHe Z=2 A=4.0026 density=1.663e-04*$density_factor
+tube atube outerRadius=100 length=1000 material=tubeHe
+beam ascii filename=$beam_filename nEvents=$n_events
+fieldexpr bz length=1000 width=100 height=100 Bz=2.0
+
+place atube z=500
+place bz z=500
+
+
+# the reacceleration pulse
+do i 0 $n_cells
+    # make a ramp from 0 to +1 followed by flattop (infinitely long)
+    fieldexpr rfup$i length=$rf_length width=100 height=100 Ez=+$ez1 tmin=0.0 tmax=$dt1_ramp_up time=t/$dt1_ramp_up \
+              timeOffset=$dt1_device+$rf_length*($i+0.5)/$c_light/$rf1_pulse_beta_rel
+    # make a ramp from 0 to -1 followed by flattop (infinitely long); sum to 0 in combination
+    fieldexpr rfdn$i length=$rf_length width=100 height=100 Ez=-$ez1 tmin=0.0 tmax=$dt1_ramp_dn time=t/$dt1_ramp_dn \
+              timeOffset=$dt1_device+$dt1_ramp_up+$dt1_flattop+$rf_length*($i+0.5)/$c_light/$rf1_pulse_beta_rel
+    place rfup$i z=$rf_length*($i+0.5)
+    place rfdn$i z=$rf_length*($i+0.5)
+enddo
+
+# the deceleration pulse
+do i 0 $n_cells
+    # make a ramp from 0 to +1 followed by flattop (infinitely long)
+    fieldexpr rfup$i length=$rf_length width=100 height=100 Ez=+$ez2 tmin=0.0 tmax=$dt2_ramp_up time=t/$dt2_ramp_up \
+              timeOffset=$dt2_device+$rf_length*($i+0.5)/$c_light/$rf2_pulse_beta_rel
+    # make a ramp from 0 to -1 followed by flattop (infinitely long); sum to 0 in combination
+    fieldexpr rfdn$i length=$rf_length width=100 height=100 Ez=-$ez2 tmin=0.0 tmax=$dt2_ramp_dn time=t/$dt2_ramp_dn \
+              timeOffset=$dt2_device+$dt2_ramp_up+$dt2_flattop+$rf_length*($i+0.5)/$c_light/$rf2_pulse_beta_rel
+    place rfup$i z=$rf_length*($i+0.5)
+    place rfdn$i z=$rf_length*($i+0.5)
+enddo
+
+# output field map
+fieldntuple field file=field t=0.0,1000.0,5.0 z=0,1000,10
+# G4BL bug - seems like it either does zntuple or timentuple but not both
+if $do_zntuple
+    zntuple format=ascii zloop=0:1000:20 referenceParticle=1
+else
+    do ti 0 1000
+        timentuple output_t file=output_t format=ascii time=$ti*1 referenceParticle=1
+    enddo
+endif
+
+
