@@ -2,7 +2,7 @@ The folder contained in this directory, chris_beam, contains the data obtained w
 
 The folder is organised such that it contains the beam file, input file, and the output obtained by Chris running the file. It also contains the an initial run output file output_t.txt which was produced by the timentuple and a difference file 
 that was an attempt to see the difference in the outputs obtained but didn't work. The other folders hold all that was obtained from that run, and what was done in each run is specified in more detail in the wiki page running cooling.g4bl a summary is 
-shown below. 
+shown below. The ez2_vary contain changing the ez2 value in the input file but no analysis has been done for this data.
 
 Run one - initial run, no data was plotted 
 Run two - no change to the input file, plots obtained 
@@ -10,3 +10,4 @@ Run three - physics list was changed to muCool with decay switched on
 Run four - physics list changed to muCool with decay off 
 Run five - fixed output by only tracking the muons, QGSP_BIC physics list 
 Run six - only tracking muons and using muCool physics list 
+
