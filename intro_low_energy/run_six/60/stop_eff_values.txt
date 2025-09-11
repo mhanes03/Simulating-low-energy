@@ -1,0 +1,2 @@
+Average stopping distance : 236.59486283876896 mm
+Stopping efficiency 0.4354
