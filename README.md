@@ -1,6 +1,6 @@
 # Simulating-low-energy
 
-## Setting up and cloning the repository
+## Setting up, cloning the repository and pushing to it 
 
 1. Will need to run in the terminal :
    
@@ -8,11 +8,34 @@
    git config --global user.name "Your github Username"
    git config --global user.email "Your GitHub account email address"
    ```
-2. Next you will need to authenicate your github either by HTTPS or SSH this can be done : https://docs.github.com/en/get-started/quickstart/set-up-git#authenticating-with-github-from-git
+2. If you want to later push then next you will need to authenicate your github either by HTTPS or SSH (recommended) this can be done : https://docs.github.com/en/get-started/quickstart/set-up-git#authenticating-with-github-from-git
+   In this you will need to set up an SSH key if you choose to use SSH so that you can push to the repository. If you don't plan to push then you can just clone the repository without setting this up. 
+   
 3. To clone this repository you will use the git clone command, and by either HTTPS or SSH
    
    ```
     git clone "URL from code button on main page of Simulating-low-energy"
+   ```
+4. If you want to add to the repository then you must first add, if there is a specific file or folder you can specify it as shown below :
+   ```
+   git add new.txt
+   ```
+   Or if you have multiple things to add you can use :
+
+   ```
+   git add .
+   ```
+5. Once you have added then you need to run the commit command and you can add a message using -m 
+   ```
+   git commit -m 'addding files'
+   ```
+6. Then to upload these changes use :
+   ```
+   git push
+   ```
+7. If you want to get the most up-to-date version of the repository or check that you do you can simply use
+   ```
+   git pull
    ```
 
 ## Organisation 
