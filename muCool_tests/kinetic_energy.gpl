@@ -1,0 +1,29 @@
+# Load styles
+load "~/gpls/nature.journal"
+load "~/gpls/bluegold-sl.colour"
+
+set term pdfcairo
+
+set mxtics 5
+set xtics add (-3,-2,-1,0,1,2,3)
+
+set format x "%.1f"
+set format x "10^{%.0f}"
+
+set xlabel 'Energy (eV)' 
+set ylabel 'Events'
+
+set output 'kinetic_energy_bars.pdf'
+
+p[0.01:1000][] 'tntp.txt' u (((($4)**2+($5)**2+($6)**2)/(2*105.66))*1e6) bins=150 binwidth=0.001 w boxes notitle 
+
+set output 'kinetic_energy_bars.pdf'
+
+p[-2:3] 'tntp.txt' u (log10((((($4)**2+($5)**2+($6)**2)/(2*105.66))*1e6))) bins=25 binwidth=0.05 w boxes notitle
+
+set output 'kinetic_energy_lines.pdf'
+
+p[-2:3] 'tntp.txt' u (log10((((($4)**2+($5)**2+($6)**2)/(2*105.66))*1e6))) bins=25 binwidth=0.05 w l notitle
+
+
+exit

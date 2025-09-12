@@ -1,0 +1,52 @@
+g4ui when=1 "/process/em/lowestMuHadEnergy 0.0 eV"
+g4ui when=1 "/process/em/lowestElectronEnergy 0.0 eV"
+
+param steppingVerbose=1 steppingFormat="EXT N GLOBAL E KE STEP VOL PROCESS"
+param eventTimeLimit=60*60*100 epsMax=0.001
+
+g4ui when=4 "/vis/viewer/set/background 1 1 1"
+
+# pressure in mbar
+param -unset pre=5
+# corresponding stopping power value
+param -unset stp=40
+param -unset GasL=1000
+param GasR=$GasL/2
+
+param MHe=4.002602
+# Gas constant cm3*atm/K/mol
+param R=82.056
+param -unset Temp=293
+# mbar to atm
+param Pre=$pre/1013.25
+
+param rho=$MHe*$Pre/$R/$Temp
+
+# E-field corresponding to the stopping power
+param Efd=$stp*$rho*100.
+
+#param dirn=/home/G4blTest
+#param histoFile=$stp,$pre,$Temp,$GasL
+
+physics muCool list=0 maxTime=2.2e+3
+trackcuts keep=mu+ maxTime=2.2e+3
+
+# record energy spectrum at 2us
+timentuple tntp time=1999 require=(PDGid==-13&&Pz>0) format=ascii
+
+param Ek=0.1e-6 M=105.658
+param P=sqrt(($M+$Ek)*($M+$Ek)-$M*$M)
+
+beam gaussian beamZ=-$GasL+10 sigmaX=0 sigmaY=0 meanMomentum=$P sigmaP=0.*$P nEvents=1e+5 particle=mu+
+
+# E-field
+fieldexpr EAcc radius=$GasR length=$GasL Ez=$Efd Er=0
+place EAcc z=-$GasL front=1
+
+material He A=$MHe Z=2 state=g pressure=$Pre density=$rho
+tubs Target outerRadius=$GasR length=$GasL material=He color=0,1,0,0.5 
+place Target z=-$GasL front=1
+
+tubs GasCell innerRadius=$GasR outerRadius=$GasR+0.1 length=$GasL material=Vacuum color=invisible kill=1 
+place GasCell z=-$GasL front=1
+
