@@ -1,0 +1,36 @@
+# Load styles
+load "~/gpls/nature.journal"
+load "~/gpls/bluegold-sl.colour"
+
+set term pdfcairo
+set autoscale 
+
+# Set axis labels
+set xlabel "Length (mm)"
+set ylabel "Stopping efficiency of muons"
+
+set output 'stopping_efficiency.pdf'
+
+# plots the z stopping distance distribution
+p[200:1000][0:1] \
+  './run_seven/efficiency.txt' u 1:2 w l title 'P = 20 mbar',\
+  './run_eight/efficiency.txt' u 1:2 w l title 'P = 40 mbar',\
+  './run_nine/efficiency.txt' u 1:2 w l title 'P = 60 mbar',\
+  './run_ten/efficiency.txt' u 1:2 w l title 'P = 80 mbar' 
+
+
+# Set axis labels
+set xlabel "Length (mm)"
+set ylabel "Percent of average stopping distance"
+
+set output 'avg_stop.pdf'
+
+# plots the z stopping distance distribution
+p[200:1000][0:1] \
+  './run_seven/avg_stop.txt' u 1:2 w l title 'P = 20 mbar',\
+  './run_eight/avg_stop.txt' u 1:2 w l title 'P = 40 mbar',\
+  './run_nine/avg_stop.txt' u 1:2 w l title 'P = 60 mbar',\
+  './run_ten/avg_stop.txt' u 1:2 w l title 'P = 80 mbar' 
+
+
+exit 
