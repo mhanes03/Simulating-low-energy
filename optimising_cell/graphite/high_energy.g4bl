@@ -1,0 +1,98 @@
+* produces a He-4 gas cell, with a degrader of chosen width and material 
+* using a Gaussian beam and high energy
+
+physics QGSP_BERT 
+trackcuts keep=mu+ maxTime=1e+9
+
+# trace the first 10 tracks
+trace nTrace=1000 oneNTuple=1 require=(PDGid==-13)
+
+************************************Gas cell*******************************************
+* cell dimensions in mm defined, and He-4 gas parameters defined
+
+# how far from the start of the world the gas cell will begin
+param cell_start=10.0
+
+# length and radius dimensions
+param -unset cell_length=500.0
+param -unset cell_radius=20.0
+
+# Gas constant cm3*atm/K/mol
+param R=82.056
+
+# mass and temperature of He-4
+param MHe=4.002602
+param He_temp=10
+
+# density
+param He_density=0.001
+
+#He_density=$MHe*$Pre/$R/$He_temp
+
+# mbar
+param -unset Pressure=50 
+param Pre=($R*$He_temp*$He_density)/$MHe
+
+# define He-4 gas at some density and temperature
+material He Z=2 A=$MHe state=g density=$He_density temperature=$He_temp pressure=$Pre
+
+# creating the gas cell and placing the cell
+tubs gas_cell outerRadius=$cell_radius length=$cell_length material=He color=0,1,0
+place gas_cell z=$cell_start+($cell_length/2) 
+
+*******************************Degrader parameters**************************************
+* degrader thickness in mm
+
+# in mm
+param -unset degrader_thickness=0.88
+
+# in K
+param degrader_temp=298
+
+# defining the degrader and placing the degrader
+tubs degrader outerRadius=$cell_radius length=$degrader_thickness material=GRAPHITE color=1,0,0 
+place degrader z=0.9*$cell_start
+
+*****************************Fields****************************************************
+
+*****************************Magnetic field********************************************
+
+# defines the solenoidal field parameters, small offset used so that particle trakcs that 
+# die on the solenoid are not included in the beamlossntuple
+param sol_inner_R=$cell_radius+0.1 
+param sol_outer_R=$sol_inner_R+2
+
+coil default material=Cu 
+
+solenoid default alternate=1 color=0,1,0 kill=1
+
+coil Focus1 innerRadius=$sol_inner_R outerRadius=$sol_outer_R length=$cell_length*2
+
+# need a coil and current, coil defined above as Focus1
+solenoid USFocus coilName=Focus1 current=1990 
+
+# field lines shown in visualisation
+fieldlines exit=1 center=0,0,$cell_start nLines=100
+
+# adds the solenoid to the world
+place USFocus z=($cell_length/2)+$cell_start
+
+********************************Setting up the beam**************************************
+
+# more realistic beam
+beam ASCII file=BEAM_100K.txt beamZ=-$cell_start nEvents=5000
+
+particlecolor mu+=1,0,0
+
+************************Setting up the tuples*****************************************
+
+# zntuple to sample along the gas cell 
+
+#zntuple zloop=$cell_start:($cell_start+$cell_length):($cell_length*0.25) format=asciiExtended
+
+zntuple zloop=$cell_start:($cell_start+$cell_length):10 format=asciiExtended
+
+# keeps track of the positive muons that are within the gas cell that have stopped 
+beamlossntuple $He_density require=(z>$cell_start&&z<$cell_start+$cell_length&&(Pz*Pz+Py*Py+Px*Px)<0.0000000001&&PDGid==-13&&(x*x+y*y<$cell_radius*$cell_radius)) format=asciiExtended
+
+timentuple $cell_length time=1 format=asciiExtended
