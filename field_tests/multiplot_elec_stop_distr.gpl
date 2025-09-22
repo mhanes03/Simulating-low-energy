@@ -1,0 +1,35 @@
+# Load styles
+load "~/gpls/nature.journal"
+load "~/gpls/bluegold-sl.colour"
+
+#set format y '%1.0f'
+set format x '%1.0f'
+
+
+################################ Muons stopped by z ############################
+
+set term pdfcairo
+
+# Set axis labels
+set xlabel "z (mm)"
+set ylabel "Counts"
+
+set style fill solid 0.5
+
+set output 'muons_stopped_versus_z_run_one.pdf'
+
+set multiplot layout 2,2 columns
+
+# plots the z stopping distance distribution
+p[0:530][] '0.25/beamloss.txt' u 3 bins=50 w boxes title '0.25'
+
+p[0:530][] '0.50/beamloss.txt' u 3 bins=50 w boxes title '0.50'
+
+p[0:530][] '0.75/beamloss.txt' u 3 bins=50 w boxes title '0.75'
+
+p[0:530][] '0.00/beamloss.txt' u 3 bins=50 w boxes title 'full cell'
+
+unset multiplot 
+
+
+exit
