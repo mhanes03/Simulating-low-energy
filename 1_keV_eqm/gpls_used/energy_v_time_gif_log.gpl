@@ -19,7 +19,7 @@ set output 'energy_v_time_log.gif'
 cd 'zntuples'
 
 start = 10
-end = 520
+end = 1010
 step = 10
 
 # Set axis labels
