@@ -1,0 +1,36 @@
+# Load styles
+load "~/gpls/nature.journal"
+load "~/gpls/bluegold-sl.colour"
+
+set format x '%1.0f'
+
+set term pdfcairo
+
+set mxtics 1
+
+# Set axis labels
+set xlabel "z (mm)"
+set ylabel "Average energy (MeV)"
+
+set output 'avg_energy_v_z_profile.pdf'
+
+p[][] 'profile.txt' u 1:((($16**2)/(2*105.66))) w l notitle
+
+set xlabel "z (mm)"
+set ylabel "Number of muons"
+
+set output 'number_muons_versus_z.pdf'
+
+p[][] 'profile.txt' u 1:2 w l notitle
+
+set output 'avg_energy_v_z_log_profile.pdf' 
+
+set logscale y 
+set format y "10^{%T}"
+set mytics 10
+
+# Set axis labels
+set xlabel "z (mm)"
+set ylabel "Average energy (eV)"
+
+p[][] 'profile.txt' u 1:((($16**2)/(2*105.66))*1e6) w l notitle
