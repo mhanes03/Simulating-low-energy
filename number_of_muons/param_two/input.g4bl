@@ -1,0 +1,111 @@
+
+physics muCool list=0 disable=Decay
+
+trackcuts keep=mu+ maxTime=1e+9 steppingVerbose=1
+
+param epsMax=1e-3
+
+**********************************Parameters******************************************
+
+param for_file=0
+
+************************************Gas cell*******************************************
+* cell dimensions in mm defined, and He-4 gas parameters defined
+
+# how far from the start of the world the gas cell will begin
+param cell_start=10.0
+
+# length and radius dimensions
+param -unset cell_length=1000.0
+param -unset cell_radius=40.0
+
+# Gas constant cm3*atm/K/mol
+param R=82.056
+
+# mass and temperature of He-4
+param MHe=4.002602
+param He_temp=290
+
+# 60 mbar, converted to atm 
+param -unset Pressure=5/1013 
+param He_density=($Pressure*$MHe)/($R*$He_temp)
+
+*****************************Fields*************************************************
+
+# magnetic fields
+param sol_inner_R=$cell_radius+0.1 
+param sol_outer_R=$sol_inner_R+2
+
+# electric field / MV/m
+param -unset E_field_magnitude=6.25e-3
+
+param -unset factor=0.0
+param -unset position=$cell_start+($cell_length*$factor)
+param -unset field_len=$cell_length-($position-$cell_start)
+
+****************************Placing the gas cell*************************************
+
+# define He-4 gas at some density and temperature
+material He Z=2 A=$MHe state=g density=$He_density temperature=$He_temp pressure=$Pressure
+
+# creating the gas cell and placing the cell
+tubs gas_cell outerRadius=$cell_radius length=$cell_length material=He color=0,1,0
+place gas_cell z=$cell_start+($cell_length/2) 
+
+*****************************Fields****************************************************
+
+*****************************Magnetic field********************************************
+
+# defines the solenoidal field parameters, small offset used so that particle trakcs that 
+# die on the solenoid are not included in the beamlossntuple
+
+
+coil default material=Cu 
+
+solenoid default alternate=1 color=0,1,0 kill=1
+
+coil Focus1 innerRadius=$sol_inner_R outerRadius=$sol_outer_R length=$cell_length*2
+
+# need a coil and current, coil defined above as Focus1
+solenoid USFocus coilName=Focus1 current=1990 
+
+# field lines shown in visualisation
+fieldlines exit=1 center=0,0,$cell_start nLines=100
+
+# adds the solenoid to the world
+place USFocus z=($cell_length/2)+$cell_start
+
+************************Electric field*************************************************
+# want to have an artifical spike in the electric field at position along the cell
+
+fieldexpr E_forward length=$field_len+$cell_start radius=$cell_radius Ez=$E_field_magnitude 
+
+place E_forward z=$position+($field_len/2)
+
+********************************Setting up the beam************************************
+
+# mean momentum value chosen for Gaussian beam
+param Ek=5e-4 M=105.658
+param P=sqrt(($M+$Ek)*($M+$Ek)-$M*$M)
+
+beam gaussian beamZ=-$cell_start sigmaX=0 sigmaY=0 meanMomentum=$P sigmaP=0.02*$P nEvents=10000 particle=mu+
+
+************************Setting up the tuples*****************************************
+
+fieldntuple field file=field z=-10,1010,10 format=ascii
+
+**************************zntuple*****************************************************
+
+zntuple zloop=-$cell_start:($cell_start+$cell_length):10 format=asciiExtended
+
+***********************beamlossntuple trace profile***********************************
+
+beamlossntuple $He_density filename=beamloss require=(z>$cell_start&&z<$cell_start+$cell_length&&(Pz*Pz+Py*Py+Px*Px)<0.0000000001&&PDGid==-13&&(x*x+y*y<$cell_radius*$cell_radius)) format=asciiExtended
+
+profile filename=profile.txt particle=mu+ zloop=-$cell_start:($cell_start+$cell_length):10 coordinates=centerline
+
+*****************************timentuples***********************************************
+
+do tim 0 2500
+  timentuple time_output file=time_output time=$tim format=asciiExtended referenceParticle=1
+enddo 
