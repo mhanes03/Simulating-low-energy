@@ -1,0 +1,24 @@
+# Load styles
+load "~/nature.journal"
+load "~/bluegold-sl.colour"
+
+set format y '%1.0f'
+set format x '%1.0f'
+
+set cblabel 'Energy (MeV)'
+
+################################ x versus y #############################################
+
+set term pdfcairo
+set autoscale 
+
+set palette rgb 33,13,10
+set colorbox
+
+# Set axis labels
+set ylabel "Pz (MeV/c)"
+set xlabel "z (mm)"
+
+set output 'pz_v_z.pdf'
+
+p[][] 'time_output.txt' u 3:6:((($4)**2+($5)**2+($6)**2)/(2*105.66)) w p palette notitle

@@ -1,0 +1,19 @@
+# Load styles
+load "~/nature.journal"
+load "~/gpls/bluegold-sl.colour"
+
+set format y '%1.0f'
+set format x '%1.0f'
+
+################################ x versus y #############################################
+
+set term pdfcairo
+set autoscale 
+
+# Set axis labels
+set xlabel "t (ns)"
+set ylabel "z (mm)"
+
+set output 'z_v_t.pdf'
+
+p 'beamloss.txt' u 7:3 w p notitle 

@@ -1,0 +1,34 @@
+# Load styles
+load "~/nature.journal"
+load "~/bluegold-sl.colour"
+
+set term pdfcairo
+set key top right
+
+# Set axis labels
+set ylabel "Kinetic energy (MeV)"
+set xlabel "Time (ns)"
+
+set output 'energy_v_time.pdf'
+
+set palette rgb 10,12,14
+set colorbox
+
+set cblabel 'Energy (MeV)'
+
+cd 'zntuples'
+start = 10
+end = 1000
+step = 10
+
+# Set axis labels
+set ylabel "Energy (MeV)"
+set xlabel "Time (ns)"
+
+# using autoscale
+files(n) = sprintf('Z%d.txt', n)
+set output 'energy_v_time'
+do for [i=start:end:step] {
+p[][] files(i) u 7:((($4)**2+($5)**2+($6)**2)/(2*105.66)):((($4)**2+($5)**2+($6)**2)/(2*105.66)) w p palette title sprintf('z = %d mm', i)
+}
+

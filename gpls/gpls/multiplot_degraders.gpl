@@ -1,0 +1,35 @@
+# Load styles
+load "~/gpls/nature.journal"
+load "~/gpls/bluegold-sl.colour"
+
+set format x '%1.1f'
+
+set term pdfcairo
+set key top right
+
+# Set axis labels
+set ylabel "Mean energy (eV)"
+set xlabel "z (mm)"
+
+# Set axis labels
+set xlabel "Degrader thickness (mm)"
+set ylabel 'Mean energy (MeV)'
+
+
+set output 'multiplot.pdf'
+
+set multiplot layout 1,2 columns
+
+set ylabel 'E_{f}/E_{i}'
+
+p[][] 'values.txt' u 1:($3/3.71) w lp pt 7 ps 0.4 notitle 
+
+
+
+set ylabel 'N_{f}/N_{i}'
+
+p[][0:1.1] 'values.txt' u 1:($4/10000) w lp pt 7 ps 0.4 notitle 
+
+  
+
+exit 

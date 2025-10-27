@@ -1,0 +1,175 @@
+# Load styles
+load "~/gpls/nature.journal"
+load "~/gpls/bluegold-sl.colour"
+
+
+
+set term pngcairo
+set key top right
+
+set output 'number_of_muons_zntuples_palette.png'
+
+set ylabel "Counts"
+
+set xlabel "Energy (MeV)"
+
+set output 'z_10.png'
+
+set key top left
+
+p[][] 'zntuples/Z10.txt' u ((($4**2)+($5**2)+($6**2))/(2*105.66)) bins=25 w boxes title 'z = 10 mm'
+
+set output 'z_10_comparison.png'
+
+set key top left
+set style fill solid 0.2
+
+p[][0:3750] 'zntuples/Z10.txt' u ((($4**2)+($5**2)+($6**2))/(2*105.66)) bins=25 w boxes title 'z = 10 mm' ,\
+'zntuples/Z10.txt' u (((($4**2)+($5**2)+(($6 > 0. ? $6:NaN)**2)))/(2*105.66)) bins=25 w boxes title 'z = 10 mm, Pz > 0' ,\
+'zntuples/Z10.txt' u ((($4**2)+($5**2)+(($6 < 0. ? $6:NaN)**2))/(2*105.66)) bins=25 w boxes title 'z = 10 mm, Pz < 0'
+
+set term gif animate delay 50 loop 0 
+
+
+set output 'energy_distr_colour_coded.gif'
+
+cd 'zntuples'
+
+start = 10
+end = 420
+step = 10
+
+files(n) = sprintf('Z%d.txt', n)
+
+
+do for [i=start:end:step] {p[0:3][0:3750] files(i) u ((($4**2)+($5**2)+($6**2))/(2*105.66)) bins=25 w boxes title sprintf('z = %d mm', i) ,\
+files(i) u (((($4**2)+($5**2)+(($6 > 0. ? $6:NaN)**2)))/(2*105.66)) bins=25 w boxes title 'Pz > 0' ,\
+files(i) u ((($4**2)+($5**2)+(($6 < 0. ? $6:NaN)**2))/(2*105.66)) bins=25 w boxes title 'Pz < 0'}
+
+cd '..'
+
+set term pngcairo
+
+unset style fill 
+set output 'z_520.png'
+
+set key right
+
+set output 'z_320.png'
+
+p[][] 'zntuples/Z320.txt' u ((($4**2)+($5**2)+($6**2))/(2*105.66)) bins=25 w boxes title 'z = 320 mm'
+
+set output 'z_520.png'
+
+p[][] 'zntuples/Z520.txt' u ((($4**2)+($5**2)+($6**2))/(2*105.66)) bins=25 w boxes title 'z = 520 mm'
+
+set output 'z_510.png'
+
+set key right
+
+p[][] 'zntuples/Z510.txt' u ((($4**2)+($5**2)+($6**2))/(2*105.66)) bins=25 w boxes title 'z = 510 mm'
+
+set output 'z_420.png'
+
+set key right
+
+p[][] 'zntuples/Z420.txt' u ((($4**2)+($5**2)+($6**2))/(2*105.66)) bins=25 w boxes title 'z = 420 mm'
+
+set output 'z_750.png'
+
+p[][] 'zntuples/Z750.txt' u ((($4**2)+($5**2)+($6**2))/(2*105.66)) bins=25 w boxes title 'z = 750 mm'
+
+set output 'z_500.png'
+
+p[][] 'zntuples/Z500.txt' u ((($4**2)+($5**2)+($6**2))/(2*105.66)) bins=25 w boxes title 'z = 500 mm'
+
+set output 'z_100.png'
+
+p[][] 'zntuples/Z100.txt' u ((($4**2)+($5**2)+($6**2))/(2*105.66)) bins=25 w boxes title 'z = 100 mm'
+
+set output 'z_120.png'
+
+p[][] 'zntuples/Z120.txt' u ((($4**2)+($5**2)+($6**2))/(2*105.66)) bins=25 w boxes title 'z = 120 mm'
+
+set output 'z_210.png'
+
+p[][] 'zntuples/Z210.txt' u ((($4**2)+($5**2)+($6**2))/(2*105.66)) bins=25 w boxes title 'z = 210 mm'
+
+set output 'z_150.png'
+
+p[][] 'zntuples/Z150.txt' u ((($4**2)+($5**2)+($6**2))/(2*105.66)) bins=25 w boxes title 'z = 150 mm'
+
+set output 'z_250.png'
+
+p[][] 'zntuples/Z250.txt' u ((($4**2)+($5**2)+($6**2))/(2*105.66)) bins=25 w boxes title 'z = 250 mm'
+
+set output 'z_220.png'
+
+p[][] 'zntuples/Z220.txt' u ((($4**2)+($5**2)+($6**2))/(2*105.66)) bins=25 w boxes title 'z = 220 mm'
+
+set output 'z_300.png'
+
+p[][] 'zntuples/Z300.txt' u ((($4**2)+($5**2)+($6**2))/(2*105.66)) bins=25 w boxes title 'z = 300 mm'
+
+set output 'z_350.png'
+
+p[][] 'zntuples/Z350.txt' u ((($4**2)+($5**2)+($6**2))/(2*105.66)) bins=25 w boxes title 'z = 350 mm'
+
+set output 'z_1010.png'
+
+p[][] 'zntuples/Z1010.txt' u ((($4**2)+($5**2)+($6**2))/(2*105.66)) bins=25 w boxes title 'z = 1010 mm'
+
+set output 'z_1010_below_50keV.png'
+
+p[][] 'zntuples/less_50keV_1010.txt' u ((($4**2)+($5**2)+($6**2))/(2*105.66)) bins=25 w boxes title 'z = 1010 mm, E < 50 keV'
+
+
+set output 'z_1010_below_1kev.png'
+
+set xlabel "Energy (keV)"
+
+p[][] 'zntuples/less_1keV_1010.txt' u (((($4**2)+($5**2)+($6**2))/(2*105.66))*1e3) bins=25 w boxes title 'z = 1010 mm, E < 1 keV'
+
+set output 'z_220_below_1kev.png'
+
+set xlabel "Energy (keV)"
+
+set key left
+
+p[][] 'zntuples/less_1keV_220.txt' u (((($4**2)+($5**2)+($6**2))/(2*105.66))*1e3) bins=25 w boxes title 'z = 220 mm, E < 1 keV'
+
+set output 'z_520_below_1kev.png'
+
+set xlabel "Energy (keV)"
+
+p[][0:500] 'zntuples/less_1keV_520.txt' u (((($4**2)+($5**2)+($6**2))/(2*105.66))*1e3) bins=25 w boxes title 'z = 520 mm, E < 1 keV'
+
+set output 'z_220_below_50kev.png'
+
+set xlabel "Energy (keV)"
+
+p[][0:500] 'zntuples/less_50keV_220.txt' u (((($4**2)+($5**2)+($6**2))/(2*105.66))*1e3) bins=25 w boxes title 'z = 220 mm, E < 50 keV'
+
+
+set output 'z_320_below_1kev.png'
+
+set xlabel "Energy (keV)"
+
+p[][] 'zntuples/less_1keV_320.txt' u (((($4**2)+($5**2)+($6**2))/(2*105.66))*1e3) bins=25 w boxes title 'z = 320 mm, E < 1 keV'
+
+set xlabel "Energy (MeV)"
+
+set output 'z_1010_above_50keV.png'
+
+p[][] 'zntuples/above_50keV_1010.txt' u ((($4**2)+($5**2)+($6**2))/(2*105.66)) bins=25 w boxes title 'z = 1010 mm, E > 50 keV'
+
+set xlabel "Energy (MeV)"
+
+set output 'z_520_above_50keV.png'
+
+p[][] 'zntuples/above_50keV_520.txt' u ((($4**2)+($5**2)+($6**2))/(2*105.66)) bins=25 w boxes title 'z = 520 mm, E > 50 keV'
+
+
+
+
+exit

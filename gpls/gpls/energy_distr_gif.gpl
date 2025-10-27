@@ -1,0 +1,26 @@
+# Load styles
+load "~/nature.journal"
+load "~/gpls/bluegold-sl.colour"
+
+set term gif animate delay 50 loop 0 
+set key top right
+
+set output 'energy_dist.gif'
+
+cd 'zntuples'
+
+start = 10
+end = 1010
+step = 10
+
+# Set axis labels
+set xlabel "Energy (MeV)"
+set ylabel "Counts"
+
+# using autoscale
+files(n) = sprintf('Z%d.txt', n)
+
+# with scales defined 
+do for [i=start:end:step] {p[0:3][0:1600] files(i) u (((((($4)**2)+(($5)**2)+(($6)**2))/(2*105.66)))) bins=25 w boxes title sprintf('z = %d mm', i)}
+
+exit 

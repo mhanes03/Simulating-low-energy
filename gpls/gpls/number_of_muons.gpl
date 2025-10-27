@@ -1,0 +1,29 @@
+# Load styles
+load "~/nature.journal"
+load "~/bluegold-sl.colour"
+
+set term pngcairo
+set key top right
+
+set cblabel 'Number of muons'
+
+
+set output 'number_of_muons.png'
+
+set logscale y 
+set mytics 10
+set format y "10^{%T}"
+set ytics mirror
+
+# Set axis labels
+set ylabel "Mean energy (eV)"
+set xlabel "z (mm)"
+
+set palette rgb 10,12,14
+set palette rgb 33,13,10
+set colorbox
+
+# with scales defined 
+p[-10:1010][] 'E_mean_no_muons_z.txt' u 1:(($2*1e6)):3 w p palette notitle
+
+exit 

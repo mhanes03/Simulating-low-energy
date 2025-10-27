@@ -1,0 +1,25 @@
+# Load styles
+load "~/nature.journal"
+load "~/bluegold-sl.colour"
+
+set format y '%1.0f'
+set format x '%1.1f'
+
+set term pdfcairo enhanced
+set autoscale 
+#set key right bottom
+
+#set palette rgb 33,13,10
+#set colorbox
+
+# Set axis labels
+set xlabel "Mean equilbrium energy (keV)"
+set ylabel "Electric field (kV/m)"
+
+set output 'e_field_v_energy.pdf'
+
+
+p[0:4][10:110] '0.5.txt' u ($1*1e3):2 w p pt 5 title '{/Symbol r} = 0.00008 mg/cm^3' , \
+  '5.txt' u ($1*1e3):2 w p pt 5 ps 0.8 title '{/Symbol r} = 0.0008 mg/cm^3', \
+  '50.txt' u ($1*1e3):2 w p pt 5 ps 0.8 title '{/Symbol r} = 0.008 mg/cm^3', \
+  '100.txt' u ($1*1e3):2 w p pt 5 ps 0.8 title '{/Symbol r} = 0.02 mg/cm^3'

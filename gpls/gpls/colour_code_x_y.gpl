@@ -1,0 +1,107 @@
+# Load styles
+load "~/nature.journal"
+load "~/bluegold-sl.colour"
+
+set format y '%1.0f'
+set format x '%1.0f'
+
+cd 'zntuples' 
+
+start = 10
+end = 780
+step = 10
+
+set cblabel 'Time (ns)'
+################################ x versus y #############################################
+
+set term pdfcairo
+set autoscale 
+set palette rgb 33,13,10
+set colorbox
+
+# Set axis labels
+set xlabel "x (mm)"
+set ylabel "y (mm)"
+
+set output 'x_v_y_palette_one.pdf'
+
+files(n) = sprintf('Z%d.txt', n)
+do for [i=start:end:step] {p files(i) u 1:2:7 w p palette title sprintf('z = %d mm', i)}
+
+################################ x versus y #############################################
+
+set term pdfcairo
+set autoscale 
+set palette rgb 10,12,14
+set colorbox
+
+# Set axis labels
+set xlabel "x (mm)"
+set ylabel "y (mm)"
+
+set output 'x_v_y_palette_two.pdf'
+
+files(n) = sprintf('Z%d.txt', n)
+do for [i=start:end:step] {p files(i) u 1:2:7 w p palette title sprintf('z = %d mm', i)}
+
+
+################################ x versus y end #############################################
+
+set term pdfcairo
+set autoscale 
+set palette rgb 33,13,10
+set colorbox
+
+# Set axis labels
+set xlabel "x (mm)"
+set ylabel "y (mm)"
+
+set output 'x_v_y_palette_one_end.pdf'
+
+#p 'Z510.txt' u 1:2:7 w p palette title 'z = 1010 mm'
+
+################################ x versus y end #############################################
+
+set term pdfcairo
+set autoscale 
+set palette rgb 10,12,14
+set colorbox
+
+# Set axis labels
+set xlabel "x (mm)"
+set ylabel "y (mm)"
+
+set output 'x_v_y_palette_two_end.pdf'
+
+#p 'Z510.txt' u 1:2:7 w p palette title 'z = 1010 mm'
+
+
+########################################### Gifs ######################################
+set term gif animate delay 50 loop 0 
+
+set output 'x_y_two.gif'
+
+# Set axis labels
+set xlabel "x (mm)"
+set ylabel "y (mm)"
+
+# using autoscale
+files(n) = sprintf('Z%d.txt', n)
+do for [i=start:end:step] {p[-40:40][-40:40] files(i) u 1:2:7 w p palette title sprintf('z = %d mm', i)}
+
+set term gif animate delay 50 loop 0 
+set output 'x_y_one.gif'
+
+# Set axis labels
+set xlabel "x (mm)"
+set ylabel "y (mm)"
+
+set palette rgb 33,13,10
+set colorbox
+
+# using autoscale
+files(n) = sprintf('Z%d.txt', n)
+do for [i=start:end:step] {p[-40:40][-40:40] files(i) u 1:2:7 w p palette title sprintf('z = %d mm', i)}
+
+
+exit 

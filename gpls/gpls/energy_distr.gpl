@@ -1,0 +1,40 @@
+# Load styles
+load "~/nature.journal"
+load "~/bluegold-sl.colour"
+
+cd 'zntuples' 
+
+start = 0
+end = 1000
+step = 20
+
+set term pdfcairo
+set autoscale
+set key top right
+
+# Set axis labels
+set xlabel "Energy (MeV)"
+set ylabel "Events"
+
+set style fill solid 0.5 
+
+# using autoscale
+files(n) = sprintf('Z%d.txt', n)
+do for [i=start:end:step] {set output sprintf('%d.pdf', i) 
+p[-0.1:1.1][] files(i) u ((($4)**2+($5)**2+($6)**2)/(2*105.66)) bins=25 w boxes title sprintf('z = %d mm', i)}
+
+
+# using autoscale
+#files(n) = sprintf('Z%d.txt', n)
+#do for [i=start:end:step] {set output sprintf('%d.pdf', i) 
+#stats files(i) u ((($4)**2+($5)**2+($6)**2)/(2*105.66))
+
+#N = STATS_records
+#width = (STATS_max - STATS_min)/N
+
+#bin(x,width) = width*int((x/width)+ 0.5)
+
+#set boxwidth width
+#p files(i) u (bin((((($4)**2+($5)**2+($6)**2)/(2*105.66))),width)):(1./(width*N)) smooth freq w boxes notitle}
+
+

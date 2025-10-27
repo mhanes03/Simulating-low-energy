@@ -1,0 +1,43 @@
+# Load styles
+load "~/nature.journal"
+load "~/gpls/bluegold-sl.colour"
+
+set format y '%1.0f'
+set format x '%1.0f'
+
+cd 'zntuples' 
+
+start = 10
+end = 1010
+step = 10
+
+################################ x versus y #############################################
+
+set term pdfcairo
+set autoscale 
+
+set style fill solid 0.5
+
+# Set axis labels
+set xlabel "Time (ns)"
+set ylabel "Events"
+
+set output 'time_distributions.pdf'
+
+files(n) = sprintf('Z%d.txt', n)
+do for [i=start:end:step] {p[900:5000][] files(i) u 7 bins=50 w boxes title sprintf('z = %d mm', i)}
+
+########################################### Gifs ######################################
+set term gif animate delay 50 loop 0 
+
+set output 'time_distributions.gif'
+
+set style fill solid 0.5
+
+# Set axis labels
+set xlabel "Time (ns)"
+set ylabel "Events"
+
+# using autoscale
+files(n) = sprintf('Z%d.txt', n)
+do for [i=start:end:step] {p[900:4500][0:12000] files(i) u 7 bins=50 w boxes title sprintf('z = %d mm', i)}

@@ -1,0 +1,38 @@
+# Load styles
+load "~/gpls/nature.journal"
+load "~/gpls/bluegold-sl.colour"
+
+set term pdfcairo
+set autoscale 
+
+# Set axis labels
+set xlabel "Position of electric field"
+set ylabel "Stopping efficiency of muons"
+
+set output 'stopping_efficiency.pdf'
+
+# plots the z stopping distance distribution
+p 'efficiency.txt' u 1:2 w l notitle
+
+
+# Set axis labels
+set xlabel "Position of electric field"
+set ylabel "Average stopping distance (mm)"
+
+set output 'avg_stop_dist.pdf'
+
+# plots the z stopping distance distribution
+p 'avg_stopp.txt' u 1:2 w l notitle
+
+
+# Set axis labels
+set xlabel "Position of electric field"
+set ylabel "Average stopping distance (mm)"
+
+set output 'avg_stop_dist_points.pdf'
+
+# plots the z stopping distance distribution
+p 'avg_stopp.txt' u 1:2 w p notitle
+
+
+exit

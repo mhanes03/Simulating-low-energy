@@ -1,0 +1,41 @@
+# Load styles
+load "~/gpls/nature.journal"
+load "~/gpls/bluegold-sl.colour"
+
+set format x '%1.0f'
+
+set term pngcairo
+set key top right
+
+# Set axis labels
+set xlabel "z (mm)"
+set ylabel "N/N_{total}"
+
+
+
+set output 'number_of_muons_zntuples_one_plot_15_20_26_30.png'
+
+#p[-10:1010][0:2] '15/zntuples/E_mean_no_muons_z.txt' u 1:($3/10000) w l title 'E = 15 kV/m', \
+#  '16/zntuples/E_mean_no_muons_z.txt' u 1:($3/10000) w l title 'E = 16 kV/m', \
+#  '17/zntuples/E_mean_no_muons_z.txt'  u 1:($3/10000) w l title 'E = 17 kV/m' ,\
+#  '18/zntuples/E_mean_no_muons_z.txt' u 1:($3/10000) w l title 'E = 18 kV/m' ,\
+#  '19/zntuples/E_mean_no_muons_z.txt' u 1:($3/10000) w l title 'E = 19 kV/m', \
+#  '20/zntuples/E_mean_no_muons_z.txt'  u 1:($3/10000) w l title 'E = 20 kV/m' ,\
+#  '21/zntuples/E_mean_no_muons_z.txt' u 1:($3/10000) w l title 'E = 21 kV/m' ,\
+#  '22/zntuples/E_mean_no_muons_z.txt' u 1:($3/10000) w l title 'E = 22 kV/m', \
+#  '23/zntuples/E_mean_no_muons_z.txt'  u 1:($3/10000) w l title 'E = 23 kV/m' ,\
+#  '24/zntuples/E_mean_no_muons_z.txt' u 1:($3/10000) w l title 'E = 24 kV/m' ,\
+#  '25/zntuples/E_mean_no_muons_z.txt' u 1:($3/10000) w l title 'E = 25 kV/m', \
+#  '26/zntuples/E_mean_no_muons_z.txt'  u 1:($3/10000) w l title 'E = 26 kV/m' ,\
+#  '27/zntuples/E_mean_no_muons_z.txt' u 1:($3/10000) w l title 'E = 27 kV/m' ,\
+#  '28/zntuples/E_mean_no_muons_z.txt' u 1:($3/10000) w l title 'E = 28 kV/m', \
+#  '29/zntuples/E_mean_no_muons_z.txt'  u 1:($3/10000) w l title 'E = 29 kV/m' ,\
+#  '30/zntuples/E_mean_no_muons_z.txt' u 1:($3/10000) w l title 'E = 30 kV/m' 
+
+
+p[-10:1010][0:2] '15/zntuples/E_mean_no_muons_z.txt' u 1:($3/10000) w l title 'E = 15 kV/m', \
+  '20/zntuples/E_mean_no_muons_z.txt' u 1:($3/10000) w l title 'E = 20 kV/m', \
+  '26/zntuples/E_mean_no_muons_z.txt'  u 1:($3/10000) w l title 'E = 26 kV/m' ,\
+  '30/zntuples/E_mean_no_muons_z.txt' u 1:($3/10000) w l title 'E = 30 kV/m' 
+  
+exit 

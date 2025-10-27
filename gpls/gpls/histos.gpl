@@ -1,0 +1,24 @@
+# Load styles
+load "~/nature.journal"
+load "~/bluegold-sl.colour"
+
+set term pdfcairo
+set key top left
+
+# Set axis labels
+set xlabel "Energy (MeV)"
+set ylabel "Events"
+set style fill solid 0.5 
+
+# using autoscale
+set output 'histo.pdf'
+
+stats 'output_z.txt' u ((($4)**2+($5)**2+($6)**2)/(2*105.66))
+
+N = STATS_records
+width = (STATS_max - STATS_min)/N
+
+bin(x,width) = width*int((x/width)+ 0.5)
+
+set boxwidth width
+p 'output_z.txt' u (bin(log10(((($4)**2+($5)**2+($6)**2)/(2*105.66))),width)):(1./(width*N)) smooth freq w boxes notitle
