@@ -1,0 +1,125 @@
+physics muCool list=0 spinTracking=1
+#physics QGSP_BERT
+
+trackcuts keep=mu+ maxTime=1e+9
+
+param epsMax=1e-3
+
+# Gas constant cm3*atm/K/mol
+param R=82.056
+
+# mass and temperature of He-4
+param MHe=4.002602
+param He_temp=290
+
+# mbar, converted to atm 
+param -unset Pressure=100/1013 
+param He_density=($Pressure*$MHe)/($R*$He_temp)
+
+# define He-4 gas at some density and temperature
+material He Z=2 A=$MHe state=g density=$He_density temperature=$He_temp pressure=$Pressure
+
+param worldMaterial=He 
+
+**********************************Parameters******************************************
+
+************************************Gas cell*******************************************
+* cell dimensions in mm defined, and He-4 gas parameters defined
+
+# how far from the start of the world the gas cell will begin
+param cell_start=10.0
+
+# length and radius dimensions
+param -unset cell_length=40.0
+param -unset cell_radius=30.0
+
+*****************************Fields*************************************************
+
+***************************Cell walls************************************************
+
+****************************Placing the gas cell*************************************
+
+*******************************Degrader parameters**************************************
+# degrader thickness in mm
+
+# in mm
+param -unset mylar_thickness=0.7
+
+# defining the degrader and placing the degrader
+tubs mylar outerRadius=30 length=$mylar_thickness material=MYLAR color=1,0,0 
+
+place mylar z=-$cell_length*1.02
+
+param -unset al_thickness=0.2
+param -unset al_thickness_thicker=0.5
+
+# defining the degrader and placing the degrader
+tubs aluminium outerRadius=30 length=$al_thickness material=Al color=0,0,1 
+tubs aluminium_end outerRadius=30 length=$al_thickness_thicker material=Al color=0,0,1 
+
+place aluminium z=-$cell_length
+
+place aluminium_end z=0
+
+********************************Detectors**********************************************
+# detectors where the cell walls are so can calculate the background from each 
+# And two of hifi detectors at the start and end of the cell 
+
+tubs Brass_degrader innerRadius=32 radius=109 length=5 material=BRASS color=1,1,1
+
+virtualdetector Det innerRadius=32 radius=109 length=5 format=ascii color=1,0,1 require=(PDGid==-11)
+
+place Det z=-74.5 rename=Det#
+place Brass_degrader z=-69.49
+
+place Det z=74.5 rename=Det#
+place Brass_degrader z=69.49
+
+*****************************Fields****************************************************
+
+************************Electric field*************************************************
+
+# electric field / MV/m
+param -unset E_field_magnitude=0.1
+
+************************Electric field*************************************************
+
+fieldexpr E_forward length=$cell_length-3 radius=$cell_radius Ez=$E_field_magnitude 
+
+place E_forward z=-20.5
+
+*****************************Magnetic field********************************************
+
+fieldmap HIFImap filename=HIFI_2D_symm.BLFieldMap
+
+# field lines shown in visualisation
+fieldlines exit=1 center=0,0,$cell_start nLines=100
+
+place HIFImap z=($cell_start+$cell_length/2) current=5
+
+********************************Setting up the beam************************************
+
+# mean momentum value chosen for Gaussian beam
+param Ek=4 M=105.658
+param P=sqrt(($M+$Ek)*($M+$Ek)-$M*$M)
+
+beam gaussian beamZ=-80 sigmaX=5 sigmaY=5 meanMomentum=$P sigmaP=0.02*$P nEvents=10e6 particle=mu+ polarization=0,0,1
+
+************************Setting up the tuples*****************************************
+
+fieldntuple field file=field z=-10,1010,1 format=ascii
+
+**************************zntuple*****************************************************
+
+zntuple zloop=-80:150:10 format=asciiExtended require=(PDGid==-13)
+
+***********************beamlossntuple trace profile***********************************
+
+beamlossntuple all_loss filename=all_loss require=(PDGid==-13) format=asciiExtended
+
+profile filename=profile.txt particle=mu+ zloop=-$cell_start:($cell_start*2+$cell_length):10 coordinates=centerline
+
+******************************newparticlentuple****************************************
+
+*****************************timentuples***********************************************
+
