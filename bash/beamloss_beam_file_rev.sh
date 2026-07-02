@@ -1,0 +1,1 @@
+awk '$3 < 7.5' all_loss.txt > outside_cell.txt
