@@ -58,21 +58,22 @@ should be done for you.
 
 ## High energy simulations 
 
-The first simulations run were done at high energy so that an optimised gas cell could be set up that can then be used for low energy. The input file that corresponds to these simulations is called 
-high_energy.g4bl. These simulations were run using a beam file, BEAM_100K.txt, to run this input file need to make sure the beam file is in the same directory. These simulations can be run easily using the command, the '>' means 
-that the output that would printed to the screen is written to the file g4_out this means that the parameters run during that simulation can be looked at later if you're unsure what you ran later.
+These simulations did not use the muCool physics list and so can be run using the normal g4bl command as shown below. 
 
 ```
 g4bl high_energy.g4bl > g4_out
-```
-If you want to change an unset parameter in the input file such as the thickness of the degrader you can easily change this in the command line when running the input file, this can be done for any of the parameters that have -unset next to 
-them in the input file and you can set as many as you want when you run the simulations. 
 
 ```
-g4bl high_energy.g4bl degrader_thickness=0.5 > g4_out
-```
+
 ## Low energy simulations 
 
-The initial low energy simulations used the same high energy input file with the only change being the physics list was changed to muCool. These simulations used muCool and so you can't use the command shown above instead 
+To run these simulations on Ada you need to make sure that the low energy physics list has been added by the team, if this has been done then you can use the command below to run it using mpi. There may be a problem if the .sif has a different name so make sure it is the same as the one in your home directory, and make sure that you use the name of your input file. 
+
+```
+apptainer run --app g4blmpi ~/g4blmpi_muoncooling_20250821.sif 16 input.g4bl > g4_out
+
+```
+
+
 
 
