@@ -37,18 +37,12 @@
    ```
    git pull
    ```
-
-## Organisation 
-
-The repository is set up that each part of the project has its own folder and corresponding wiki page to explain the outputs generated, and to store the bash, python and gnuplot scripts that were used to generate
-the output. 
-
+ 
 ## Outputs
 
-The high energy and low energy simulations output zntuples, beamlossntuple, timentuple. The zntuples are set to output so that each z position of the cell has its own output file this is make it easy to pick a certain
-z position for plotting such as the beginning and end of the cell, the outputs come out in the format : 'Z100.txt' which would be for z = 100. All the files are set to extended ASCII files so that spin polarisation can 
-be tracked later, and to make processing easier. The beamlossntuple has the requirements to record all the muons that are stopped within the cell, and has the filename 'beamloss.txt'. The timentuple samples between 0 and 
-1000 ns and is output as one file 'output_t.txt' 
+The high energy and low energy simulations output zntuples, beamlossntuple, timentuple for most of the simulations. The zntuples are set to output so that each z position of the cell has its own output file, in the format Z100.txt where 100 is the distance it is recording for, this is to make it easy to pick a certain
+z position. All the files are set to non extended or extended ASCII files so that spin polarisation can 
+be tracked later. The beamlossntuple has the requirements to record all the muons that fulfill the require statment, and has the filename 'beamloss.txt'. The timentuple samples between two values and is output as one file 'output_t.txt' 
 
 ## Running the gpl scripts
 
@@ -62,7 +56,6 @@ These simulations did not use the muCool physics list and so can be run using th
 
 ```
 g4bl high_energy.g4bl > g4_out
-
 ```
 
 ## Low energy simulations 
@@ -71,8 +64,11 @@ To run these simulations on Ada you need to make sure that the low energy physic
 
 ```
 apptainer run --app g4blmpi ~/g4blmpi_muoncooling_20250821.sif 16 input.g4bl > g4_out
-
 ```
+
+## Tools that were used 
+
+A differential evolution optimiser was made to optimise parameters for the cell 
 
 
 
