@@ -41,7 +41,7 @@ This git hub contains information on the low energy simulations carried out and 
    ```
 ## High energy simulations 
 
-G4Beamline simulations run without the muCool physics list were run with the command shown below 
+G4Beamline simulations run without the muCool physics list were run with the command shown below using the FTFP_BERT physics list 
 
 ```
 g4bl high_energy.g4bl > g4_out
