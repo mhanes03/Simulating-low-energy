@@ -1,5 +1,7 @@
 # Simulating-low-energy
 
+This git hub contains information on the low energy simulations carried out and details of the tools developed to carry these simulations out. The wiki contains details of how each of these tools work and how they can be used as well as information on the simulations carried out to develop options for low energy muon beamline. 
+
 ## Setting up, cloning the repository and pushing to it 
 
 1. Will need to run in the terminal :
@@ -39,10 +41,17 @@
    ```
 ## High energy simulations 
 
-These simulations did not use the muCool physics list and so can be run using the normal g4bl command as shown below. 
+G4Beamline simulations run without the muCool physics list were run with the command shown below 
 
 ```
 g4bl high_energy.g4bl > g4_out
+```
+## Visualising G4Beamline input files
+
+For the set-ups the input files were visualised using the command below 
+
+```
+g4bl input.g4bl viewer=best
 ```
 
 ## Low energy simulations 
@@ -91,20 +100,30 @@ python3 paschen.py
 
 ## Bash scripts 
 
+Bash scripts were used to run through different parameters using a do loop that runs simulations with new parameter values. 
 
-## Outputs
+```bash
+bash sample_thickness.sh
+```
 
-The high energy and low energy simulations output zntuples, beamlossntuple, timentuple for most of the simulations. The zntuples are set to output so that each z position of the cell has its own output file, in the format Z100.txt where 100 is the distance it is recording for, this is to make it easy to pick a certain
-z position. All the files are set to non extended or extended ASCII files so that spin polarisation can 
-be tracked later. The beamlossntuple has the requirements to record all the muons that fulfill the require statment, and has the filename 'beamloss.txt'. The timentuple samples between two values and is output as one file 'output_t.txt' 
+To change the parameters from the command line in these scripts it was done as shown below for parameters set in the input file using param -unset
 
-## Running the gpl scripts
+```
+apptainer run --app g4blmpi ~/g4blmpi_muoncooling_20250821.sif 16 input.g4bl degrader_thickness=$thickness > g4_out
+```
 
-If you want to use the gpl scripts need to make sure that you have the nature.journal style file and the .colour file. The scripts that use the zntuple data also have it set that the zntuple data is in a zntuple folder this 
-was done to keep the different outputs separate because if the cell is large there can be a lot of Z files, many of the bash scripts made do this when running the simulations so if you use one of them to run the simulations it
-should be done for you. 
+## Outputs 
 
+From the simualtions the timentuples were output as one output file and so to separate the entries into the specific time a bash script was used, run as shown below 
 
+```bash
+bash sort_time.sh
+```
 
+## Plotting 
 
+To plot the output files both gnuplot and python were used, to run the gnuplot gpl scripts the command below was used, and the python plotting was done in jupyter notebooks. 
 
+```
+gnuplot energy_v_time.gpl
+```
