@@ -37,7 +37,38 @@
    ```
    git pull
    ```
- 
+## High energy simulations 
+
+These simulations did not use the muCool physics list and so can be run using the normal g4bl command as shown below. 
+
+```
+g4bl high_energy.g4bl > g4_out
+```
+
+## Low energy simulations 
+
+To run these simulations on Ada you need to make sure that the low energy physics list has been added, if this has been done then you can use the command below to run it using mpi. There may be a problem if the .sif has a different name so make sure it is the same as the one in your home directory, and make sure that you use the name of your input file. 
+
+```
+apptainer run --app g4blmpi ~/g4blmpi_muoncooling_20250821.sif 16 input.g4bl > g4_out
+```
+
+## Moving between SRIM/TRIM and G4Beamline
+
+Due to limitations of the muCool physics list muons less than 1 keV have a infinite mean free path when moving through any material other than helium gas so a workflow was developed to simulate muons moving through other materials such as mylar degraders. To carry this out was done using a bash script and a python script 
+
+```bash
+bash convert_beam_file.sh
+```
+The python script was run in the bash script using the command 
+
+```bash
+python3 convert_to_BLTrack.py
+```
+
+## Differential evolution optimiser 
+
+The Scipy differential evolution optimiser was used 
 ## Outputs
 
 The high energy and low energy simulations output zntuples, beamlossntuple, timentuple for most of the simulations. The zntuples are set to output so that each z position of the cell has its own output file, in the format Z100.txt where 100 is the distance it is recording for, this is to make it easy to pick a certain
@@ -50,25 +81,6 @@ If you want to use the gpl scripts need to make sure that you have the nature.jo
 was done to keep the different outputs separate because if the cell is large there can be a lot of Z files, many of the bash scripts made do this when running the simulations so if you use one of them to run the simulations it
 should be done for you. 
 
-## High energy simulations 
-
-These simulations did not use the muCool physics list and so can be run using the normal g4bl command as shown below. 
-
-```
-g4bl high_energy.g4bl > g4_out
-```
-
-## Low energy simulations 
-
-To run these simulations on Ada you need to make sure that the low energy physics list has been added by the team, if this has been done then you can use the command below to run it using mpi. There may be a problem if the .sif has a different name so make sure it is the same as the one in your home directory, and make sure that you use the name of your input file. 
-
-```
-apptainer run --app g4blmpi ~/g4blmpi_muoncooling_20250821.sif 16 input.g4bl > g4_out
-```
-
-## Tools that were used 
-
-A differential evolution optimiser was made to optimise parameters for the cell 
 
 
 
