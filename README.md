@@ -68,7 +68,30 @@ python3 convert_to_BLTrack.py
 
 ## Differential evolution optimiser 
 
-The Scipy differential evolution optimiser was used 
+The Scipy differential evolution optimiser was used details of which can be found at https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.differential_evolution.html 
+
+To run these scripts ran the command below 
+
+```python
+python3 optimise_voltage.py
+```
+
+## Using FEMM
+
+To make magnetic and electric field maps to then import into G4Beamline, first created the fields in FEMM and then used lua script to make the fieldmap for G4Beamline. The script was run by loading the file in on the GUI and 
+
+
+## Calculating breakdown voltage for helium and neon gas 
+
+A python script was made to calculate an estimate for the breakdown voltage this was run as below 
+
+```python
+python3 paschen.py
+```
+
+## Bash scripts 
+
+
 ## Outputs
 
 The high energy and low energy simulations output zntuples, beamlossntuple, timentuple for most of the simulations. The zntuples are set to output so that each z position of the cell has its own output file, in the format Z100.txt where 100 is the distance it is recording for, this is to make it easy to pick a certain
