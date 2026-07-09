@@ -1,5 +1,11 @@
-import numpy as np 
+# Purpose : to calculate the breakdown voltage for helium and neon 
+# 
+# Input : pressure of gas and separation of electrodes 
+# Output : the breakdown voltage corresponding to the parameters 
+#
+# Limitation : cannot calculate modified Paschen
 
+import numpy as np 
 
 def paschen(a, b, pd):
     # using gamma = 0.01
@@ -23,7 +29,7 @@ print("Breakdown voltage for helium at a pressure p =", p*1.333,"mbar", "and d =
 a = 4.4 
 b = 111
 
-p = 1000*1.33
+p = 1000/1.33
 
 d = 35
 
