@@ -1,3 +1,10 @@
+# Purpose : to find the number of entries in a file 
+# 
+# Input : file that want to find the number of entries from 
+# Output : file that has the z value and the number of muons at this value 
+#
+# Limitations : doesn't take into account double counts, this can be done using unique command on the EventID
+
 import numpy as np 
 
 # opens new file for data to be written to 
