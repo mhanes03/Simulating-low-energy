@@ -1,3 +1,10 @@
+# Purpose : find the mean energy at a certain z value 
+#
+# Input : zntuple for a particular z value 
+# Output : the mean energy 
+#
+# Limtiations : 
+
 import numpy as np 
 
 file = 'Z200.txt'
