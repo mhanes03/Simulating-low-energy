@@ -1,6 +1,9 @@
-# extracts all the parameters from the zntuple 
-# calculates the mean value of magnitude of the momentum and writes them to a text file 
-# for plotting 
+# Purpose : For each zntuple the mean energy and time value with the number of muons at these values 
+#
+# Input : zntuples 
+# Output : file that holds the number of muons, mean energy and time 
+#
+# Limitations : The number of entries does not take into account double counts this can be done using the unique command on the EventID
 
 import numpy as np 
 
