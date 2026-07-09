@@ -1,3 +1,9 @@
+# Purpose : using differential evolution optimiser to optimise the cell for the voltage applied and density of helium gas
+#
+# Input : bounds for the voltage, done in terms of fraction of the breakdown voltage, and the density is fraction of helium at standard pressure and temp
+# Output : optimisation trail file 
+# 
+# Limitations :
 import subprocess 
 from scipy.optimize import differential_evolution
 import numpy as np
