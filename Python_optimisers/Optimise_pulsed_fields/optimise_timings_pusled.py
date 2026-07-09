@@ -1,3 +1,9 @@
+# Purpose : using differential evolution optimiser to optimise the cell for timings of pulsed fields 
+#
+# Input : bounds for the timings 
+# Output : optimisation trail file 
+# 
+# Limitations :
 import subprocess 
 from scipy.optimize import differential_evolution
 import numpy as np
