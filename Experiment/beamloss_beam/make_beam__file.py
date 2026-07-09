@@ -1,3 +1,9 @@
+# Purpose : create beam file for the positron simulation for the experiment, removing the entries with a Nan and changing the z value of those outside the cell 
+# 
+# Input : beamlossntuple from the muon simulation of the experiment 
+# Output : beam file for positron simulation, and file to hold all the Nan entries 
+#
+# Limtiation : 
 import numpy as np 
 
 with open('beam.txt', 'a') as f:
