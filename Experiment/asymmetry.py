@@ -1,3 +1,10 @@
+# Purpose : attempts to calculate the asymmetry from the detector 
+#
+# Input : the detector files 
+# Output : asymmetry as a function of time 
+#
+# Limitations : should use the in built histogram function to bin the time values 
+
 import numpy as np 
 import pandas as pd
 
