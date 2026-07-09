@@ -1,5 +1,11 @@
-import numpy as np 
+# Purpose : to round the Paschen factors from the optimisations to one decimal place, done so that plots for particular Paschen factors could be produced 
+#
+# Input : optimisation trail file from the differential evolution optimiser 
+# Output : optimisation trail with rounded Paschen factors 
+#
+# Limitations : 
 
+import numpy as np 
 
 file_name = 'optimisation_trail.txt'
 
