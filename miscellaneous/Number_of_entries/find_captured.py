@@ -1,6 +1,9 @@
-# extracts all the parameters from the zntuple 
-# calculates the mean value of magnitude of the momentum and writes them to a text file 
-# for plotting 
+# Purpose : Finds the number of muons below an energy limit 
+# 
+# Input : zntuples
+# Output : file with the number of muons at each z value below an energy limit
+#
+# Limitations : does not take into account double counting which can be done using unique command on the EventID, and would also count stopped muons, should use an energy range instead of a hard limit
 
 import numpy as np 
 
