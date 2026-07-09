@@ -1,6 +1,6 @@
 # Purpose : this script aims to convert the TRANSMIT file from SRIM into a BLTrack file 
 # 
-# Inputs : need a TRANSMIT file that has already has the T removed in the first column carried out by the bash script convert_beam_file.sh (https://github.com/mhanes03/Simulating-low-energy/blob/main/bash/convert_beam_file.sh)
+# Inputs : need a TRANSMIT file that has already has the T removed in the first column carried out by the bash script convert_beam_file.sh (https://github.com/mhanes03/Simulating-low-energy/blob/main/Python_moving_SRIM_and_G4/convert_beam_file.sh)
 # Output : a BLTrack beam file 
 
 # Limitations : no time distribution has been introduced, but this can be used using lines 10-11 and 27. This also only creates an ascii file and not an extended ascii and so no initial spin polarisation
