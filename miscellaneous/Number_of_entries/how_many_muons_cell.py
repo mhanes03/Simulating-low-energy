@@ -1,3 +1,10 @@
+# Purpose : Finds the number of muons between an energy range 
+#
+# Input : zntuples
+# Output : Finds the number of muons in the energy range and above or below 
+#
+# Limitations : does not take into account double counts this can be done using the unique command on the EventID
+
 import numpy as np 
 
 # parameters of the cell ran by simulation 
