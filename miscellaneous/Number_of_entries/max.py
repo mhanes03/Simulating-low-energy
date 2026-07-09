@@ -1,3 +1,10 @@
+# Purpose : finds the best Paschen factor entry for each value, determined by the maximum number of muons in the energy range 
+#
+# Input : Paschen factor files, separated by Paschen factor
+# Output : file with parameter set for each paschen factor that performed the best 
+#
+# Limitations : 
+
 import numpy as np 
 
 for j in range(10, 31, 1):
