@@ -1,3 +1,10 @@
+# Purpose : using differential evolution optimiser to optimise the cell for the voltage applied for a constant pressure valule 
+#
+# Input : bounds for the voltage, done in terms of fraction of the breakdown voltage, and the constant pressure of helium 
+# Output : optimisation trail file 
+# 
+# Limitations :
+
 import subprocess 
 from scipy.optimize import differential_evolution
 import numpy as np
