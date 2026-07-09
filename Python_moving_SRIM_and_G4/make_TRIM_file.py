@@ -1,3 +1,10 @@
+# Purpose : to produce a TRIM.dat file so that a momentum spread can be put on the muons 
+#
+# Input : Setting of the mean energy value and spread 
+# Output : TRIM.dat file 
+#
+# Limitations : TRIM.dat file can only have 9999 entries 
+
 import numpy as np 
 
 # for the gaussian distribution, energy in eV
