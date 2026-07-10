@@ -1,4 +1,9 @@
-
+# Purpose : samples different field values for the 150 mbar pressure cell for Paschen factors 0.5 to 0.9 
+#
+# Input : field values  
+# Output : simulations for each electric field value
+# 
+# Limitations : 
 # 0.5 0.6 0.7 0.8 0.85 0.9 paschen factors 
 field="0.0773 0.0928 0.108 0.124 0.131 0.139"
 
