@@ -1,3 +1,9 @@
+# Purpose : to separate the time values in the timentuple into separate files for each time
+#
+# Input : timentuple 
+# Output : individual files for each time value  
+# 
+# Limitations : 
 mkdir tntuples
 
 cp time_output.txt tntuples
