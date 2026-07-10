@@ -1,4 +1,9 @@
-
+# Purpose : runs the python script for different pressure values 
+#
+# Input : pressure values  
+# Output : energy file from python script 
+# 
+# Limitations : 
 press="50 100 250 500 750 1000"
 
 for pressure in $press
