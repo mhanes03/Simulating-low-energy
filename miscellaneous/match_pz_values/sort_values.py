@@ -1,3 +1,9 @@
+# Purpose : to match before and after values for muons before and after going through the degrader 
+#
+# Input : two zntuples, one before the degrader and one after 
+# Output : Pz values before and after 
+# 
+# Limitations : 
 import numpy as np 
 
 Event_id_100, Pz_100 = np.loadtxt('pz_before_and_after_100.txt',  unpack=True)
