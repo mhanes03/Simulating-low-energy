@@ -1,4 +1,9 @@
-
+# Purpose : samples different magnetic field values 
+#
+# Input : magnetic field values  
+# Output : simulations for each magnetic field value 
+# 
+# Limitations : 
 B_field="2.5 4.5 3.5 1.5"
 
 for B in $B_field
