@@ -1,3 +1,9 @@
+# Purpose : attempt to make the beam file for the muons taken from the beamloss file 
+#
+# Input : beamloss files for each part of the cell
+# Output : beam file
+# 
+# Limitations : it needs to load a lot of files in, because each of the beamloss files are separate 
 import numpy as np
 
 filename = 'outside_cell.txt'
