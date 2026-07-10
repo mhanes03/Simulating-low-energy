@@ -1,3 +1,9 @@
+# Purpose : samples different pressure values 
+#
+# Input : different pressure values 
+# Output : simulations for different densities  
+# 
+# Limitations : 
 pressure="5 1000 5000"
 
 for press in $pressure
