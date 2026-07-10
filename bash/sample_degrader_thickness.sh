@@ -1,4 +1,9 @@
-
+# Purpose : sample different degrader thicknesses and running g4bl simulation for each thickness
+#
+# Input : thickness values want to sample 
+# Output : simulations for each thickness 
+# 
+# Limitations : 
 thick="0.9 0.95 1.05 1.1 1.15 1.2"
 
 for thickness in $thick
