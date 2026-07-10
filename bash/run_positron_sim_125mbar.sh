@@ -1,4 +1,4 @@
-# Purpose : samples different field values for the 150 mbar pressure cell for Paschen factors 0.5 to 0.9 for positron simulation 
+# Purpose : samples different field values for the 125 mbar pressure cell for Paschen factors 0.5 to 0.9 for positron simulation 
 #
 # Input : field values  
 # Output : simulations for each electric field value
