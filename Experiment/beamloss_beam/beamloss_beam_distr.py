@@ -1,4 +1,4 @@
-# Purpose : attempt to make the beam file for the muons taken from the beamloss file 
+# Purpose : attempt to make the beam file for the muons taken from the beamloss file, and introduces an x and y distribution 
 #
 # Input : beamloss files for each part of the cell
 # Output : beam file
