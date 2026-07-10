@@ -1,3 +1,9 @@
+# Purpose : to match electric field value with different stopping power values for constant pressure
+#
+# Input : pressure value and stopping power values 
+# Output : simulations for each electric field valule  
+# 
+# Limitations : 
 S="80 70 60 50 40 30 20"
 
 for stp in $S
