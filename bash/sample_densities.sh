@@ -1,3 +1,9 @@
+# Purpose : match the electric field for different densities for a stopping power of 20 MeV cm^2 /g 
+#
+# Input : pressure values and the stopping power value wanted 
+# Output : simulations for these parameters 
+# 
+# Limitations : 
 pressure="50 100 150 200 250 500 750 1000"
 
 for press in $pressure
