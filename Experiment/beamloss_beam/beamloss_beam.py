@@ -1,3 +1,9 @@
+# Purpose : attempt to make the beam file for the muons taken from the beamloss file 
+#
+# Input : outside_cell file which are the entries from the beamlossntuple that were outside the gas cell 
+# Output : beam file
+# 
+# Limitations : it only takes the muons that were outside cell, so for whole beam file would need to concencate the files, it also doesn't remove the Nan entries and so the file would crash
 import numpy as np
 
 filename = 'outside_cell.txt'
