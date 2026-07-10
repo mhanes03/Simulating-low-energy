@@ -1,4 +1,9 @@
-
+# Purpose : separates zntuple entries into data files for different energy ranges
+#
+# Input : zntuples
+# Output : energy range data files  
+# 
+# Limitations : 
 [ ! -d energy_ranges ] && mkdir energy_ranges
 
 cd energy_ranges
