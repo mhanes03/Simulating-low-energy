@@ -1,0 +1,30 @@
+# Load styles
+load "~/gpls/nature.journal"
+load "~/gpls/bluegold-sl.colour"
+
+set term pdfcairo
+unset size
+
+set xlabel ''
+set ylabel 'Counts'
+
+set output 'positrons_produced.pdf'
+
+set style data histogram
+set style histogram cluster gap 2
+set style fill solid
+set boxwidth 1
+set xtics format ""
+set grid ytics
+
+set title 'Counts from newparticlentuple'
+
+p[][] 'positrons_produced.txt' u 2:xtic(1) notitle
+
+
+set output 'positrons_created_comp.pdf'
+
+set key top left 
+p[][] '../Positrons_created_comp.txt' u 2:xtic(1) title 'No E-field', \
+'../Positrons_created_comp.txt' u 3 title '0.125 MV/m', \
+'../Positrons_created_comp.txt' u 4 title '0.144 MV/m', \

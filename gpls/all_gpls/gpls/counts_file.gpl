@@ -1,0 +1,21 @@
+# Load styles
+load "~/gpls/nature.journal"
+load "~/gpls/bluegold-sl.colour"
+
+set term pdfcairo
+
+set xlabel 'Detector'
+set ylabel 'Counts'
+
+set output 'bar_chart_of_counts.pdf'
+
+set style data histogram
+set style histogram cluster gap 1
+set style fill solid
+set boxwidth 0.9
+set xtics format ""
+set grid ytics
+
+p[][0:9000] 'counts_file.txt' u 2:xtic(1) title 'No E-field', \
+'counts_file.txt' u 3 title '0.125 MV/m', \
+'counts_file.txt' u 4 title '0.144 MV/m', \

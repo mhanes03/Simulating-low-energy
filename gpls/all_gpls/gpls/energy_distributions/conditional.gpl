@@ -1,0 +1,23 @@
+# Load styles
+load "~/nature.journal"
+load "~/gpls/bluegold-sl.colour"
+
+cd 'zntuples' 
+
+start = 10
+end = 1000
+step = 10
+
+set term pdfcairo
+set autoscale
+
+# Set axis labels
+set xlabel "Energy (keV)"
+set ylabel "Events" 
+
+set style fill solid 0.5 
+
+# using autoscale
+files(n) = sprintf('Z%d.txt', n)
+do for [i=start:end:step] {set output sprintf('%d_conditional.pdf', i) 
+p[][] files(i) u (((((($4)**2+($5)**2+($6)**2)/(2*105.66)))*1e3) < 50. && ((((($4)**2+($5)**2+($6)**2)/(2*105.66)))*1e3) > 1.  ? ((((($4)**2+($5)**2+($6)**2)/(2*105.66)))*1e3):NaN) bins=25 w boxes title sprintf('z = %d mm', i)}

@@ -1,0 +1,20 @@
+# Load styles
+load "~/gpls/nature.journal"
+load "~/gpls/bluegold-sl.colour"
+
+
+
+set term pngcairo
+set key top right
+
+set output 'number_of_muons_zntuples_palette.png'
+
+set ylabel "Counts"
+
+set xlabel "Energy (MeV)"
+
+set output 'z_10.png'
+
+set key top left
+
+p[][] 'zntuples/Z10.txt' u ((($4**2)+($5**2)+($6**2))/(2*105.66)) bins=25 w boxes title 'z = 10 mm'

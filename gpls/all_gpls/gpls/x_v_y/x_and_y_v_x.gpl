@@ -1,0 +1,66 @@
+# Load styles
+load "~/nature.journal"
+load "~/gpls/bluegold-sl.colour"
+
+set format y '%1.0f'
+set format x '%1.0f'
+
+cd 'zntuples' 
+
+start = 0
+end = 1000
+step = 10
+
+################################ x versus y #############################################
+
+set term pdfcairo
+set autoscale 
+
+# Set axis labels
+set xlabel "x (mm)"
+set ylabel "y (mm)"
+
+set output 'x_v_y.pdf'
+
+files(n) = sprintf('Z%d.txt', n)
+do for [i=start:end:step] {p files(i) u 1:2 title sprintf('z = %d mm', i)}
+
+############################## Px versus Py #########################################
+
+set term pdfcairo
+
+# Set axis labels
+set xlabel "P_x (MeV/c)"
+set ylabel "P_y (MeV/c)"
+
+set output 'px_v_py.pdf'
+
+files(n) = sprintf('Z%d.txt', n)
+do for [i=start:end:step] {p files(i) u 4:5 title sprintf('z = %d mm', i)}
+
+########################################### Gifs ######################################
+set term gif animate delay 50 loop 0 
+
+set output 'x_y.gif'
+
+# Set axis labels
+set xlabel "x (mm)"
+set ylabel "y (mm)"
+
+# using autoscale
+files(n) = sprintf('Z%d.txt', n)
+do for [i=start:end:step] {p[-40:40][-40:40] files(i) u 1:2 title sprintf('z = %d mm', i)}
+
+set output 'px_py.gif'
+set term gif animate delay 50 loop 0 
+
+# Set axis labels
+set xlabel "P_x (MeV/c)"
+set ylabel "P_y (MeV/c)"
+
+# using autoscale
+files(n) = sprintf('Z%d.txt', n)
+do for [i=start:end:step] {p[-10:10][-10:10] files(i) u 4:5 title sprintf('z = %d mm', i)}
+
+cd '..'
+exit 

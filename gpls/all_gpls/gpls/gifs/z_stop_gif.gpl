@@ -1,0 +1,26 @@
+# Load styles
+load "~/gpls/nature.journal"
+load "~/gpls/bluegold-sl.colour"
+
+set format '%.0f'
+
+set term gif animate delay 50 loop 0 
+set autoscale
+
+set output 'z_stop.gif'
+set style fill solid 0.5 
+
+# Set axis labels
+set xlabel "z (mm)"
+set ylabel "Counts"
+
+# using autoscale
+n = 0.01
+path(n) = sprintf('%.2f', n)
+
+do for [i=0:100] {cd path(n)
+p[0:515][0:200] 'beamloss.txt' u 3 bins=50 w boxes title sprintf('thickness = %.2f mm' , i*0.01)
+n = n+0.01
+cd '..'}
+
+exit

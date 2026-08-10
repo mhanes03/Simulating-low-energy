@@ -1,0 +1,35 @@
+#!/bin/bash
+
+# Website URL
+#http://colorschemedesigner.com/#3x222ppo8K-K-
+
+# General Palette
+set palette defined ( 0 '#FFC0CB',\
+                      1 '#A020F0',\
+                      2 '#20547C',\
+                      3 '#77B1DE',\
+                      4 '#A9C7DE',\
+                      5 '#EFD5B2',\
+                      6 '#EFBD79',\
+                      7 '#C07F28',\
+                      8 '#785F3D',\
+                      9 '#5B3605')
+
+# Reset for 3D/map plots
+unset colorbox
+
+set style line 1 pt 1 ps 1.0 lt 1 lc  rgb "#882D61" lw 2
+set style line 2 pt 1 ps 1.0 lt 1 lc  rgb "#AA3939" lw 2
+set style line 3 pt 1 ps 1.0 lt 1 lc  rgb "#7B9F35"  lw 2
+set style line 4 pt 1 ps 1.0 lt 1 lc rgb  "#2D882D" lw 2
+set style line 5 pt 1 ps 1.0 lt 1 lc rgb "#58A72" lw 2
+set style line 6 pt 1 ps 1.0 lt 1 lc rgb "#C07F28" lw 2
+set style line 7 pt 1 ps 1.0 lt 1 lc  rgb "#785F3D" lw 2
+set style line 8 pt 1 ps 1.0 lt 1 lc rgb "#5B3605" lw 2
+set style line 9 pt 1 ps 1.0 lt 1 lc rgb "#5B3605" lw 2
+set style line 10 pt 1 ps 1.0 lt 1 lc rgb "#5B3605" lw 2
+
+#Set additional styles for dashed/dotted lines
+set style line 100 pt 1 ps 1.2 lt 0 lc rgb "gray30" lw 2
+set style line 101 pt 9 ps 1.4 lt 5 lc rgb "black" lw 2
+

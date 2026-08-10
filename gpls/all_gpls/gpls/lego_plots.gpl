@@ -1,0 +1,7 @@
+# Load styles
+load "~/gpls/nature.journal"
+load "~/gpls/bluegold-sl.colour"
+
+set term pdfcairo
+
+set output 'asymm.pdf'

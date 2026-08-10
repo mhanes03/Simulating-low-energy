@@ -1,0 +1,18 @@
+# Load styles
+load "~/gpls/nature.journal"
+load "~/gpls/bluegold-sl.colour"
+
+set term pdfcairo
+
+# Set axis labels
+set ylabel "Captured muons (%)"
+
+set output 'efficiency.pdf'
+
+set palette rgb 33,13,10
+set colorbox
+set cblabel 'Above bounds (%)'
+
+set xlabel "t_{2} (ns)"
+
+p[][] 'optimisation_trail_timings.txt' u 1:($5/100):($2/100) w p palette notitle

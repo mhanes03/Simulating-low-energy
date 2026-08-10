@@ -1,0 +1,58 @@
+# Load styles
+load "~/gpls/nature.journal"
+load "~/gpls/bluegold-sl.colour"
+
+
+
+################################ Muons stopped by z ############################
+
+set term pdfcairo
+set autoscale 
+
+# Set axis labels
+set xlabel "z (mm)"
+set ylabel "Counts"
+
+set style fill transparent solid 0.5
+
+set output 'muons_stopped_versus_z_dist.pdf'
+
+# plots the z stopping distance distribution
+p 'beamlossincell.txt' u 3 bins=50 w boxes notitle
+
+set output 'muons_stopped_versus_z.pdf'
+
+set ylabel "Energy (eV)"
+
+# plots the z stopping distance distribution
+p 'beamlossincell.txt' u 3:(((($4**2)+($5**2)+($6**2))/(2*105.66))*1e6) w p notitle
+
+
+set output 'muons_stopped_versus_t.pdf'
+
+set ylabel "Counts"
+set xlabel 'Time ns'
+
+# plots the z stopping distance distribution
+p[] 'beamlossincell.txt' u 7 bins=50 w boxes notitle
+
+
+set output 'muons_stopped_versus_z_comp.pdf'
+
+
+# plots the z stopping distance distribution
+p '../../beamloss.txt' u 3 bins=50 w boxes title 'No E-field', \
+'beamloss.txt' u 3 bins=50 w boxes title 'Half way'
+
+
+
+set output 'muons_stopped_versus_z_all.pdf'
+
+
+# plots the z stopping distance distribution
+p '../../beamloss.txt' u 3 bins=50 w boxes title 'No E-field', \
+'beamloss.txt' u 3 bins=50 w boxes title 'Half way', \
+'../../e-field/beamloss.txt' u 3 bins=50 w boxes title 'Full cell', \
+
+
+exit

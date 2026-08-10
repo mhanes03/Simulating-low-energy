@@ -1,0 +1,13 @@
+load "~/nature.journal"
+load "~/gpls/bluegold-sl.colour"
+
+set term pdfcairo
+set autoscale
+
+# Set axis labels
+set xlabel "Energy (MeV)"
+set ylabel "Events" 
+
+set output 'trim.pdf'
+
+p[][] 'TRIM.dat' u ($3*1E-6) bins=25 w boxes notitle

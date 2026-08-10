@@ -1,0 +1,29 @@
+# Load styles
+load "~/gpls/nature.journal"
+load "~/gpls/bluegold-sl.colour"
+
+set term pdfcairo
+unset size
+
+set xlabel ''
+set ylabel 'Counts'
+
+set output 'muon_loss.pdf'
+
+set style data histogram
+set style histogram cluster gap 2
+set style fill solid
+set boxwidth 1
+set xtics format ""
+set grid ytics
+
+set title 'Counts from beamlossntuples'
+
+p[][] 'muon_counts_loss.txt' u 2:xtic(1) notitle
+
+set output 'muon_loss_comp.pdf'
+
+set key top left 
+p[][] '../muon_counts_loss_comp.txt' u 2:xtic(1) title 'No E-field', \
+'../muon_counts_loss_comp.txt' u 3 title '0.125 MV/m', \
+'../muon_counts_loss_comp.txt' u 4 title '0.144 MV/m', \

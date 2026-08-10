@@ -1,0 +1,38 @@
+# Load styles
+load "~/nature.journal"
+load "~/gpls/bluegold-sl.colour"
+
+cd 'tntuples' 
+
+set term pdfcairo
+set autoscale
+
+# Set axis labels
+set xlabel "Energy (MeV)"
+set ylabel "Events" 
+
+set output '100.pdf'
+
+
+set style fill transparent solid 0.5
+
+set key top left
+set xlabel "Energy (keV)"
+set ylabel "Events" 
+
+
+p[][] 'T100.txt' u (((($4)**2+($5)**2+($6)**2)/(2*105.66))*1e3) bins=25 w boxes title 't = 100 ns'
+
+
+set output '100_z.pdf'
+
+
+set style fill transparent solid 0.5
+
+set key top left
+set xlabel "z (mm)"
+set ylabel "Events" 
+
+
+p[][] 'T100.txt' u 3 bins=25 w boxes title 't = 100 ns'
+

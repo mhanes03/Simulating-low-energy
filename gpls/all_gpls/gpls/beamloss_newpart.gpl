@@ -1,0 +1,11 @@
+# Load styles
+load "~/gpls/nature.journal"
+load "~/gpls/bluegold-sl.colour"
+
+set term pdfcairo
+
+set output 'beamloss_newparticles.pdf'
+
+p[-20:160][-25:25] 'positrons.txt' u 3:1 w p notitle, \
+'beamlossincell.txt' u 3:1 w p notitle, \
+'in_degrader.txt' u 3:1 w p notitle

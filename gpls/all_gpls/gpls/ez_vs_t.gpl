@@ -1,0 +1,19 @@
+# Load styles
+load "~/nature.journal"
+load "~/gpls/bluegold-sl.colour"
+
+set term pdfcairo
+set output 'field.pdf'
+
+start=0
+end=1000
+step=10
+
+cd 'fieldntuples'
+
+set xlabel 'Time (ns)'
+set ylabel 'Electric field (MV/m)'
+
+files(n) = sprintf('F%d.txt', n)
+do for [i=start:end:step] {set output sprintf('%d.pdf', i) 
+p[][-0.09:0.06] files(i) u 4:10 w l title sprintf('z = %d mm', i)}

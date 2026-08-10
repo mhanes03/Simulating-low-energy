@@ -1,0 +1,16 @@
+# Load styles
+load "~/nature.journal"
+load "~/gpls/bluegold-sl.colour"
+
+set term pdfcairo
+
+set xlabel "t (ns)"
+set ylabel "Number muons 0.1 eV - 1 keV (%)" 
+
+set output 'N_versus_t.pdf'
+
+p[0:2500][0:8.25] './15/tntuples/energy_and_number_time_bounds.txt' u 1:($5/1e2) w l title 'Flat top = 15 ns', \
+            './20/tntuples/energy_and_number_time_bounds.txt' u 1:($5/1e2) w l title 'Flat top = 20 ns', \
+            './25/tntuples/energy_and_number_time_bounds.txt' u 1:($5/1e2) w l title 'Flat top = 25 ns', \
+            './30/tntuples/energy_and_number_time_bounds.txt' u 1:($5/1e2) w l title 'Flat top = 30 ns', \
+            './35/tntuples/energy_and_number_time_bounds.txt' u 1:($5/1e2) w l title 'Flat top = 35 ns', \

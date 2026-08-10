@@ -1,0 +1,46 @@
+# Load styles
+load "~/gpls/nature.journal"
+load "~/gpls/bluegold-sl.colour"
+
+set format x '%1.0f'
+
+set term pdfcairo
+
+set mxtics 1
+
+# Set axis labels
+set xlabel "z (mm)"
+set ylabel "Average energy (eV)"
+
+set output 'avg_energy_v_z_log_colourbar.pdf' 
+
+set multiplot layout 2,2 columns
+set key samplen 2 spacing .5 font ",11"
+
+#set ylabel font ",11"
+
+set logscale y 
+set format y "10^{%T}"
+set mytics 10
+
+# Set axis labels
+set xlabel "z (mm)"
+set ylabel "Average energy (eV)"
+
+set palette rgb 33,13,10
+set colorbox
+
+set logscale cb
+set format cb "10^{%T}"
+set cbrange [1e0:1e4]
+
+#set cblabel 'Number of muons'
+set cblabel font ",11"
+
+p[0:1010][1e2:2e4] 'param_one/run_four/profile.txt' u 1:((($16**2)/(2*105.66))*1e6):2 w l palette title 'E = 45.6 kV/m'
+
+p[0:1010][1e2:2e3] 'param_two/run_three/profile.txt' u 1:((($16**2)/(2*105.66))*1e6):2 w l palette title 'E = 6.25 kV/m'
+
+p[0:1010][1e2:2e4] 'param_three/run_three/profile.txt' u 1:((($16**2)/(2*105.66))*1e6):2 w l palette title 'E = 32 kV/m'
+
+p[0:1010][2e1:2e3] 'param_four/run_twoo/profile.txt' u 1:((($16**2)/(2*105.66))*1e6):2 w l palette title 'E = 1.56 kV/m'

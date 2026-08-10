@@ -1,0 +1,51 @@
+# Load styles
+load "~/gpls/nature.journal"
+load "~/gpls/bluegold-sl.colour"
+
+
+
+set term pngcairo
+set key top right
+
+set style fill solid 0.2
+
+set xlabel "Energy (MeV)"
+set ylabel "Counts"
+
+set output 'z_320_comp.png'
+
+p[][0:1400] '0.01/zntuples/Z320.txt' u ((($4**2)+($5**2)+($6**2))/(2*105.66)) bins=25 w boxes title 'z = 320 mm, thickness = 10 microns', \
+'0.02/zntuples/Z320.txt' u ((($4**2)+($5**2)+($6**2))/(2*105.66)) bins=25 w boxes title ' 20 microns' ,\
+'0.03/zntuples/Z320.txt' u ((($4**2)+($5**2)+($6**2))/(2*105.66)) bins=25 w boxes title ' 30 microns' ,\
+'0.04/zntuples/Z320.txt' u ((($4**2)+($5**2)+($6**2))/(2*105.66)) bins=25 w boxes title '40 microns' ,\
+'0.05/zntuples/Z320.txt' u ((($4**2)+($5**2)+($6**2))/(2*105.66)) bins=25 w boxes title ' 50 microns'
+
+
+set output 'z_220_comp.png'
+
+p[][0:1400] '0.01/zntuples/Z220.txt' u ((($4**2)+($5**2)+($6**2))/(2*105.66)) bins=25 w boxes title 'z = 220 mm, thickness = 10 microns', \
+'0.02/zntuples/Z220.txt' u ((($4**2)+($5**2)+($6**2))/(2*105.66)) bins=25 w boxes title ' 20 microns' ,\
+'0.03/zntuples/Z220.txt' u ((($4**2)+($5**2)+($6**2))/(2*105.66)) bins=25 w boxes title ' 30 microns' ,\
+'0.04/zntuples/Z220.txt' u ((($4**2)+($5**2)+($6**2))/(2*105.66)) bins=25 w boxes title '40 microns' ,\
+'0.05/zntuples/Z220.txt' u ((($4**2)+($5**2)+($6**2))/(2*105.66)) bins=25 w boxes title ' 50 microns'
+
+
+set output 'z_420_comp.png'
+
+p[][0:1400] '0.01/zntuples/Z420.txt' u ((($4**2)+($5**2)+($6**2))/(2*105.66)) bins=25 w boxes title 'z = 420 mm, thickness = 10 microns', \
+'0.02/zntuples/Z420.txt' u ((($4**2)+($5**2)+($6**2))/(2*105.66)) bins=25 w boxes title ' 20 microns' ,\
+'0.03/zntuples/Z420.txt' u ((($4**2)+($5**2)+($6**2))/(2*105.66)) bins=25 w boxes title ' 30 microns' ,\
+'0.04/zntuples/Z420.txt' u ((($4**2)+($5**2)+($6**2))/(2*105.66)) bins=25 w boxes title '40 microns' ,\
+'0.05/zntuples/Z420.txt' u ((($4**2)+($5**2)+($6**2))/(2*105.66)) bins=25 w boxes title ' 50 microns'
+
+
+set xlabel "z (mm)"
+set ylabel "Number of muons"
+
+set output 'number_muons_versus_z.png'
+
+p[][] '0.01/profile.txt' u 1:2 w l title 'thickness = 10 microns', \
+'0.02/profile.txt' u 1:2 w l title ' 20 microns' ,\
+'0.03/profile.txt'  u 1:2 w l  title ' 30 microns' ,\
+'0.04/profile.txt'  u 1:2 w l  title '40 microns' ,\
+'0.05/profile.txt'  u 1:2 w l  title ' 50 microns'

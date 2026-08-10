@@ -1,0 +1,24 @@
+# Load styles
+load "~/gpls/nature.journal"
+load "~/gpls/bluegold-sl.colour"
+
+set term pdfcairo
+
+# Set axis labels
+set ylabel "Captured muons (%)"
+set xlabel "Paschen factor"
+
+set output 'N_eqm_paschen.pdf'
+
+set palette rgb 33,13,10
+set colorbox
+set cblabel 'Pressure (mbar)'
+
+p 'max_N_eqm_entries.txt' u 1:($8/1e2):($5*1013) w p palette notitle
+
+set output 'N_eqm_pressure.pdf'
+
+set cblabel 'Paschen factor'
+set xlabel "Pressure (mbar)"
+
+p 'max_N_eqm_entries.txt' u ($5*1013):($8/1e2):1 w p palette notitle

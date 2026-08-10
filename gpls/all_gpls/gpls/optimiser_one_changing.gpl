@@ -1,0 +1,41 @@
+# Load styles
+load "~/gpls/nature.journal"
+load "~/gpls/bluegold-sl.colour"
+
+set term pdfcairo
+
+
+# Set axis labels
+set ylabel "Captured muons (%)"
+
+set xlabel "Paschen factor"
+
+set output 'captured.pdf'
+
+p[][] 'optimisation_trail.txt' u 1:($8/1e2) notitle
+
+set output 'colour_coded.pdf'
+
+set palette rgb 33,13,10
+set colorbox
+set cblabel 'Paschen factor'
+
+set xlabel "Pressure (mbar)"
+
+p 'optimisation_trail.txt' u ($5*1013):($8/1E2):1 w p palette notitle
+
+set output 'colour_coded_density.pdf'
+
+set palette rgb 33,13,10
+set colorbox
+set cblabel 'Pressure (mbar)'
+
+set xlabel "Pressure (mbar)"
+
+p 'optimisation_trail.txt' u 1:($8/1E2):($5*1013) w p palette notitle
+
+set output 'captured_density.pdf'
+
+set xlabel "Density factor"
+
+p[][] 'optimisation_trail.txt' u 2:($8/1E2)  notitle

@@ -1,0 +1,38 @@
+# Load styles
+load "~/gpls/nature.journal"
+load "~/gpls/bluegold-sl.colour"
+
+set term pdfcairo
+
+set mxtics 1
+
+# Set axis labels
+set xlabel "E-field (kV/m)"
+set ylabel "Mean energy (eV)"
+
+set output 'mean_energy_volts.pdf'
+
+p[][300:825] 'over_300mm/5_mbar/mean_std_spread.txt' u ($1*1e3):($2*1e6)  title "At 300 mm 5 mbar 290 K", \
+'over_500mm/5_mbar/mean_std_spread.txt' u ($1*1e3):($2*1e6)  title "At 500 mm 5 mbar 290 K"
+
+set output 'spread_volts.pdf'
+
+set ylabel "Energy spread (%)"
+
+p[][] 'over_300mm/5_mbar/mean_std_spread.txt' u ($1*1e3):($4*1e2)  title "At 300 mm 5 mbar 290 K", \
+'over_500mm/5_mbar/mean_std_spread.txt' u ($1*1e3):($4*1e2)  title "At 500 mm 5 mbar 290 K"
+
+set output 'spread_volts_energy_std.pdf'
+
+set ylabel "Energy spread (eV)"
+
+p[][] 'over_300mm/5_mbar/mean_std_spread.txt' u ($1*1e3):($3*3*1e6)  title "At 300 mm 5 mbar 290 K", \
+'over_500mm/5_mbar/mean_std_spread.txt' u ($1*1e3):($3*3*1e6)  title "At 500 mm 5 mbar 290 K"
+
+set logscale y 
+set format y "10^{%T}"
+set mytics 10
+
+#set output 'mean_energy_volts_log.pdf'
+
+#p[][] 'mean_std_spread.txt' u ($1*1e3):($2*1e6)  title "At 300 mm 5 mbar 290 K"

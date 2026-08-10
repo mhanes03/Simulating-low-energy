@@ -1,0 +1,89 @@
+# Load styles
+load "~/nature.journal"
+load "~/gpls/bluegold-sl.colour"
+
+#cd 'zntuples' 
+
+start = -250
+end = 250
+step = 10
+
+set term pdfcairo
+set autoscale
+
+set style fill transparent solid 0.5
+
+set xlabel "Energy (MeV)"
+set ylabel "Events" 
+
+# using autoscale
+files(n) = sprintf('Z%d.txt', n)
+do for [i=start:end:step] {set output sprintf('%d.pdf', i) 
+p[][] files(i) u ((((($4)**2+($5)**2+($6)**2)/(2*105.66)))) bins=25 w boxes title sprintf('z = %d mm', i)}
+
+#set output 'comparison_all.pdf'
+
+
+#set style fill transparent solid 0.5
+
+
+#set xlabel "Energy (MeV)"
+#set ylabel "Events" 
+
+
+#p[][] 'Z10.txt' u ((($4)**2+($5)**2+($6)**2)/(2*105.66)) bins=25 w boxes title 'z = 10 mm', \
+#'Z250.txt' u ((($4)**2+($5)**2+($6)**2)/(2*105.66)) bins=25 w boxes title 'z = 250 mm', \
+#'Z500.txt' u ((($4)**2+($5)**2+($6)**2)/(2*105.66)) bins=25 w boxes title 'z = 500 mm' , \
+#'Z750.txt' u ((($4)**2+($5)**2+($6)**2)/(2*105.66)) bins=25 w boxes title 'z = 750 mm', \
+#'Z1000.txt' u ((($4)**2+($5)**2+($6)**2)/(2*105.66)) bins=25 w boxes title 'z = 1000 mm'
+
+
+#set output 'comparison.pdf'
+
+
+#set style fill transparent solid 0.5
+# Set axis labels
+#set xlabel "Energy (MeV)"
+#set ylabel "Events" 
+
+#set key top left
+
+#p[][] 'Z10.txt' u ((($4)**2+($5)**2+($6)**2)/(2*105.66)) bins=25 w boxes title 'z = 10 mm', \
+#'Z50.txt' u ((($4)**2+($5)**2+($6)**2)/(2*105.66)) bins=25 w boxes title 'z = 50 mm'
+
+#set output 'comparison_25.pdf'
+
+#set key top left
+
+#p[][] 'Z10.txt' u ((($4)**2+($5)**2+($6)**2)/(2*105.66)) bins=25 w boxes title 'z = 10 mm', \
+#'Z25.txt' u ((($4)**2+($5)**2+($6)**2)/(2*105.66)) bins=25 w boxes title 'z = 25 mm'
+
+
+
+
+#set output 'comparison_w_out_10.pdf'
+
+#set key top left
+
+#p[][] 'Z25.txt' u ((($4)**2+($5)**2+($6)**2)/(2*105.66)) bins=25 w boxes title 'z = 25 mm', \
+#'Z50.txt' u ((($4)**2+($5)**2+($6)**2)/(2*105.66)) bins=25 w boxes title 'z = 50 mm' , \
+#'Z75.txt' u ((($4)**2+($5)**2+($6)**2)/(2*105.66)) bins=25 w boxes title 'z = 75 mm'
+
+
+
+
+
+# using autoscale
+#files(n) = sprintf('Z%d.txt', n)
+#do for [i=start:end:step] {set output sprintf('%d.pdf', i) 
+#stats files(i) u ((($4)**2+($5)**2+($6)**2)/(2*105.66))
+
+#N = STATS_records
+#width = (STATS_max - STATS_min)/N
+
+#bin(x,width) = width*int((x/width)+ 0.5)
+
+#set boxwidth width
+#p files(i) u (bin((((($4)**2+($5)**2+($6)**2)/(2*105.66))),width)):(1./(width*N)) smooth freq w boxes notitle}
+
+

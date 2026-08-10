@@ -1,0 +1,63 @@
+# Load styles
+load "~/nature.journal"
+load "~/gpls/bluegold-sl.colour"
+
+set format y '%1.0f'
+set format x '%1.0f'
+
+cd 'zntuples' 
+
+start = 10
+end = 1000
+step = 10
+
+
+set term pdfcairo
+set autoscale 
+
+set style fill solid 0.5
+
+# Set axis labels
+set xlabel "Time (ns)"
+set ylabel "Events"
+
+set output 'time_distributions.pdf'
+
+files(n) = sprintf('Z%d.txt', n)
+do for [i=start:end:step] {p[][] files(i) u 7 bins=25 w boxes title sprintf('z = %d mm', i)}
+
+set style fill transparent solid 0.5
+
+set output 'time_distribution_220_320_420_520.pdf'
+
+p[0:500][] 'Z220.txt' u 7 bins=50 w boxes title 'z=220 mm', \
+'Z320.txt' u 7 bins=50 w boxes title 'z = 320 mm', \
+'Z420.txt' u 7 bins=50 w boxes title 'z = 420 mm', \
+'Z520.txt' u 7 bins=50 w boxes title 'z = 520 mm'
+
+set output 'time_distribution_320_420_520.pdf'
+
+p[0:1000][] 'Z320.txt' u 7 bins=50 w boxes title 'z = 320 mm', \
+'Z420.txt' u 7 bins=50 w boxes title 'z = 420 mm', \
+'Z520.txt' u 7 bins=50 w boxes title 'z = 520 mm'
+
+set output 'time_distribution_each_degrader.pdf'
+
+p[0:300][] 'Z10.txt' u 7 bins=50 w boxes title 'z = 10 mm', \
+'Z120.txt' u 7 bins=50 w boxes title 'z = 120 mm', \
+'Z220.txt' u 7 bins=50 w boxes title 'z = 220 mm'
+
+########################################### Gifs ######################################
+set term gif animate delay 50 loop 0 
+
+set output 'time_distributions.gif'
+
+set style fill solid 0.5
+
+# Set axis labels
+set xlabel "Time (ns)"
+set ylabel "Events"
+
+# using autoscale
+files(n) = sprintf('Z%d.txt', n)
+do for [i=start:end:step] {p[0:500][0:5000] files(i) u 7 bins=50 w boxes title sprintf('z = %d mm', i)}

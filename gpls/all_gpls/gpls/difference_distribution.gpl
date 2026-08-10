@@ -1,0 +1,29 @@
+# Load styles
+load "~/nature.journal"
+load "~/gpls/bluegold-sl.colour"
+
+cd 'zntuples' 
+
+set term pdfcairo
+set autoscale
+
+# Set axis labels
+set xlabel "Energy (MeV)"
+set ylabel "Events" 
+
+set output 'comparison.pdf'
+
+
+set style fill transparent solid 0.5
+
+
+p[][] '< paste Z10.txt Z100.txt' u (abs((((($4)**2+($5)**2+($6)**2)/(2*105.66)) - ((($32)**2+($33)**2+($34)**2)/(2*105.66))))) bins=25 w boxes title '10 mm versus 100 mm'
+
+set output 'comparison_no_sub.pdf'
+
+
+set style fill transparent solid 0.5
+
+
+p[][] 'Z10.txt' u (((($4)**2+($5)**2+($6)**2)/(2*105.66))) bins=25 w boxes title 'z = 10 mm' , \
+'Z100.txt' u (((($4)**2+($5)**2+($6)**2)/(2*105.66))) bins=25 w boxes title 'z = 1000 mm' 

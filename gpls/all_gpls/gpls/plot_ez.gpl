@@ -1,0 +1,21 @@
+# Load styles
+load "~/gpls/nature.journal"
+load "~/gpls/bluegold-sl.colour"
+
+#set format y '%1.0f'
+set format x '%1.0f'
+
+################################ Muons stopped by z ############################
+
+set term pdfcairo
+
+# Set axis labels
+set xlabel "z (mm)"
+set ylabel "Ez (MV/m)"
+
+set style fill solid 0.5
+
+set output 'electric_field.pdf'
+
+# plots the z stopping distance distribution
+p[0:510][] 'field.txt' u 3:10 w l notitle

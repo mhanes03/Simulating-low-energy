@@ -1,0 +1,11 @@
+# Load styles
+load "~/gpls/nature.journal"
+load "~/gpls/bluegold-sl.colour"
+
+set term pdfcairo 
+
+set output 'counts.pdf'
+
+
+p 'extra_offset_0.125/counts.txt' 2 w p title '0.125 MV/m', \
+'extra_offset_0.144/counts.txt' 2 w p title '0.144 MV/m', \

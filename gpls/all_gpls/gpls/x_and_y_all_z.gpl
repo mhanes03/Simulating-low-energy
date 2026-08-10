@@ -1,0 +1,23 @@
+# Load styles
+load "~/nature.journal"
+load "~/gpls/bluegold-sl.colour"
+
+cd 'zntuples' 
+
+start = 0
+end = 1000
+step = 10
+
+set term pdfcairo
+set autoscale
+
+set style fill transparent solid 0.5
+
+set xlabel "x (mm)"
+set ylabel "y (mm)" 
+
+# using autoscale
+files(n) = sprintf('Z%d.txt', n)
+do for [i=start:end:step] {set output sprintf('%d.pdf', i) 
+p[][] files(i) u 1:2 w p title sprintf('z = %d mm', i)}
+

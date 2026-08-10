@@ -1,0 +1,41 @@
+# Load styles
+load "~/nature.journal"
+load "~/bluegold-sl.colour"
+
+#set cblabel 'Energy (eV)'
+set logscale cb
+set format cb "10^{%T}"
+set cbrange [1e2:5e6]
+
+set logscale y 
+set format y "10^{%T}"
+set mytics 10
+
+cd 'zntuples'
+
+start = 10
+end = 520
+step = 10
+
+set term pngcairo 
+
+# Set axis labels
+set ylabel "Energy (eV)"
+set xlabel "Time (ns)"
+
+set palette rgb 33,13,10
+set colorbox
+
+set output 'energy_v_time_log_320.png'
+
+p[0:1500][1e2:5e6] 'Z320.txt' u 7:(((((($4)**2)+(($5)**2)+(($6)**2))/(2*105.66))*1e6)):(((((($4)**2)+(($5)**2)+(($6)**2))/(2*105.66))*1e6)) w p palette title 'z = 320 mm'
+
+
+set output 'energy_v_time_log_420.png'
+
+p[0:1500][1e2:5e6] 'Z420.txt' u 7:(((((($4)**2)+(($5)**2)+(($6)**2))/(2*105.66))*1e6)):(((((($4)**2)+(($5)**2)+(($6)**2))/(2*105.66))*1e6)) w p palette title 'z = 420 mm'
+
+
+set output 'energy_v_time_log_520.png'
+
+p[0:1500][1e2:5e6] 'Z520.txt' u 7:(((((($4)**2)+(($5)**2)+(($6)**2))/(2*105.66))*1e6)):(((((($4)**2)+(($5)**2)+(($6)**2))/(2*105.66))*1e6)) w p palette title 'z = 520 mm'

@@ -1,0 +1,30 @@
+# Load styles
+load "~/nature.journal"
+load "~/gpls/bluegold-sl.colour"
+
+cd 'zntuples' 
+
+start = 10
+end = 1000
+step = 10
+
+set term pdfcairo
+set autoscale
+
+# Set axis labels
+set xlabel "Energy (eV)"
+set ylabel "Events" 
+
+set output 'low_energy_800.pdf'
+
+set style fill transparent solid 0.5
+
+
+p[][] 'less_1keV_800.txt' u (((($4)**2+($5)**2+($6)**2)/(2*105.66))*1e6) bins=25 w boxes title 'z = 800 mm, E < 1 keV'
+
+set output 'low_energy_50.pdf'
+
+set style fill transparent solid 0.5
+
+
+p[][] 'less_50keV_260.txt' u (((($4)**2+($5)**2+($6)**2)/(2*105.66))*1e6) bins=25 w boxes title 'z = 260 mm, E < 50 keV'

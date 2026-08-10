@@ -1,0 +1,28 @@
+# Load styles
+load "~/nature.journal"
+load "~/bluegold-sl.colour"
+
+set term pngcairo 
+
+set output 'mean_energy.png'
+
+cd 'zntuples'
+
+start = -10
+end = 1010
+step = 10
+
+# Set axis labels
+set ylabel "Mean energy (MeV)"
+set xlabel "z (mm)"
+
+set palette rgb 33,13,10
+set colorbox
+
+# using autoscale
+files(n) = sprintf('Z%d.txt', n)
+
+# with scales defined 
+do for [i=start:end:step] {p[650:1000][1E-6:10] files(i) u 7:(log10(((($4)**2+($5)**2+($6)**2)/(2*105.66)))):(log10(((($4)**2+($5)**2+($6)**2)/(2*105.66)))) w p palette title sprintf('z = %d mm', i)}
+
+exit 

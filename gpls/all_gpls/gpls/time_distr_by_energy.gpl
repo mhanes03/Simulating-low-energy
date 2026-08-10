@@ -1,0 +1,31 @@
+# Load styles
+load "~/gpls/nature.journal"
+load "~/gpls/bluegold-sl.colour"
+
+set term pngcairo
+set key top right
+
+set ylabel "Counts"
+
+set style fill transparent solid 0.5
+
+set xlabel "Time (ns)"
+
+set output 'below_1_keV_time.png'
+
+
+p[][] 'zntuples/less_1keV_30.txt' u 7 bins=25 w boxes title 'z = 40 mm E < 1 keV' ,\
+'zntuples/less_1keV_120.txt' u 7 bins=25 w boxes title 'z = 120 mm E <= 1 keV'
+
+set output 'below_50_keV_time.png'
+
+
+p[][] 'zntuples/less_50keV_30.txt' u 7 bins=25 w boxes title 'z = 40 mm E < 50 keV' ,\
+'zntuples/less_50keV_120.txt' u 7 bins=25 w boxes title 'z = 120 mm E <= 50 keV'
+
+
+set output 'above_50_keV_time.png'
+
+
+p[][] 'zntuples/above_50keV_30.txt' u 7 bins=25 w boxes title 'z = 40 mm E > 50 keV' ,\
+'zntuples/above_50keV_120.txt' u 7 bins=25 w boxes title 'z = 120 mm E >= 50 keV'

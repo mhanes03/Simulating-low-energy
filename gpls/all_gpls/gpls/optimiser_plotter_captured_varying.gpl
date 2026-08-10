@@ -1,0 +1,58 @@
+# Load styles
+load "~/gpls/nature.journal"
+load "~/gpls/bluegold-sl.colour"
+
+set term pdfcairo
+
+
+# Set axis labels
+set ylabel "Captured muons (%)"
+
+set xlabel "Paschen factor"
+
+set output 'captured.pdf'
+
+p[][] 'optimisation_trail.txt' u 1:($7/1e2)  notitle, \
+'1_and_2/optimisation_trail.txt' u 1:($7/1e2) w p pt 1 ps 1.0 lt 1 lc  rgb "#FF1694" lw 2 notitle
+
+
+set output 'colour_coded.pdf'
+
+set palette rgb 33,13,10
+set colorbox
+set cblabel 'Paschen factor'
+
+set xlabel "Pressure (mbar)"
+
+p 'optimisation_trail.txt' u ($5*1013):($7/1E2):1 w p palette notitle, \
+'between_0.9/optimisation_trail.txt' u ($5*1013):($7/1E2):1 w p palette notitle, \
+'1_and_2/optimisation_trail.txt' u ($5*1013):($7/1E2):1 w p palette notitle
+
+set output 'colour_coded_without_0_to_1.pdf'
+
+p[0:20][] 'optimisation_trail.txt' u ($5*1013):($7/1E2):1 w p palette notitle, \
+'1_and_2/optimisation_trail.txt' u ($5*1013):($7/1E2):1 w p palette notitle
+
+set output 'colour_coded_without_0_to_1_all.pdf'
+
+p[][] 'optimisation_trail.txt' u ($5*1013):($7/1E2):1 w p palette notitle, \
+'1_and_2/optimisation_trail.txt' u ($5*1013):($7/1E2):1 w p palette notitle
+
+
+set output 'captured_density_more.pdf'
+
+set xlabel "Density factor"
+set xtics 0, 0.001, 0.05
+
+p[][] 'optimisation_trail.txt' u 2:($7/1E2)  notitle, \
+'1_and_2/optimisation_trail.txt' u 2:($7/1E2) w p pt 1 ps 1.0 lt 1 lc  rgb "#FF1694" lw 2 notitle
+
+set output 'colour_coded_factor.pdf'
+
+
+set xlabel "Density factor"
+set xtics 0, 0.003, 0.022
+
+p[0:0.022][] 'optimisation_trail.txt' u 2:($7/1E2):1 w p palette notitle, \
+'between_0.9/optimisation_trail.txt' u 2:($7/1E2):1 w p palette notitle, \
+'1_and_2/optimisation_trail.txt' u 2:($7/1E2):1 w p palette notitle

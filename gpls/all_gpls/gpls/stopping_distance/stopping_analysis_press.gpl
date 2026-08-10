@@ -1,0 +1,28 @@
+# Load styles
+load "~/gpls/nature.journal"
+load "~/gpls/bluegold-sl.colour"
+
+set term pdfcairo
+set autoscale 
+
+# Set axis labels
+set xlabel "Pressure (mbar)"
+set ylabel "Stopping efficiency of muons"
+
+set output 'stopping_efficiency.pdf'
+
+# plots the z stopping distance distribution
+p[20:80][0:1] 'efficiency.txt' u 1:2 w l notitle
+
+
+# Set axis labels
+set xlabel "Pressure (mbar)"
+set ylabel "Average stopping distance (mm)"
+
+set output 'avg_stop_dist.pdf'
+
+# plots the z stopping distance distribution
+p 'avg_stopp.txt' u 1:2 w l notitle
+
+
+exit

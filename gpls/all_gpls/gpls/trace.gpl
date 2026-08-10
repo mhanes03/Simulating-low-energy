@@ -1,0 +1,57 @@
+# Load styles
+load "../gpls/nature.journal"
+load "../gpls/bluegold-sl.colour"
+
+################################# Pz versus z ########################################
+
+set term pdfcairo
+set autoscale 
+
+# Set axis labels
+set xlabel "z (mm)"
+set ylabel "P_z (MeV/c)"
+
+set output 'pz_v_z.pdf'
+
+do for [i=0:999]{p 'AllTracks.txt' u 3:6 index i w l notitle}
+
+########################### z versus z ##############################################
+# Set axis labels
+set xlabel "z (mm)"
+set ylabel "x (mm)"
+
+set output 'z_v_x.pdf'
+
+do for [i=0:999]{p 'AllTracks.txt' u  3:1 index i w l notitle}
+
+######################### z versus u ##################################################
+
+# Set axis labels
+set xlabel "z (mm)"
+set ylabel "y (mm)"
+
+set output 'y_v_z.pdf'
+
+do for [i=0:999]{p 'AllTracks.txt' u 3:2 index i w l notitle}
+
+########################## KE versus time ############################################
+
+# Set axis labels
+set xlabel "t (ns)"
+set ylabel "Kinetic energy (MeV)"
+
+set output 'ke_v_t.pdf'
+
+do for [i=0:999]{p[600:900][] 'AllTracks.txt' u 7:((($4)**2+($5)**2+($6)**2)/(2*105.66)) index i w l notitle}
+
+######################### z versus time #############################################
+
+# Set axis labels
+set xlabel "t (ns)"
+set ylabel "z (mm)"
+
+set output 'z_v_t.pdf'
+
+do for [i=0:999]{p[600:900][] 'AllTracks.txt' u  7:3 index i w l notitle}
+
+exit

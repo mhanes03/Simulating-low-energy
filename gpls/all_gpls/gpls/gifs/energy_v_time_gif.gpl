@@ -1,0 +1,35 @@
+# Load styles
+load "~/nature.journal"
+load "~/bluegold-sl.colour"
+
+set term gif animate delay 50 loop 0 
+set key top right
+
+set cblabel 'Energy (MeV)'
+set logscale cb
+set format cb "10^{%T}"
+set cbrange [1E-5:1E1]
+
+set output 'energy_v_time_log_cb.gif'
+
+cd 'zntuples'
+
+start = 10
+end = 1000
+step = 10
+
+# Set axis labels
+set ylabel "Energy (MeV)"
+set xlabel "Time (ns)"
+
+set palette rgb 10,12,14
+set palette rgb 33,13,10
+set colorbox
+
+# using autoscale
+files(n) = sprintf('Z%d.txt', n)
+
+# with scales defined 
+do for [i=start:end:step] {p[600:1000][0:4.15] files(i) u 7:((($4)**2+($5)**2+($6)**2)/(2*105.66)):(log10(((($4)**2+($5)**2+($6)**2)/(2*105.66)))) w p palette title sprintf('z = %d mm', i)}
+
+exit 

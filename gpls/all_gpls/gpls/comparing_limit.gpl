@@ -1,0 +1,39 @@
+# Load styles
+load "~/gpls/nature.journal"
+load "~/gpls/bluegold-sl.colour"
+
+set term pngcairo
+set key top right
+
+set ylabel "Counts"
+
+set xlabel "Energy (MeV)"
+
+set output 'mylar.png'
+
+set key top right
+set style fill transparent solid 0.5
+
+p[][0:2500] 'run_one/0.7/zntuples/Z10.txt' u ((($4**2)+($5**2)+($6**2))/(2*105.66)) bins=25 w boxes title 'z = 10 mm, Mylar 0.7 mm' ,\
+'run_one/0.8/zntuples/Z10.txt' u ((($4**2)+($5**2)+($6**2))/(2*105.66)) bins=25 w boxes title 'z = 10 mm, Mylar 0.8 mm' ,\
+'run_one/0.9/zntuples/Z10.txt' u ((($4**2)+($5**2)+($6**2))/(2*105.66)) bins=25 w boxes title 'z = 10 mm, Mylar 0.9 mm' 
+
+
+set output 'graphite.png'
+
+set key top right
+set style fill transparent solid 0.5
+
+p[][0:2500] 'run_two/0.4/zntuples/Z10.txt' u ((($4**2)+($5**2)+($6**2))/(2*105.66)) bins=25 w boxes title 'z = 10 mm, Graphite 0.4 mm' ,\
+'run_two/0.5/zntuples/Z10.txt' u ((($4**2)+($5**2)+($6**2))/(2*105.66)) bins=25 w boxes title 'z = 10 mm, Graphite 0.5 mm' ,\
+'run_two/0.6/zntuples/Z10.txt' u ((($4**2)+($5**2)+($6**2))/(2*105.66)) bins=25 w boxes title 'z = 10 mm, Graphite 0.6 mm' 
+
+
+set output 'silver.png'
+
+set key top right
+set style fill transparent solid 0.5
+
+p[][0:4000] 'run_three/0.1/zntuples/Z10.txt' u ((($4**2)+($5**2)+($6**2))/(2*105.66)) bins=25 w boxes title 'z = 10 mm, Silver 0.1 mm' ,\
+'run_three/0.2/zntuples/Z10.txt' u ((($4**2)+($5**2)+($6**2))/(2*105.66)) bins=25 w boxes title 'z = 10 mm, Silver 0.2 mm' ,\
+'run_three/0.3/zntuples/Z10.txt' u ((($4**2)+($5**2)+($6**2))/(2*105.66)) bins=25 w boxes title 'z = 10 mm, Silver 0.3 mm' 

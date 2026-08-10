@@ -1,0 +1,17 @@
+# Load styles
+load "../../gpls/nature.journal"
+load "../../gpls/bluegold-sl.colour"
+
+set term pdfcairo enhanced
+set autoscale 
+
+set ylabel '{/Symbol e}'
+set xlabel 'z (mm)'
+
+set output 'transverse_emittance.pdf'
+
+p 'profile.txt' u 1:9 w l title 'G4 solution'
+
+exit 
+
+

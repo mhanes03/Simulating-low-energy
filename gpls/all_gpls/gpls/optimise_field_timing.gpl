@@ -1,0 +1,28 @@
+# Load styles
+load "~/gpls/nature.journal"
+load "~/gpls/bluegold-sl.colour"
+
+set term pdfcairo
+
+# Set axis labels
+set ylabel "Captured muons (%)"
+
+set output 'efficiency.pdf'
+
+set palette rgb 33,13,10
+set colorbox
+set cblabel 'Forward field (MV/m)'
+
+set xlabel "t_{2} (ns)"
+
+p[][0:0.05] 'optimisation_trail_timing_field.txt' u 1:($6/100):2 w p palette notitle
+
+set output 'efficiency_neg.pdf'
+
+set palette rgb 33,13,10
+set colorbox
+set cblabel 'Negative field (MV/m)'
+
+set xlabel "t_{2} (ns)"
+
+p[][0:0.05] 'optimisation_trail_timing_field.txt' u 1:($6/100):3 w p palette notitle

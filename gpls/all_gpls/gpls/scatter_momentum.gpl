@@ -1,0 +1,60 @@
+# This produces the kinetic energy plots for just before the degrader and at the 
+# the end of the cell, as this hopes to show the impact of cooling 
+# the later two plots are the time distribution plots for before the degrader and the
+# end of the cell  
+
+# Load styles
+load "../../gpls/nature.journal"
+load "../../gpls/bluegold-sl.colour"
+
+set format y '%1.1f'
+set format x '%1.1f'
+
+# moves to where the zntuple files are stored after the simulations
+cd 'zntuples' 
+
+set term pdfcairo
+set autoscale
+unset xtics 
+
+############################ Kinetic energy scatter plots ###########################
+
+set ylabel 'Kinetic energy (MeV)'
+
+# before the degrader 
+set output 'Kinetic_energy_scatter_Z10.pdf'
+
+p[2:4.5] 'Z10.txt' u ((($4)**2+($5)**2+($6)**2)/(2*105.66)) w p notitle 
+
+# end of the cell
+set output 'Kinetic_energy_scatter_Z510.pdf'
+
+p 'Z510.txt' u ((($4)**2+($5)**2+($6)**2)/(2*105.66)) w p notitle 
+
+######################### Kinetice energy binned ######################################
+
+set xtics
+set xlabel 'Kinetic energy (MeV)'
+set ylabel ''
+
+set output 'Kinetic_energy_binned_Z10.pdf'
+
+p 'Z10.txt' u ((($4)**2+($5)**2+($6)**2)/(2*105.66)) bins=25 w boxes notitle 
+
+set output 'Kinetic_energy_binned_Z510.pdf'
+
+p 'Z510.txt' u ((($4)**2+($5)**2+($6)**2)/(2*105.66)) bins=25 w boxes notitle 
+
+########################## Time distributions ###########################################
+
+set xlabel 'Time (ns)'
+
+set output 'Time_binned_Z10.pdf'
+
+p 'Z10.txt' u 7 bins=25 w boxes notitle 
+
+set output 'Time_binned_Z510.pdf'
+
+p 'Z510.txt' u 7 bins=25 w boxes notitle 
+
+exit

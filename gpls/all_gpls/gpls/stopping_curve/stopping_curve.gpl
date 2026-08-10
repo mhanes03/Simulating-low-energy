@@ -1,0 +1,18 @@
+# Load styles
+load "~/gpls/nature.journal"
+load "~/gpls/bluegold-sl.colour"
+
+set term pngcairo
+set key top right
+
+set logscale y 
+set format y "10^{%T}"
+set mytics 10
+
+set logscale x
+set format x "10^{%T}"
+set mxtics 10
+
+set output 'stopping_power_curve.png'
+
+p 'stp_curve.txt' u ($1*1e6):3 w l title 'Silver'

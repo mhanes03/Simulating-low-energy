@@ -1,0 +1,22 @@
+# Load styles
+load "~/nature.journal"
+load "~/gpls/bluegold-sl.colour"
+
+cd 'tntuples' 
+
+start = 0
+end = 2000
+step = 10
+
+set term pdfcairo
+set autoscale
+
+set style fill transparent solid 0.5
+
+set xlabel "Energy (MeV)"
+set ylabel "Events" 
+
+# using autoscale
+files(n) = sprintf('T%d.txt', n)
+do for [i=start:end:step] {set output sprintf('%d.pdf', i) 
+p[][] files(i) u ((((($4)**2+($5)**2+($6)**2)/(2*105.66)))) bins=25 w boxes title sprintf('t = %d ns', i)}

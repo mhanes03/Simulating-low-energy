@@ -1,0 +1,110 @@
+# Load styles
+load "~/gpls/nature.journal"
+load "~/gpls/bluegold-sl.colour"
+
+set term gif animate delay 75 loop 0
+set key top right
+
+#set cblabel 'Energy (eV)'
+set logscale cb
+set format cb "10^{%T}"
+set cbrange [1e-4:5e6]
+
+set logscale y 
+set format y "10^{%T}"
+set mytics 10
+
+set output 'energy_v_z_log.gif'
+
+cd 'tntuples'
+
+start = 10
+end = 1900
+step = 10
+
+# Set axis labels
+set ylabel "Energy (eV)"
+set xlabel "z (mm)"
+
+set palette rgb 33,13,10
+set colorbox
+
+# using autoscale
+files(n) = sprintf('T%d.txt', n)
+
+# with scales defined 
+do for [i=start:end:step] {p[0:1000][1e-4:5e6] files(i) u 3:(((((($4)**2)+(($5)**2)+(($6)**2))/(2*105.66))*1e6)):(((((($4)**2)+(($5)**2)+(($6)**2))/(2*105.66))*1e6)) w p palette title sprintf('t = %d ns', i)}
+
+set term pdfcairo
+set key top right
+
+#set cblabel 'Energy (eV)'
+set logscale cb
+set format cb "10^{%T}"
+set cbrange [1e2:5e6]
+
+set logscale y 
+set format y "10^{%T}"
+set mytics 10
+
+start = 20
+end = 1000
+step = 20
+
+# Set axis labels
+set ylabel "Energy (eV)"
+set xlabel "z (mm)"
+
+set palette rgb 10,12,14
+set palette rgb 33,13,10
+set colorbox
+
+# using autoscale
+files(n) = sprintf('T%d.txt', n)
+
+# with scales defined 
+do for [i=start:end:step] {set output sprintf('T%d.pdf', i) 
+p[0:1000][5e1:5e6] files(i) u 3:(((((($4)**2)+(($5)**2)+(($6)**2))/(2*105.66))*1e6)):(((((($4)**2)+(($5)**2)+(($6)**2))/(2*105.66))*1e6)) w p palette title sprintf('t = %d ns', i)}
+
+set terminal pngcairo 
+
+set output 'energy_v_z_log_130.png'
+
+p[0:1000][5e1:5e6] 'T130.txt'u 3:(((((($4)**2)+(($5)**2)+(($6)**2))/(2*105.66))*1e6)):(((((($4)**2)+(($5)**2)+(($6)**2))/(2*105.66))*1e6)) w p pt 2 palette title 't = 130 ns'
+
+set term gif animate delay 50 loop 0 
+set key top right
+
+set output 'energy_v_z_log_coded.gif'
+
+# Set axis labels
+set ylabel "Energy (eV)"
+set xlabel "z (mm)"
+
+start = 1
+end = 300
+step = 1
+
+# using autoscale
+files(n) = sprintf('T%d.txt', n)
+
+# with scales defined 
+do for [i=start:end:step] {p[0:520][5e1:5e6] files(i) u 3:(((((($4)**2)+(($5)**2)+(($6 > 0. ? $6:NaN)**2))/(2*105.66))*1e6)) w p pt 1 ps 1 title sprintf('t = %d ns, pz > 0', i), \
+files(i) u 3:(((((($4)**2)+(($5)**2)+(($6 < 0. ? $6:NaN)**2))/(2*105.66))*1e6)) w p pt 1 title sprintf('t = %d ns, pz < 0', i)}
+
+
+set terminal pngcairo 
+
+set output 'energy_v_z_log_upto_40.png'
+
+p[0:520][5e1:5e6] 'T40.txt'u 3:(((((($4)**2)+(($5)**2)+(($6)**2))/(2*105.66))*1e6)):(((((($4)**2)+(($5)**2)+(($6)**2))/(2*105.66))*1e6)) w p pt 2 palette title 't = 40 ns'
+
+
+set terminal pngcairo 
+
+set output 'energy_v_z_log_upto_200.png'
+
+p[0:520][5e1:5e6] 'T200.txt'u 3:(((((($4)**2)+(($5)**2)+(($6)**2))/(2*105.66))*1e6)):(((((($4)**2)+(($5)**2)+(($6)**2))/(2*105.66))*1e6)) w p pt 2 palette title 't = 200 ns'
+
+
+exit 

@@ -1,0 +1,31 @@
+# Load styles
+load "~/gpls/nature.journal"
+load "~/gpls/bluegold-sl.colour"
+
+set term pdfcairo
+
+set mxtics 1
+
+# Set axis labels
+set xlabel "E-field (kV/m)"
+set ylabel "Mean time (ns)"
+
+set output 'mean_time_volts_both.pdf'
+
+p[][] 'over_300mm/5_mbar/mean_std_spread_time.txt' u ($1*1e3):2  title "At 300 mm 5 mbar 290 K", \
+'over_500mm/5_mbar/mean_std_spread_time.txt' u ($1*1e3):2  title "At 500 mm 5 mbar 290 K", \
+
+
+set output 'spread_volts_time.pdf'
+
+set ylabel "Time spread (%)"
+
+p[][]  'over_300mm/5_mbar/mean_std_spread_time.txt' u ($1*1e3):($4*1e2)  title "At 300 mm 5 mbar 290 K", \
+'over_500mm/5_mbar/mean_std_spread_time.txt' u ($1*1e3):($4*1e2)  title "At 500 mm 5 mbar 290 K"
+
+set output 'spread_volts_time_std.pdf'
+
+set ylabel "Time spread (ns)"
+
+p[][] 'over_300mm/5_mbar/mean_std_spread_time.txt' u ($1*1e3):($3*3)  title "At 300 mm 5 mbar 290 K", \
+'over_500mm/5_mbar/mean_std_spread_time.txt' u ($1*1e3):($3*3)  title "At 500 mm 5 mbar 290 K"

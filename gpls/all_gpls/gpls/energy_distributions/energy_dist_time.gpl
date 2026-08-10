@@ -1,0 +1,50 @@
+# Load styles
+load "~/gpls/nature.journal"
+load "~/gpls/bluegold-sl.colour"
+
+set term pngcairo
+
+set style fill transparent solid 0.4
+
+set output 'number_of_muons_zntuples_palette.png'
+
+set ylabel "Counts"
+
+set xlabel "Energy (keV)"
+
+set output 'T_50_less_1kev.png'
+
+p[][] 'tntuples/less_1keV_50.txt' u (((($4**2)+($5**2)+($6**2))/(2*105.66))*1e3) bins=25 w boxes title 't = 50 ns'
+
+set output 'T_less_1_keV_60.png'
+
+p 'tntuples/less_1keV_60.txt' u (((($4**2)+($5**2)+($6**2))/(2*105.66))*1e3) bins=25 w boxes title 't = 60 ns'
+
+set output 'T_less_1_keV_100.png'
+
+p 'tntuples/less_1keV_100.txt' u (((($4**2)+($5**2)+($6**2))/(2*105.66))*1e3) bins=25 w boxes title 't = 100 ns'
+
+set output 'T_less_1_keV_70.png'
+
+p 'tntuples/less_1keV_70.txt' u (((($4**2)+($5**2)+($6**2))/(2*105.66))*1e3) bins=25 w boxes title 't = 70 ns'
+
+
+set output 'T_combined_less_1kev_50_to_70.png'
+
+p[][] 'tntuples/less_1keV_50.txt' u (((($4**2)+($5**2)+($6**2))/(2*105.66))*1e3) bins=25 w boxes title 't = 50 ns, E < 1 keV', \
+'tntuples/less_1keV_60.txt' u (((($4**2)+($5**2)+($6**2))/(2*105.66))*1e3) bins=25 w boxes title 't = 60 ns, E < 1 keV' ,\
+'tntuples/less_1keV_70.txt' u (((($4**2)+($5**2)+($6**2))/(2*105.66))*1e3) bins=25 w boxes title 't = 70 ns, E < 1 keV'
+
+set output 'T_combined_less_1kev_100_200.png'
+
+p[][] 'tntuples/less_1keV_100.txt' u (((($4**2)+($5**2)+($6**2))/(2*105.66))*1e3) bins=25 w boxes title 't = 100 ns', \
+'tntuples/less_1keV_200.txt' u (((($4**2)+($5**2)+($6**2))/(2*105.66))*1e3) bins=25 w boxes title 't = 200 ns' 
+
+
+set output 'greater_than_220mm_less_1_keV_200ns.png'
+
+p 'tntuples/greater_than_equal_220_1keV_200ns.txt' u (((($4**2)+($5**2)+($6**2))/(2*105.66))*1e3) bins=25 w boxes title 't = 200 ns, z >= 220 mm, E <= 1 keV' 
+
+#set output 'T_100.png'
+
+#p 'tntuples/T100.txt' u ((($4**2)+($5**2)+($6**2))/(2*105.66)) bins=25 w boxes title 't = 100 ns'

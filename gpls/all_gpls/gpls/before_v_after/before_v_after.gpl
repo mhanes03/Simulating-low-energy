@@ -1,0 +1,190 @@
+# Load styles
+load "~/gpls/nature.journal"
+load "~/gpls/bluegold-sl.colour"
+
+
+
+set term pngcairo
+set key top right
+
+
+set ylabel "Counts"
+
+set xlabel "Energy (MeV)"
+
+set ylabel "Counts"
+
+set output 'before_v_after_degrader.png'
+
+
+
+set style fill transparent solid 0.5
+
+p[][0:1000] 'zntuples/Z760.txt' u ((($4**2)+($5**2)+($6**2))/(2*105.66)) bins=25 w boxes title 'z = 760 mm' ,\
+'zntuples/Z770.txt' u ((($4**2)+($5**2)+($6**2))/(2*105.66))  bins=25 w boxes title 'z = 770 mm 
+
+
+set xlabel "Energy (keV)"
+
+set style fill transparent solid 0.5
+
+set output '520_below_keV.png'
+
+
+p[][] 'zntuples/less_1keV_520.txt' u (((($4**2)+($5**2)+($6**2))/(2*105.66))*1e3) bins=25 w boxes title 'z = 520 mm E <= 1 keV'
+
+
+set output 'below_1_keV_test.png'
+
+
+p[][] 'zntuples/less_1keV_520.txt' u (((($4**2)+($5**2)+($6**2))/(2*105.66))*1e3) bins=25 w boxes title 'z = 520 mm E <= 1 keV' ,\
+'zntuples/less_1keV_540.txt' u (((($4**2)+($5**2)+($6**2))/(2*105.66))*1e3) bins=25 w boxes title 'z = 540 mm E <= 1 keV' ,\
+'zntuples/less_1keV_560.txt' u (((($4**2)+($5**2)+($6**2))/(2*105.66))*1e3) bins=25 w boxes title 'z = 560 mm E <= 1 keV' ,\
+'zntuples/less_1keV_580.txt' u (((($4**2)+($5**2)+($6**2))/(2*105.66))*1e3) bins=25 w boxes title 'z = 580 mm E <= 1 keV' ,\
+'zntuples/less_1keV_600.txt' u (((($4**2)+($5**2)+($6**2))/(2*105.66))*1e3) bins=25 w boxes title 'z = 600 mm E <= 1 keV' ,\
+'zntuples/less_1keV_620.txt' u (((($4**2)+($5**2)+($6**2))/(2*105.66))*1e3) bins=25 w boxes title 'z = 620 mm E <= 1 keV'
+
+set xlabel "Energy (keV)"
+
+set output 'below_50_keV_small.png'
+
+
+p[][] 'zntuples/less_50keV_10.txt' u (((($4**2)+($5**2)+($6**2))/(2*105.66))*1e3) bins=25 w boxes title 'z = 10 mm E <= 50 keV' ,\
+'zntuples/less_50keV_110.txt' u (((($4**2)+($5**2)+($6**2))/(2*105.66))*1e3) bins=25 w boxes title 'z = 110 mm E <= 50 keV'
+
+set output 'below_1_keV_new.png'
+
+
+p[][] 'zntuples/less_1keV_10.txt' u (((($4**2)+($5**2)+($6**2))/(2*105.66))*1e3) bins=25 w boxes title 'z = 10 mm E <= 1 keV' ,\
+'zntuples/less_50keV_110.txt' u (((($4**2)+($5**2)+($6**2))/(2*105.66))*1e3) bins=25 w boxes title 'z = 110 mm E <= 1 keV'
+
+set output 'below_1_keV_small.png'
+
+
+p[][] 'zntuples/less_1keV_40.txt' u (((($4**2)+($5**2)+($6**2))/(2*105.66))*1e3) bins=25 w boxes title 'z = 40 mm E <= 1 keV' ,\
+'zntuples/less_1keV_120.txt' u (((($4**2)+($5**2)+($6**2))/(2*105.66))*1e3) bins=25 w boxes title 'z = 120 mm E <= 1 keV'
+
+
+set output 'below_1_keV_small_2.png'
+
+
+p[][] 'zntuples/less_1keV_30.txt' u (((($4**2)+($5**2)+($6**2))/(2*105.66))*1e3) bins=25 w boxes title 'z = 30 mm E < 1 keV' ,\
+'zntuples/less_1keV_120.txt' u (((($4**2)+($5**2)+($6**2))/(2*105.66))*1e3) bins=25 w boxes title 'z = 120 mm E < 1 keV'
+
+
+set output 'below_1_keV_20.png'
+
+p[][] 'zntuples/less_1keV_20.txt' u (((($4**2)+($5**2)+($6**2))/(2*105.66))*1e3) bins=25 w boxes title 'z = 20 mm E < 1 keV'
+
+
+set output 'below_50_keV_small_2.png'
+
+
+p[0:3][] 'zntuples/less_50keV_30.txt' u (((($4**2)+($5**2)+($6**2))/(2*105.66))*1e3) bins=25 w boxes title 'z = 30 mm E < 50 keV' ,\
+'zntuples/less_50keV_120.txt' u (((($4**2)+($5**2)+($6**2))/(2*105.66))*1e3) bins=25 w boxes title 'z = 120 mm E < 50 keV'
+
+
+
+set ylabel "Counts"
+
+set xlabel "Energy (MeV)"
+
+set output 'before_v_after_120.png'
+
+
+set key top left
+set style fill transparent solid 0.5
+
+p[][] 'zntuples/Z100.txt' u ((($4**2)+($5**2)+($6**2))/(2*105.66)) bins=25 w boxes title 'z = 100 mm' ,\
+'zntuples/Z120.txt' u ((($4**2)+($5**2)+($6**2))/(2*105.66))  bins=25 w boxes title 'z = 120 mm 
+
+
+set output 'before_v_after_10_510.png'
+
+
+set key top left
+set style fill solid 0.2
+
+p[][] 'zntuples/Z10.txt' u ((($4**2)+($5**2)+($6**2))/(2*105.66)) bins=25 w boxes title 'z = 10 mm' ,\
+'zntuples/Z510.txt' u ((($4**2)+($5**2)+($6**2))/(2*105.66))  bins=25 w boxes title 'z = 510 mm '
+
+
+set output 'before_v_after_510_1010.png'
+
+
+set key top right
+set style fill transparent solid 0.5
+
+p[][] 'zntuples/Z510.txt' u ((($4**2)+($5**2)+($6**2))/(2*105.66)) bins=25 w boxes title 'z = 510 mm' ,\
+'zntuples/Z1010.txt' u ((($4**2)+($5**2)+($6**2))/(2*105.66))  bins=25 w boxes title 'z = 1010 mm 
+
+
+
+set ylabel "Counts"
+
+set xlabel "Energy (keV)"
+
+set output 'below_1_keV_bigcell.png'
+
+set style fill transparent solid 0.5
+
+
+p[][] 'zntuples/less_1keV_520.txt' u (((($4**2)+($5**2)+($6**2))/(2*105.66))*1e3) bins=25 w boxes title 'z = 520 mm E < 1 keV' ,\
+'zntuples/less_1keV_1010.txt' u (((($4**2)+($5**2)+($6**2))/(2*105.66))*1e3) bins=25 w boxes title 'z = 1010 mm E < 1 keV' , \
+
+set output 'below_50_keV_bigcell.png'
+
+set style fill transparent solid 0.5
+
+
+p[][] 'zntuples/less_50keV_520.txt' u (((($4**2)+($5**2)+($6**2))/(2*105.66))*1e3) bins=25 w boxes title 'z = 520 mm E < 50 keV' ,\
+'zntuples/less_50keV_1010.txt' u (((($4**2)+($5**2)+($6**2))/(2*105.66))*1e3) bins=25 w boxes title 'z = 1010 mm E < 50 keV' , \
+
+
+
+set key top right
+
+set xlabel "Energy (MeV)"
+
+set output 'before_v_after_220.png'
+
+
+p[][] 'zntuples/Z210.txt' u ((($4**2)+($5**2)+($6**2))/(2*105.66)) bins=25 w boxes title 'z = 210 mm' ,\
+'zntuples/Z220.txt' u ((($4**2)+($5**2)+($6**2))/(2*105.66))  bins=25 w boxes title 'z = 220 mm'
+
+
+set ylabel "Counts"
+
+
+
+set xlabel "Energy (keV)"
+
+set output 'below_1_keV.png'
+
+
+p[][] 'zntuples/less_1keV_220.txt' u (((($4**2)+($5**2)+($6**2))/(2*105.66))*1e3) bins=25 w boxes title 'z = 220 mm E < 1 keV' ,\
+'zntuples/less_1keV_320.txt' u (((($4**2)+($5**2)+($6**2))/(2*105.66))*1e3) bins=25 w boxes title 'z = 320 mm E < 1 keV' , \
+'zntuples/less_1keV_420.txt' u (((($4**2)+($5**2)+($6**2))/(2*105.66))*1e3) bins=25 w boxes title 'z = 420 mm E < 1 keV' , \
+'zntuples/less_1keV_520.txt' u (((($4**2)+($5**2)+($6**2))/(2*105.66))*1e3) bins=25 w boxes title 'z = 520 mm E < 1 keV'
+
+set output 'before_v_after_520.png'
+
+
+p[][] 'zntuples/Z220.txt' u ((($4**2)+($5**2)+($6**2))/(2*105.66)) bins=25 w boxes title 'z = 220 mm' ,\
+'zntuples/Z520.txt' u ((($4**2)+($5**2)+($6**2))/(2*105.66))  bins=25 w boxes title 'z = 520 mm 
+
+set ylabel "Counts"
+
+
+
+set xlabel "Energy (keV)"
+
+
+
+set output 'below_1_keV_big_cell.png'
+
+
+p[][] 'zntuples/less_1keV_520.txt' u (((($4**2)+($5**2)+($6**2))/(2*105.66))*1e3) bins=25 w boxes title 'z = 520 mm, E < 1 keV' , \
+'zntuples/less_1keV_620.txt' u (((($4**2)+($5**2)+($6**2))/(2*105.66))*1e3) bins=25 w boxes title 'z = 620 mm, E < 1 keV' , \
+'zntuples/less_1keV_770.txt' u (((($4**2)+($5**2)+($6**2))/(2*105.66))*1e3) bins=25 w boxes title 'z = 770 mm, E < 1 keV' , \
+'zntuples/less_1keV_1010.txt' u (((($4**2)+($5**2)+($6**2))/(2*105.66))*1e3) bins=25 w boxes title 'z = 1010 mm, E < 1 keV'

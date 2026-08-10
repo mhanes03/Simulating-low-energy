@@ -1,0 +1,61 @@
+# Load styles
+load "~/nature.journal"
+load "~/bluegold-sl.colour"
+
+set format y '%1.0f'
+set format x '%1.0f'
+
+cd 'zntuples' 
+
+start = 10
+end = 500
+step = 10
+
+################################ Each of the z binned ##############################
+
+set term pdfcairo
+set autoscale
+set key top right
+
+# Set axis labels
+set xlabel "|P| (MeV/c)"
+set ylabel "Counts"
+set style fill solid 0.5 
+
+# using autoscale
+files(n) = sprintf('Z%d.txt', n)
+do for [i=start:end:step] {set output sprintf('%d.pdf', i) 
+p files(i) u (sqrt(($4)**2+($5)**2+($6)**2)) bins=25 w boxes title sprintf('z = %d mm', i)}
+
+######################################### Gif ##########################################
+
+set term gif animate delay 50 loop 0 
+
+set output 'momentum_distr.gif'
+set style fill solid 0.5 
+
+set xlabel "|P| (MeV/c)"
+set ylabel 'Counts'
+
+# using autoscale
+files(n) = sprintf('Z%d.txt', n)
+
+#do for [i=start:end:step] {p files(i) u (sqrt(($4)**2+($5)**2+($6)**2)) bins=25 w boxes title sprintf('z = %d', i)}
+
+# with scales defined 
+do for [i=start:end:step] {p[0:32.5][0:400] files(i) u (sqrt(($4)**2+($5)**2+($6)**2)) bins=25 w boxes title sprintf('z = %d mm', i)}
+
+cd '..'
+
+############################ Mean momentum versus z ####################################
+
+set term pdfcairo
+set autoscale
+
+set xlabel 'z (mm)'
+set ylabel '|P_{avg}| (MeV/c)'
+
+#set output 'mean_momentum_v_z_lines.pdf'
+#p 'P_mean_versus_z.txt' u 1:2 w l notitle 
+
+exit
