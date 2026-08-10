@@ -1,0 +1,18 @@
+# Load styles
+load "~/nature.journal"
+load "~/gpls/bluegold-sl.colour"
+
+set term pdfcairo
+set autoscale
+
+# Set axis labels
+set xlabel "Energy (MeV)"
+set ylabel "Events" 
+
+set style fill transparent solid 0.5
+
+set output 'energy_distr.pdf'
+
+p[0:3][] '0.7/TRANSMIT.txt' u ($4*1e-6)  bins=25 w boxes title  '0.7 mm', \
+'0.8/TRANSMIT.txt' u ($4*1e-6)  bins=25 w boxes title '0.8 mm', \
+'0.9/TRANSMIT.txt' u ($4*1e-6)  bins=25 w boxes title '0.9 mm'

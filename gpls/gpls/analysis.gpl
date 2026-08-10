@@ -1,0 +1,25 @@
+# Load styles
+load "~/gpls/nature.journal"
+load "~/gpls/bluegold-sl.colour"
+
+set term pngcairo
+set key top right
+
+set xlabel "Energy (eV)"
+set ylabel "Counts"
+
+
+set style fill transparent solid 0.5
+
+set output 'below_1_keV_test.png'
+
+
+p[][] 'zntuples/less_1keV_260.txt' u (((($4**2)+($5**2)+($6**2))/(2*105.66))*1e6) bins=25 w boxes title 'z = 260 mm E <= 1 keV' 
+
+
+
+set output 'below_50_keV_test.png'
+
+set xlabel "Energy (keV)"
+
+p[][] 'zntuples/less_50keV_260.txt' u (((($4**2)+($5**2)+($6**2))/(2*105.66))*1e3) bins=25 w boxes title 'z = 260 mm E <= 50 keV' 

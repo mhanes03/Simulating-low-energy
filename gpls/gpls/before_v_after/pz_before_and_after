@@ -1,0 +1,47 @@
+# Load styles
+load "~/gpls/nature.journal"
+load "~/gpls/bluegold-sl.colour"
+
+
+
+set term pngcairo
+set key top right
+
+set xlabel "P_{z} MeV/c"
+
+set ylabel "P'_{z} MeV/c"
+
+set key left
+
+#set output 'pz_sorted_120.png'
+
+#p[][] 'zntuples/pz_before_and_After_120.txt' u 2:4 notitle
+
+set output 'pz_sorted_50.png'
+
+p[][] 'zntuples/pz_before_and_After_50.txt' u 2:4 notitle
+
+
+#p[][-10:30] 'zntuples/Z100.txt' u 9:6 title 'z = 100 mm' ,\
+#'zntuples/Z120.txt' u 9:6 title 'z = 120 mm 
+
+
+
+#set output 'pz_before_and_After_50.png'
+
+
+#p[][-10:30] 'zntuples/Z210.txt' u 9:6 title 'z = 210 mm' ,\
+#'zntuples/Z220.txt' u 9:6 title 'z = 220 mm 
+
+
+#set output 'cooling_cell.png'
+
+
+#p[][-10:30] 'zntuples/Z220.txt' u 9:6 title 'z = 220 mm' ,\
+'#zntuples/Z320.txt' u 9:6 title 'z = 320 mm 
+
+
+#set output 'pz_pz_120.png'
+
+
+#p[][-10:30] 'zntuples/combined_100_120.txt' u 2:(($6 < 0. ? $6:NaN)**2) title 'z = 220 mm' 

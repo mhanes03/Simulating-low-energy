@@ -1,0 +1,26 @@
+# Load styles
+load "~/gpls/nature.journal"
+load "~/gpls/bluegold-sl.colour"
+
+set term pdfcairo
+
+set mxtics 1
+
+# Set axis labels
+set xlabel "E-field (kV/m)"
+set ylabel "Captured muons (%)"
+
+set output 'captured_muons.pdf'
+
+p[][] 'optimisation_trail.txt' u ($1*1e3):($4/1e2)  title "At 300 mm 5 mbar 290 K"
+
+set xlabel "Paschen factor"
+
+set output 'captured_muons_paschen.pdf'
+
+p[][] 'optimisation_trail.txt' u ($1/(0.0032/0.3)):($4/1e2)  title "At 300 mm 5 mbar 290 K"
+
+#set output 'captured_muons_comp.pdf'
+
+#p[][] 'optimisation_trail.txt' u ($1*1e3):($3/1e2)  title "Optimiser", \
+#'by_hand_optimum.txt' u 1:($4/1e2) title 'By hand'

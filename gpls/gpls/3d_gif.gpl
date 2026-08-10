@@ -1,0 +1,49 @@
+# Load styles
+load "~/gpls/nature.journal"
+load "~/gpls/bluegold-sl.colour"
+
+set term gif animate delay 100 loop 0 
+
+set output 'graph.gif'
+
+start = 10 
+end = 150
+step = 10 
+
+unset size
+
+set grid
+set grid layerdefault   lt 0 linecolor 0 linewidth 0.500,  lt 0 linecolor 0 linewidth 0.500
+set logscale z
+set format z "10^{%T}"
+set mztics 10
+
+set xtics 200 1000 400
+set xtics 400
+
+set ytics 1 30 5
+
+set palette rgb 33,13,10
+set colorbox
+
+set xlabel 'Time (ns)'
+set xlabel  offset character -1, -1, 0 font "" textcolor lt -1 norotate
+
+set ylabel 'z (cm)'
+set ylabel  offset character -2, -2, -3 font "" textcolor lt -1 norotate
+
+set zlabel 'Energy (eV)' rotate
+set logscale cb
+set format cb "10^{%T}"
+set cbrange [1e-3:5e6]
+
+#set cblabel 'Energy (eV)' rotate 
+
+#set colorbox vertical origin screen 0.8, 0.2 size screen 0.05, 0.5 front  noinvert bdefault
+
+# using autoscale
+files(n) = sprintf('Z%d.txt', n)
+
+# with scales defined 
+do for [i=start:end:step] {
+splot[0:2000][0:15][1e-3:5e6] files(i) u 7:($3*0.1):(((((($4)**2)+(($5)**2)+(($6)**2))/(2*105.66))*1e6)):(((((($4)**2)+(($5)**2)+(($6)**2))/(2*105.66))*1e6)) w p palette notitle}

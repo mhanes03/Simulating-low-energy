@@ -1,0 +1,53 @@
+# Load styles
+load "~/gpls/nature.journal"
+load "~/gpls/bluegold-sl.colour"
+
+set term pdfcairo
+
+set output 'map_of_newparticles.pdf'
+
+unset size
+
+set grid
+set grid layerdefault   lt 0 linecolor 0 linewidth 0.500,  lt 0 linecolor 0 linewidth 0.500
+
+
+#set xtics 200 1000 400
+#set xtics 400
+
+#set ytics 1 30 5
+
+set xlabel 'y (mm)'
+set xlabel  offset character -1, -1, 0 font "" textcolor lt -1 norotate
+
+set ylabel 'z (mm)'
+set ylabel  offset character -2, -2, -3 font "" textcolor lt -1 norotate
+
+set zlabel 'x (mm)' rotate
+
+set view 60,30,1,1
+
+splot 'positrons.txt' u 2:3:1 w p notitle 
+
+
+set output 'x_v_z.pdf'
+
+unset ylabel 
+
+set ylabel 'x (mm)'
+set xlabel 'z (mm)'
+
+p 'positrons.txt' u 3:1 w p notitle 
+
+
+set output 'x_v_z_cell.pdf'
+
+
+p[-20:160][-25:25] 'positrons.txt' u 3:1 w p notitle 
+
+set output 'z_v_t_cell.pdf'
+
+set ylabel 'z (mm)'
+set xlabel 't (ns)'
+
+p[][] 'positrons.txt' u 7:3 w p notitle 

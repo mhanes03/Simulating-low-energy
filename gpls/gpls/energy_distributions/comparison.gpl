@@ -1,0 +1,25 @@
+# Load styles
+load "~/nature.journal"
+load "~/gpls/bluegold-sl.colour"
+
+
+set term pdfcairo
+set autoscale
+
+# Set axis labels
+set xlabel "Energy (MeV)"
+set ylabel "Events" 
+
+set output 'comparison.pdf'
+
+
+set style fill transparent solid 0.5
+
+
+set xlabel "Energy (MeV)"
+set ylabel "Events" 
+
+
+p[][] '0.7/zntuples/Z10.txt' u ((($4)**2+($5)**2+($6)**2)/(2*105.66)) bins=25 w boxes title '0.7 mm', \
+'0.8/zntuples/Z10.txt' u ((($4)**2+($5)**2+($6)**2)/(2*105.66)) bins=25 w boxes title '0.8 mm', \
+'0.9/zntuples/Z10.txt' u ((($4)**2+($5)**2+($6)**2)/(2*105.66)) bins=25 w boxes title '0.9 mm'

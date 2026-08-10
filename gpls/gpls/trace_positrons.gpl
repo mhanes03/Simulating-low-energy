@@ -1,0 +1,30 @@
+# Load styles
+load "~/gpls/nature.journal"
+load "~/gpls/bluegold-sl.colour"
+
+set term pdfcairo
+
+set output 'pz_v_z.pdf'
+
+set xlabel 'z (mm)'
+set ylabel 'Pz (MeV/c)'
+
+plot 'positrontrace.txt' using 3:6 index 0 notitle
+
+
+set output 'x_v_y.pdf'
+
+set xlabel 'x (mm)'
+set ylabel 'y (mm)'
+
+plot 'positrontrace.txt' using 1:2 index 0 w l notitle
+
+start = 0
+end = 999
+step = 1
+
+set xlabel 'z (mm)'
+set ylabel 'Pz (MeV/c)'
+
+do for [i=start:end:step] {set output sprintf('%d.pdf', i) 
+plot 'positrontrace.txt' using 3:6 index i w l notitle}

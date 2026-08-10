@@ -1,0 +1,33 @@
+# Load styles
+load "~/gpls/nature.journal"
+load "~/gpls/bluegold-sl.colour"
+
+
+
+################################ Muons stopped by z ############################
+
+set term pdfcairo
+set autoscale 
+
+# Set axis labels
+set xlabel "z (mm)"
+set ylabel "Counts"
+
+set style fill solid 0.5
+
+set output 'muons_stopped_versus_z_dist.pdf'
+
+set style fill transparent solid 0.5
+
+# plots the z stopping distance distribution
+p '../beamloss.txt' u 3 bins=50 w boxes title 'No E-field', \
+'beamloss.txt' u 3 bins=50 w boxes title '0.816 MV/m'
+
+set output 'muons_stopped_versus_t_dist.pdf'
+
+set style fill transparent solid 0.5
+set xlabel 't (ns)'
+
+# plots the z stopping distance distribution
+p '../beamloss.txt' u 7 bins=50 w boxes title 'No E-field', \
+'beamloss.txt' u 7 bins=50 w boxes title '0.816 MV/m'

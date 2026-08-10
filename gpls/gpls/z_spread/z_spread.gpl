@@ -1,0 +1,62 @@
+# Load styles
+load "~/nature.journal"
+load "~/gpls/bluegold-sl.colour"
+
+set format y '%1.0f'
+set format x '%1.0f'
+
+cd 'tntuples' 
+
+start = 20
+end = 200
+step = 10
+
+
+set term pdfcairo
+set autoscale 
+
+
+set style fill transparent solid 0.5
+
+set output 'z_distribution_50_100_150_200.pdf'
+
+p[0:250][] 'T50.txt' u 3 bins=50 w boxes title 't = 50 ns', \
+'T100.txt' u 3 bins=50 w boxes title 't = 100 ns', \
+'T150.txt' u 3 bins=50 w boxes title 't = 150 ns', \
+'T200.txt' u 3 bins=50 w boxes title 't = 200 ns'
+
+
+set style fill solid 0.5
+
+# Set axis labels
+set xlabel "z (mm)"
+set ylabel "Events"
+
+set output 'z_distributions.pdf'
+
+files(n) = sprintf('T%d.txt', n)
+do for [i=start:end:step] {p[][] files(i) u 3 bins=50 w boxes title sprintf('t = %d ns', i)}
+
+set style fill transparent solid 0.5
+
+set output 'z_distr_50_100_150.pdf'
+
+p[0:250][] 'T50.txt' u 3 bins=50 w boxes title 't = 50 ns', \
+'T100.txt' u 3 bins=50 w boxes title 't = 100 ns', \
+'T150.txt' u 3 bins=50 w boxes title 't = 150 ns'
+
+
+
+
+set output 'z_distribution_10_to_50.pdf'
+
+p[0:65][] 'T10.txt' u 3 bins=50 w boxes title 't = 10 ns', \
+'T25.txt' u 3 bins=50 w boxes title 't = 25 ns', \
+'T50.txt' u 3 bins=50 w boxes title 't = 50 ns'
+
+set output 'z_distribution_200_250_300.pdf'
+
+p[0:250][] 'T200.txt' u 3 bins=50 w boxes title 't = 200 ns', \
+'T250.txt' u 3 bins=50 w boxes title 't = 250 ns', \
+'T300.txt' u 3 bins=50 w boxes title 't = 300 ns'
+

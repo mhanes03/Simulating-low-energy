@@ -1,0 +1,77 @@
+# Load styles
+load "~/gpls/nature.journal"
+load "~/gpls/bluegold-sl.colour"
+
+set term pdfcairo
+
+#set output 'energy_deposited_plastic.pdf'
+
+set xlabel 'Energy (MeV)'
+
+#p[][] 'plastic.txt' u ((($4)**2+($5)**2+($6)**2)/(2*0.511)) bins=50 w p title 'plastic', \
+
+set output 'energy_deposited.pdf'
+
+set xlabel 'Energy (MeV)'
+
+p[][] 'Det2.txt' u ((($4)**2+($5)**2+($6)**2)/(2*0.511)) bins=50 w p title 'Det 2', \
+'Det1.txt' u ((($4)**2+($5)**2+($6)**2)/(2*0.511)) bins=50 w p title 'Det 1', \
+
+set output 'px.pdf'
+
+set xlabel 'Px (MeV/c)'
+set ylabel 'Counts'
+
+p 'Det1.txt' u 4 bins=50 w p title 'Det 1', \
+'Det2.txt' u 4 bins=50 w p title 'Det 2', \
+
+set output 'py.pdf'
+
+set xlabel 'Py (MeV/c)'
+
+p 'Det1.txt' u 5 bins=50 w p title 'Det 1', \
+'Det2.txt' u 5 bins=50 w p title 'Det 2', \
+
+set output 'pz.pdf'
+
+set xlabel 'Pz (MeV/c)'
+
+p 'Det1.txt' u 6 bins=50 w p title 'Det 1', \
+'Det2.txt' u 6 bins=50 w p title 'Det 2', \
+
+
+set output 'time_distribution.pdf'
+
+set xlabel 'Time (ns)'
+set style fill transparent solid 0.5
+
+p[-1000:10000][] 'Det2.txt' u 7 bins=50 w boxes title 'Det 2', \
+'Det1.txt' u 7 bins=50 w boxes title 'Det 1', \
+
+set output 'x.pdf'
+
+set xlabel 'x (mm)'
+set ylabel 'y (mm)'
+
+set style fill transparent solid 0.5
+
+p[][] 'Det2.txt' u 1:2 w p title 'Det 2', \
+'Det1.txt' u 1:2 w p title 'Det 1', \
+'plastic.txt' u 1:2 w p title 'Plastic', \
+'peek_outer.txt' u 1:2 w p title 'Outer', \
+'peek_inner.txt' u 1:2 w p title 'Inner', \
+
+set output 'x_y.pdf'
+
+set xlabel 'x (mm)'
+set ylabel 'y (mm)'
+
+set style fill transparent solid 0.5
+
+p[][] 'Det2.txt' u 1:2 w p title 'Det 2', \
+'Det1.txt' u 1:2 w p title 'Det 1', \
+
+
+
+
+

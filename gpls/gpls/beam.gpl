@@ -1,0 +1,38 @@
+# Load styles
+load "~/nature.journal"
+load "~/gpls/bluegold-sl.colour"
+
+set term pdfcairo 
+
+set output 'beam.pdf'
+
+set style fill transparent solid 0.5
+
+# Set axis labels
+set xlabel "Energy (MeV)"
+set ylabel "Events" 
+
+p[-0.5:2.5][] 'beam.txt' u ((($4)**2+($5)**2+($6)**2)/(2*105.66)) bins=25 w boxes title 'Beam file'
+
+set output 'beam_1.pdf'
+
+set style fill transparent solid 0.5
+
+# Set axis labels
+set xlabel "Energy (MeV)"
+set ylabel "Events" 
+
+
+p[-0.5:2.5][] 'beam.txt' u ((($4)**2+($5)**2+($6)**2)/(2*105.66)) bins=25 w boxes title 'Beam file', \
+'TRANSMIT.txt' u ($4*1e-6)  bins=25 w boxes title 'Transmit file'
+
+set output 'beam_2.pdf'
+
+set style fill transparent solid 0.5
+
+# Set axis labels
+set xlabel "Energy (MeV)"
+set ylabel "Events" 
+
+
+p[][] 'TRIM.dat' u ($3*1e-6)  bins=25 w boxes notitle

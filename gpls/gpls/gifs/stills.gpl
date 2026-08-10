@@ -1,0 +1,41 @@
+# Load styles
+load "~/gpls/nature.journal"
+load "~/gpls/bluegold-sl.colour"
+
+set term pdfcairo
+set key top right
+
+#set cblabel 'Energy (eV)'
+set logscale cb
+set format cb "10^{%T}"
+set cbrange [1e2:5e6]
+
+set logscale y 
+set format y "10^{%T}"
+set mytics 10
+
+cd 'zntuples'
+
+start = 20
+end = 1000
+step = 10
+
+# Set axis labels
+set ylabel "Energy (eV)"
+set xlabel "Time (ns)"
+
+set palette rgb 10,12,14
+set palette rgb 33,13,10
+set colorbox
+
+
+# using autoscale
+files(n) = sprintf('Z%d.txt', n)
+
+# with scales defined 
+do for [i=start:end:step] {set output sprintf('Z%d.pdf', i) 
+
+p[][] files(i) u 7:(((((($4)**2)+(($5)**2)+(($6)**2))/(2*105.66))*1e6)):(((((($4)**2)+(($5)**2)+(($6)**2))/(2*105.66))*1e6)) w p palette title sprintf('z = %d mm', i)}
+
+
+exit 

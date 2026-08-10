@@ -1,0 +1,43 @@
+# Load styles
+load "~/gpls/nature.journal"
+load "~/gpls/bluegold-sl.colour"
+
+set term pdfcairo
+
+set mxtics 1
+
+# Set axis labels
+set xlabel "E-field (kV/m)"
+set ylabel "Mean energy (eV)"
+
+set output 'mean_energy_volts.pdf'
+
+p[][] 'mean_std_spread.txt' u ($1*1e3):($5*1e6)  notitle 
+
+set output 'mean_energy_pascehn_press.pdf'
+
+set xlabel "Pressure (mbar)"
+set palette rgb 33,13,10
+set colorbox
+set cblabel 'Paschen factor'
+
+p[][0:1e3] 'mean_std_spread.txt' u ($4*1013):($5*1e6):2 w p palette notitle 
+
+set output 'mean_energy_paschen.pdf'
+
+set xlabel "Paschen factor"
+set palette rgb 33,13,10
+set colorbox
+set cblabel 'Captured muons (%)'
+
+p[][] 'mean_std_spread.txt' u 2:($5*1e6):($8/1E2) w p palette notitle 
+
+set output 'mean_energy_paschen_zoom.pdf'
+
+set xlabel "Paschen factor"
+set palette rgb 33,13,10
+set colorbox
+set cblabel 'Captured muons (%)'
+
+
+p[][0:1e3] 'mean_std_spread.txt' u 2:($5*1e6):($8/1E2) w p palette notitle 

@@ -1,0 +1,14 @@
+# Load styles
+load "~/nature.journal"
+load "~/gpls/bluegold-sl.colour"
+
+cd 'zntuples' 
+
+set term pdfcairo
+
+set xlabel "z (mm)"
+set ylabel "Number muons E < 1 keV (%)" 
+
+set output 'N_versus_z.pdf'
+
+p[][0:3] 'energy_and_number.txt' u 1:($5/1e2) w lp notitle 

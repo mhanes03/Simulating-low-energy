@@ -1,0 +1,21 @@
+# Load styles
+load "~/nature.journal"
+load "~/bluegold-sl.colour"
+
+set term pdfcairo
+
+set cblabel 'Energy (eV)'
+set logscale cb
+set format cb "10^{%T}"
+set cbrange [1e-2:5e6]
+
+set output 'colour_code_energy.pdf'
+
+# Set axis labels
+set ylabel "x (mm)"
+set xlabel "y (mm)"
+
+set palette rgb 33,13,10
+set colorbox
+
+p[-40:40][-40:40] 'Z0.txt' u 1:2:(((((($4)**2)+(($5)**2)+(($6)**2))/(2*105.66))*1e6)) w p palette title 'z = 0 mm'

@@ -1,0 +1,34 @@
+# Load styles
+load "~/nature.journal"
+load "~/gpls/bluegold-sl.colour"
+
+cd 'zntuples' 
+
+start = 0
+end = 1000
+step = 10
+
+set term pdfcairo
+
+set xlabel "Px (MeV/c)"
+set ylabel "Py (MeV/c)" 
+
+set cblabel 'Pz (MeV/c)'
+
+set logscale cb
+set format cb "10^{%T}"
+set cbrange [1e-10:1e2]
+
+set logscale x
+set format x "10^{%T}"
+
+set logscale y
+set format y "10^{%T}"
+
+set palette rgb 33,13,10
+set colorbox
+
+files(n) = sprintf('Z%d.txt', n)
+
+do for [i=start:end:step] {set output sprintf('%d_with_pz.pdf', i) 
+p[][] files(i) u abs(4):abs(5):abs(6) w p palette title sprintf('z = %d mm', i)}

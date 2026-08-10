@@ -1,0 +1,39 @@
+# Load styles
+load "~/gpls/nature.journal"
+load "~/gpls/bluegold-sl.colour"
+
+set term pdfcairo
+
+# Set axis labels
+set xlabel "Energy (eV)"
+set ylabel "Stopping power (MeV cm^2/g)"
+
+set logscale y 
+set format y "10^{%T}"
+set mytics 10
+
+set logscale x 
+set format x "10^{%T}"
+set mxtics 10
+
+set output 'Stopping_curve_no_intersects.pdf'
+
+#set arrow from 0.9e3, graph 0 to 0.9e3, graph 1 nohead lw 2 
+#set arrow from graph 0, first 289 to graph 1, first 289 nohead lw 2
+
+#show arrow 
+
+p[0.5e3:1e9][1:2000] 'muons_in_helium.txt' u ($1 >= 200 ? $1:NaN):($2*1e3) w l notitle
+
+#p 'muons_in_helium.txt' u ($1 >= 200 ? $1:NaN):($2*1e3) w l title 'Electronic', \
+#'muons_in_helium.txt' u ($1 <= 10000 ? $1:NaN):($3*1e3) w l title 'Nuclear'
+
+#p[10:4E6][] 'muons_in_neon.txt' u 1:($3*1e3) w l title 'Electronic', \
+#'muons_in_neon.txt' u 1:($4*1e3) w l title 'Nuclear'
+
+#set output 'Stopping_curve_diff_units.pdf'
+
+#set ylabel "Stopping power (eV cm^2/10^{15} atoms)"
+
+#p 'muons_in_helium.txt' u ($1 >= 200 ? $1:NaN):($2*6.6471) w l title 'Electronic', \
+'muons_in_helium.txt' u ($1 <= 10000 ? $1:NaN):($3*6.6471) w l title 'Nuclear'

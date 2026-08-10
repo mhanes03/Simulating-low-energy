@@ -1,0 +1,48 @@
+# Load styles
+load "~/nature.journal"
+load "~/gpls/bluegold-sl.colour"
+
+set term pngcairo
+set key top right
+
+set ylabel 'Counts'
+set xlabel 'Energy (keV)'
+
+set style fill transparent solid 0.4
+
+set output 'T40.png'
+
+p[][] 'tntuples/T40.txt' u (((($4**2)+($5**2)+($6**2))/(2*105.66))*1e3) bins=25 w boxes title 't = 40 ns'
+
+
+set output 'T60.png'
+
+p[][] 'tntuples/T60.txt' u (((($4**2)+($5**2)+($6**2))/(2*105.66))*1e3) bins=25 w boxes title 't = 60 ns'
+
+
+set output 'T80.png'
+
+p[][] 'tntuples/T80.txt' u (((($4**2)+($5**2)+($6**2))/(2*105.66))*1e3) bins=25 w boxes title 't = 80 ns'
+
+set output 'T100.png'
+
+p[][] 'tntuples/T100.txt' u (((($4**2)+($5**2)+($6**2))/(2*105.66))*1e3) bins=25 w boxes title 't = 100s ns'
+
+set output 'T120.png'
+
+p[][] 'tntuples/T120.txt' u (((($4**2)+($5**2)+($6**2))/(2*105.66))*1e3) bins=25 w boxes title 't = 120 ns'
+
+
+set output 'T40_120.png'
+
+p[][] 'tntuples/T40.txt' u (((($4**2)+($5**2)+($6**2))/(2*105.66))*1e3) bins=25 w boxes title 't = 40 ns', \
+ 'tntuples/T60.txt' u (((($4**2)+($5**2)+($6**2))/(2*105.66))*1e3) bins=25 w boxes title 't = 60 ns', \
+  'tntuples/T80.txt' u (((($4**2)+($5**2)+($6**2))/(2*105.66))*1e3) bins=25 w boxes title 't = 80 ns', \
+  'tntuples/T100.txt' u (((($4**2)+($5**2)+($6**2))/(2*105.66))*1e3) bins=25 w boxes title 't = 100s ns', \
+  'tntuples/T120.txt' u (((($4**2)+($5**2)+($6**2))/(2*105.66))*1e3) bins=25 w boxes title 't = 120 ns'
+
+  set output 'T80_120.png'
+
+ p[][] 'tntuples/T80.txt' u (((($4**2)+($5**2)+($6**2))/(2*105.66))*1e3) bins=25 w boxes title 't = 80 ns', \
+  'tntuples/T100.txt' u (((($4**2)+($5**2)+($6**2))/(2*105.66))*1e3) bins=25 w boxes title 't = 100s ns', \
+  'tntuples/T120.txt' u (((($4**2)+($5**2)+($6**2))/(2*105.66))*1e3) bins=25 w boxes title 't = 120 ns'

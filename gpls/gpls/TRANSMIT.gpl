@@ -1,0 +1,20 @@
+# Load styles
+load "~/nature.journal"
+load "~/gpls/bluegold-sl.colour"
+
+set term pdfcairo
+set autoscale
+
+# Set axis labels
+set xlabel "Energy (keV)"
+set ylabel "Events" 
+
+set style fill transparent solid 0.5
+
+set output 'energy_distr.pdf'
+
+set xtics 0, 300, 2100
+
+p[0:2100][] 'TRANSMIT.txt' u ($4*1e-3)  bins=25 w boxes title 'TRIM'
+
+

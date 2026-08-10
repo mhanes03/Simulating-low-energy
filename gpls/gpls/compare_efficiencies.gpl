@@ -1,0 +1,15 @@
+# Load styles
+load "~/nature.journal"
+load "~/gpls/bluegold-sl.colour"
+
+set term pdfcairo
+
+set xlabel "t (ns)"
+set ylabel "Number of muons E < 1 keV (%)" 
+
+set output 'N_versus_t.pdf'
+
+p[0:3100][] './timings_12.13712029650219/tntuples/energy_and_number_time.txt' u 1:($5/1e2) w lp title '12 ns', \
+'./timings_17.554594559859055/tntuples/energy_and_number_time.txt' u 1:($5/1e2) w lp title '17 ns', \
+'./timings_27.982501137892562/tntuples/energy_and_number_time.txt' u 1:($5/1e2) w lp title '27 ns', \
+'./timings_47.31306061112377/tntuples/energy_and_number_time.txt' u 1:($5/1e2) w lp title '47 ns', \

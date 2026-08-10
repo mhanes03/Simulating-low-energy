@@ -1,0 +1,25 @@
+# Load styles
+load "./nature.journal"
+load "./bluegold-sl.colour"
+
+################################# Pz versus z ########################################
+
+set term pdfcairo
+set autoscale 
+
+# Set axis labels
+set ylabel "P_z (MeV/c)"
+
+set output 'pz_scatter.pdf'
+
+p 'time_output.txt' u 3:6 w l notitle 
+
+# Set axis labels
+set xlabel "t (ns)"
+set ylabel "P_z (MeV/c)"
+
+set output 'pz_v_t.pdf'
+
+p 'time_output.txt' u 7:6 w l notitle 
+
+exit

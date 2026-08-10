@@ -1,0 +1,34 @@
+# Load styles
+load "~/gpls/nature.journal"
+load "~/gpls/bluegold-sl.colour"
+
+set term pdfcairo
+
+# Set axis labels
+set ylabel "Captured muons (%)"
+
+set output 'In_eqm_bounds.pdf'
+
+set palette rgb 33,13,10
+set colorbox
+set cblabel 'Paschen factor'
+
+set xlabel "Volt (kV/m)"
+
+#p 'optimisation_trail.txt' u 2:($3/1e2):1 w p palette notitle
+
+p[][] 'optimisation_trail.txt' u ($1*1e3):($4/1e2):($1/0.0061) w p palette notitle
+
+
+set output 'Above_and_below.pdf'
+
+set palette rgb 33,13,10
+set colorbox
+set cblabel 'Paschen factor'
+
+set ylabel "Muons (%)"
+set xlabel "Volt (MV/m)"
+
+p[][] 'optimisation_trail.txt' u 2:($4/1e2) w p title 'Below bounds', \
+'optimisation_trail.txt' u 2:($5/1e2) w p title 'Above bounds', \
+'optimisation_trail.txt' u 2:($3/1e2) w p title 'In bounds', \

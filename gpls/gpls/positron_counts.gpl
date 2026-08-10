@@ -1,0 +1,14 @@
+# Load styles
+load "~/gpls/nature.journal"
+load "~/gpls/bluegold-sl.colour"
+
+set term pdfcairo
+set style fill transparent solid 0.5
+
+set output 'z_distribution.pdf'
+
+p[0:160] 'positrons.txt' u 3 bins=50 w boxes notitle 
+
+set output 'time_distribution.pdf'
+
+p[] 'positrons.txt' u 7 bins=50 w boxes notitle 

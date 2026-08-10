@@ -1,0 +1,21 @@
+# Load styles
+load "~/nature.journal"
+load "~/gpls/bluegold-sl.colour"
+
+set term pdfcairo
+
+# Set axis labels
+set xlabel "x (mm)"
+set ylabel "y (mm)"
+
+set output 'x_v_y_10.pdf'
+
+p[-40:40][-40:40] './Z-10.txt' u 1:2 w p notitle 
+
+set output 'x_v_y_20.pdf'
+
+p[-40:40][-40:40] './Z-20.txt' u 1:2 w p notitle 
+
+set output 'x_v_y_40.pdf'
+
+p[-40:40][-40:40] './Z-40.txt' u 1:2 w p notitle 

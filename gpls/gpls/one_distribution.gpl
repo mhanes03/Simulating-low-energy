@@ -1,0 +1,19 @@
+
+# Load styles
+load "~/gpls/nature.journal"
+load "~/gpls/bluegold-sl.colour"
+
+set term pngcairo
+set key top right
+
+set ylabel "Counts"
+
+set xlabel "Energy (MeV)"
+
+set output 'energy_distribution.png'
+
+
+set key top right
+set style fill transparent solid 0.5
+
+p[][] 'zntuples/Z10.txt' u ((($4**2)+($5**2)+($6**2))/(2*105.66)) bins=25 w boxes title 'z = 10 mm' 

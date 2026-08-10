@@ -1,0 +1,43 @@
+# Load styles
+load "~/gpls/nature.journal"
+load "~/gpls/bluegold-sl.colour"
+
+set term pngcairo
+
+set style fill transparent solid 0.4
+
+set ylabel "Counts"
+
+set xlabel "Energy (keV)"
+
+set output 'less_15keV_220.png'
+
+p[][] 'zntuples/less_15keV_220.txt' u (((($4**2)+($5**2)+($6**2))/(2*105.66))*1e3) bins=25 w boxes title 'z = 220 mm'
+
+set output 'less_15keV_320.png'
+
+p 'zntuples/less_15keV_320.txt' u (((($4**2)+($5**2)+($6**2))/(2*105.66))*1e3) bins=25 w boxes title 'z = 320 mm'
+
+set output 'less_15keV_420.png'
+
+p 'zntuples/less_15keV_420.txt' u (((($4**2)+($5**2)+($6**2))/(2*105.66))*1e3) bins=25 w boxes title 'z = 420 mm'
+
+set output 'less_15keV_520.png'
+
+p 'zntuples/less_15keV_520.txt' u (((($4**2)+($5**2)+($6**2))/(2*105.66))*1e3) bins=25 w boxes title 'z = 520 mm'
+
+set output 'less_15keV_220_520.png'
+
+p[][] 'zntuples/less_15keV_220.txt' u (((($4**2)+($5**2)+($6**2))/(2*105.66))*1e3) bins=25 w boxes title 'z = 220 mm', \
+'zntuples/less_15keV_320.txt' u (((($4**2)+($5**2)+($6**2))/(2*105.66))*1e3) bins=25 w boxes title 'z = 320 mm', \
+'zntuples/less_15keV_420.txt' u (((($4**2)+($5**2)+($6**2))/(2*105.66))*1e3) bins=25 w boxes title 'z = 420 mm', \
+'zntuples/less_15keV_520.txt' u (((($4**2)+($5**2)+($6**2))/(2*105.66))*1e3) bins=25 w boxes title 'z = 520 mm'
+
+
+set output 'less_15keV_220_520.png'
+
+p[][0:800] 'zntuples/less_15keV_220.txt' u (((($4**2)+($5**2)+($6**2))/(2*105.66))*1e3) bins=25 w boxes title 'z = 220 mm', \
+'zntuples/less_15keV_320.txt' u (((($4**2)+($5**2)+($6**2))/(2*105.66))*1e3) bins=25 w boxes title 'z = 320 mm', \
+'zntuples/less_15keV_420.txt' u (((($4**2)+($5**2)+($6**2))/(2*105.66))*1e3) bins=25 w boxes title 'z = 420 mm', \
+'zntuples/less_15keV_520.txt' u (((($4**2)+($5**2)+($6**2))/(2*105.66))*1e3) bins=25 w boxes title 'z = 520 mm'
+

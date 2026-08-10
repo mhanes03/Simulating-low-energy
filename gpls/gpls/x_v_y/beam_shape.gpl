@@ -1,0 +1,57 @@
+# Load styles
+load "~/gpls/nature.journal"
+load "~/gpls/bluegold-sl.colour"
+
+set format y '%1.0f'
+set format x '%1.0f'
+
+################################ Muons stopped by z ############################
+
+set term pdfcairo
+
+# Set axis labels
+set xlabel "Time (ns)"
+set ylabel "Events"
+
+set style fill solid 0.5
+
+####################### beam ################################################
+
+set output 'time_distr_beam.pdf'
+
+p[][] 'BEAM_100K.txt' u 7 bins=50 w boxes notitle
+
+
+# Set axis labels
+set xlabel "Time (ns)"
+set ylabel "z (mm)"
+
+set output 'z_v_t_beam.pdf'
+
+p[][] 'BEAM_100K.txt' u 7:3 w p notitle
+
+
+# Set axis labels
+set xlabel "x (mm)"
+set ylabel "y (mm)"
+
+set output 'x_v_y_beam.pdf'
+
+p[][] 'BEAM_100K.txt' u 1:2 w p notitle
+
+# Set axis labels
+set xlabel "px (MeV/c)"
+set ylabel "py (MeV/c)"
+
+set output 'px_v_py_beam.pdf'
+
+p[][] 'BEAM_100K.txt' u 4:5 w p notitle
+
+
+# Set axis labels
+set xlabel "pz (MeV/c)"
+set ylabel "z (mm)"
+
+set output 'pz_v_z_beam.pdf'
+
+p[][] 'BEAM_100K.txt' u 3:6 w p notitle

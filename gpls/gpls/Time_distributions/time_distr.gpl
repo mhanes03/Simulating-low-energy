@@ -1,0 +1,26 @@
+# Load styles
+load "~/gpls/nature.journal"
+load "~/gpls/bluegold-sl.colour"
+
+set format y '%1.0f'
+set format x '%1.0f'
+
+################################ Muons stopped by z ############################
+
+set term pdfcairo
+
+# Set axis labels
+set xlabel "Time (ns)"
+set ylabel "Counts"
+
+set style fill solid 0.5
+
+####################### beamloss ################################################
+
+set output 'time_distr_beamloss.pdf'
+
+p[][] 'beamloss.txt' u 7 bins=50 w boxes notitle
+
+#set output 'time_distr_beamloss_1000.pdf'
+
+#p[][0:500] '28.891/beamloss.txt' u 7 bins=50 w boxes title 'S = 1000 MeV cm^2/g'

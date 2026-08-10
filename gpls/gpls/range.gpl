@@ -1,0 +1,35 @@
+# Load styles
+load "~/nature.journal"
+load "~/gpls/bluegold-sl.colour"
+
+set term pdfcairo 
+
+set xlabel 'Energy (MeV)'
+set ylabel 'Range (m)'
+
+set ytics mirror 
+set output 'range_w_5bar.pdf'
+
+p 'muons_helium_1_bar.txt' u ($1*1e-6):($4*1e-3) w l title '1 bar 290 K', \
+'muons_helium_5bar.txt' u ($1*1e-6):($4*1e-3) w l title '5 bar 290 K', \
+
+set output 'range_w_5mbar_zoom.pdf'
+p[0:2.5][] 'muons_helium_5mbar.txt' u ($1*1e-6):($4*1e-3) w l title '5 mbar 290 K'
+
+set output 'range_zoom_w_5bar.pdf'
+
+p[0:2.5][] 'muons_helium_1_bar.txt' u ($1*1e-6):($4*1e-3) w l title '1 bar 290 K', \
+'muons_helium_5bar.txt' u ($1*1e-6):($4*1e-3) w l title '5 bar 290 K'
+
+set output 'range_1_bar_y_zoom.pdf'
+
+p[0:1.2][0:0.3] 'muons_helium_1_bar.txt' u ($1*1e-6):($4*1e-3) w l title '1 bar 290 K'
+
+set output 'range_100_mbar_y_zoom.pdf'
+
+p[0:1.2][0:0.3] 'muons_helium_100mbar.txt' u ($1*1e-6):4 w l title '100 mbar 290 K'
+
+set output 'range_100_mbar_v_1bar_y_zoom.pdf'
+
+p[0:1.2][0:0.3] 'muons_helium_100mbar.txt' u ($1*1e-6):4 w l title '100 mbar 290 K', \
+'muons_helium_1_bar.txt' u ($1*1e-6):($4*1e-3) w l title '1 bar 290 K'

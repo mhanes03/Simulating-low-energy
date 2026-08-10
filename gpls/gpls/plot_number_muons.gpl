@@ -1,0 +1,15 @@
+# Load styles
+load "~/nature.journal"
+load "~/gpls/bluegold-sl.colour"
+
+set term pdfcairo
+
+set xlabel "Flat top time (ns)"
+set ylabel "Captured muons at 1000 ns" 
+
+set output 'N_versus_flat_top.pdf'
+
+p[0:60][0:0.5] '10/tntuples/energy_and_number.txt' u 1:($4/1E5) w lp notitle, \
+  '15/tntuples/energy_and_number.txt' u 1:($4/1E5) w lp notitle, \
+  '20/tntuples/energy_and_number.txt' u 1:($4/1E5) w lp notitle, \
+  '40_flat_top/tntuples/energy_and_number.txt' u 1:($4/1E5) w lp notitle

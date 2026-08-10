@@ -1,0 +1,76 @@
+# Load styles
+load "~/nature.journal"
+load "~/bluegold-sl.colour"
+
+set format y '%1.0f'
+set format x '%1.0f'
+
+cd 'zntuples' 
+
+start = 10
+end = 1010
+step = 10
+
+set cblabel 'Time (ns)'
+################################ x versus y #############################################
+
+set term pdfcairo
+set autoscale 
+set palette rgb 33,13,10
+set colorbox
+
+# Set axis labels
+set xlabel "Px (MeV/c)"
+set ylabel "Py (MeV/c)"
+
+set output 'px_v_py_palette_one.pdf'
+
+files(n) = sprintf('Z%d.txt', n)
+do for [i=start:end:step] {p files(i) u 4:5:7 w p palette title sprintf('z = %d mm', i)}
+
+################################ x versus y #############################################
+
+set term pdfcairo
+set autoscale 
+set palette rgb 10,12,14
+set colorbox
+
+# Set axis labels
+set xlabel "Px (MeV/c)"
+set ylabel "Py (MeV/c)"
+
+set output 'px_v_py_palette_two.pdf'
+
+files(n) = sprintf('Z%d.txt', n)
+do for [i=start:end:step] {p files(i) u 4:5:7 w p palette title sprintf('z = %d mm', i)}
+
+
+########################################### Gifs ######################################
+set term gif animate delay 50 loop 0 
+
+set output 'px_py_two.gif'
+
+# Set axis labels
+set xlabel "Px (MeV/c)"
+set ylabel "Py (MeV/c)"
+
+# using autoscale
+files(n) = sprintf('Z%d.txt', n)
+do for [i=start:end:step] {p[-10:10][-10:10] files(i) u 4:5:7 w p palette title sprintf('z = %d mm', i)}
+
+set term gif animate delay 50 loop 0 
+set output 'px_py_one.gif'
+
+# Set axis labels
+set xlabel "Px (MeV/c)"
+set ylabel "Py (MeV/c)"
+
+set palette rgb 33,13,10
+set colorbox
+
+# using autoscale
+files(n) = sprintf('Z%d.txt', n)
+do for [i=start:end:step] {p[-10:10][-10:10] files(i) u 4:5:7 w p palette title sprintf('z = %d mm', i)}
+
+
+exit 

@@ -1,0 +1,50 @@
+# Load styles
+load "~/nature.journal"
+load "~/gpls/bluegold-sl.colour"
+
+set term pdfcairo
+set autoscale
+
+# Set axis labels
+set xlabel "Energy (MeV)"
+set ylabel "Events" 
+
+set output 'comparison_20_30.pdf'
+
+set style fill transparent solid 0.5
+
+set key top left
+set xlabel "Energy (MeV)"
+set ylabel "Events" 
+
+
+p[][] 'zntuples/Z20.txt' u ((($4)**2+($5)**2+($6)**2)/(2*105.66)) bins=25 w boxes title 'z = 20 mm ', \
+'zntuples/Z30.txt' u ((($4)**2+($5)**2+($6)**2)/(2*105.66)) bins=25 w boxes title 'z = 30 mm'
+
+set output 'comparison_0_10.pdf'
+
+set style fill transparent solid 0.5
+
+set key top left
+set xlabel "Energy (MeV)"
+set ylabel "Events" 
+
+
+p[][] 'zntuples/Z0.txt' u ((($4)**2+($5)**2+($6)**2)/(2*105.66)) bins=25 w boxes title 'z = 0 mm ', \
+'zntuples/Z10.txt' u ((($4)**2+($5)**2+($6)**2)/(2*105.66)) bins=25 w boxes title 'z = 10 mm'
+
+set output 'comparison_30_40.pdf'
+
+set style fill transparent solid 0.5
+
+set key top left
+set xlabel "Energy (MeV)"
+set ylabel "Events" 
+
+
+p[][] 'zntuples/Z30.txt' u ((($4)**2+($5)**2+($6)**2)/(2*105.66)) bins=25 w boxes title 'z = 30 mm ', \
+'zntuples/Z40.txt' u ((($4)**2+($5)**2+($6)**2)/(2*105.66)) bins=25 w boxes title 'z = 40 mm'
+
+#p[][] '0.84/zntuples/Z10.txt' u ((($4)**2+($5)**2+($6)**2)/(2*105.66)) bins=25 w boxes title '0.84 mm', \
+#'0.9/zntuples/Z10.txt' u ((($4)**2+($5)**2+($6)**2)/(2*105.66)) bins=25 w boxes title '0.90 mm', \
+#'0.92/zntuples/Z10.txt' u ((($4)**2+($5)**2+($6)**2)/(2*105.66)) bins=25 w boxes title '0.92 mm'

@@ -1,0 +1,128 @@
+# Load styles
+load "~/gpls/nature.journal"
+load "~/gpls/bluegold-sl.colour"
+
+set term pngcairo
+set key top right
+
+set ylabel "Counts"
+
+set xlabel "Energy (MeV)"
+
+set output 'degraders_comp_tungsten_57.png'
+
+
+set key top right
+set style fill transparent solid 0.5
+
+p[][0:5700] 'run_one/0.8/zntuples/Z10.txt' u ((($4**2)+($5**2)+($6**2))/(2*105.66)) bins=25 w boxes title 'z = 10 mm, Mylar 0.8 mm' ,\
+'run_two/0.5/zntuples/Z10.txt' u ((($4**2)+($5**2)+($6**2))/(2*105.66))  bins=25 w boxes title 'z = 10 mm, Graphite 0.5 mm', \
+'run_three/0.1/zntuples/Z10.txt' u ((($4**2)+($5**2)+($6**2))/(2*105.66))  bins=25 w boxes title 'z = 10 mm, Silver 0.1 mm', \
+'run_four/0.057/zntuples/Z10.txt' u ((($4**2)+($5**2)+($6**2))/(2*105.66))  bins=25 w boxes title 'z = 10 mm, Tungsten 0.057 mm'
+
+set output 'degraders_comp_tungsten.png'
+
+
+set key top right
+set style fill transparent solid 0.5
+
+p[][0:5700] 'run_one/0.8/zntuples/Z10.txt' u ((($4**2)+($5**2)+($6**2))/(2*105.66)) bins=25 w boxes title 'z = 10 mm, Mylar 0.8 mm' ,\
+'run_two/0.5/zntuples/Z10.txt' u ((($4**2)+($5**2)+($6**2))/(2*105.66))  bins=25 w boxes title 'z = 10 mm, Graphite 0.5 mm', \
+'run_three/0.1/zntuples/Z10.txt' u ((($4**2)+($5**2)+($6**2))/(2*105.66))  bins=25 w boxes title 'z = 10 mm, Silver 0.1 mm', \
+'run_four/0.05/zntuples/Z10.txt' u ((($4**2)+($5**2)+($6**2))/(2*105.66))  bins=25 w boxes title 'z = 10 mm, Tungsten 0.05 mm'
+
+set output 'degraders_comp.png'
+
+
+set key top left
+#set style fill solid 0.2
+
+p[][] 'run_one/0.8/zntuples/Z10.txt' u ((($4**2)+($5**2)+($6**2))/(2*105.66)) bins=25 w boxes title 'z = 10 mm, Mylar 0.8 mm' ,\
+'run_two/0.5/zntuples/Z10.txt' u ((($4**2)+($5**2)+($6**2))/(2*105.66))  bins=25 w boxes title 'z = 10 mm, Graphite 0.5 mm', \
+'run_three/0.1/zntuples/Z10.txt' u ((($4**2)+($5**2)+($6**2))/(2*105.66))  bins=25 w boxes title 'z = 10 mm, Silver 0.1 mm'
+
+set output 'degraders_comp_nosilver.png'
+
+
+set key top left
+#set style fill solid 0.2
+
+p[][0:2100] 'run_one/0.8/zntuples/Z10.txt' u ((($4**2)+($5**2)+($6**2))/(2*105.66)) bins=25 w boxes title 'z = 10 mm, Mylar 0.8 mm' ,\
+'run_two/0.5/zntuples/Z10.txt' u ((($4**2)+($5**2)+($6**2))/(2*105.66))  bins=25 w boxes title 'z = 10 mm, Graphite 0.5 mm'
+
+
+set output 'degraders_comp_tungsten_silver.png'
+
+
+set key top left
+#set style fill solid 0.2
+
+p[][0:5000] 'run_three/0.1/zntuples/Z10.txt' u ((($4**2)+($5**2)+($6**2))/(2*105.66))  bins=25 w boxes title 'z = 10 mm, Silver 0.1 mm', \
+'run_four/0.05/zntuples/Z10.txt' u ((($4**2)+($5**2)+($6**2))/(2*105.66))  bins=25 w boxes title 'z = 10 mm, Tungsten 0.05 mm'
+
+
+#'run_four/0.057/zntuples/Z10.txt' u ((($4**2)+($5**2)+($6**2))/(2*105.66))  bins=25 w boxes title 'z = 10 mm, Tungsten 0.057 mm'
+
+set output 'matching_dE.png'
+
+set key top right
+set style fill transparent solid 0.5
+
+p[][0:2600] 'run_one/0.8/zntuples/Z10.txt' u ((($4**2)+($5**2)+($6**2))/(2*105.66)) bins=25 w boxes title 'z = 10 mm, Mylar 0.8 mm' ,\
+'run_two/0.5/zntuples/Z10.txt' u ((($4**2)+($5**2)+($6**2))/(2*105.66))  bins=25 w boxes title 'z = 10 mm, Graphite 0.5 mm', \
+'run_three/0.18/zntuples/Z10.txt' u ((($4**2)+($5**2)+($6**2))/(2*105.66))  bins=25 w boxes title 'z = 10 mm, Silver 0.18 mm', \
+'run_four/0.11/zntuples/Z10.txt' u ((($4**2)+($5**2)+($6**2))/(2*105.66)) bins=25 w boxes title 'z = 10 mm, Tungsten 0.11 mm'
+
+set output 'matching_dE_2.png'
+
+set key top right
+set style fill transparent solid 0.5
+#set style fill solid 0.2
+
+p[][0:2600] 'run_one/0.8/zntuples/Z10.txt' u ((($4**2)+($5**2)+($6**2))/(2*105.66)) bins=25 w boxes title 'z = 10 mm, Mylar 0.8 mm' ,\
+'run_two/0.5/zntuples/Z10.txt' u ((($4**2)+($5**2)+($6**2))/(2*105.66))  bins=25 w boxes title 'z = 10 mm, Graphite 0.5 mm', \
+'run_three/0.16/zntuples/Z10.txt' u ((($4**2)+($5**2)+($6**2))/(2*105.66))  bins=25 w boxes title 'z = 10 mm, Silver 0.16 mm', \
+'run_four/0.1/zntuples/Z10.txt' u ((($4**2)+($5**2)+($6**2))/(2*105.66))  bins=25 w boxes title 'z = 10 mm, Tungsten 0.1 mm'
+
+set output 'matching_dE_3.png'
+
+set key top right
+set style fill transparent solid 0.5
+#set style fill solid 0.2
+
+p[][0:2600] 'run_one/0.8/zntuples/Z10.txt' u ((($4**2)+($5**2)+($6**2))/(2*105.66)) bins=25 w boxes title 'z = 10 mm, Mylar 0.8 mm' ,\
+'run_two/0.5/zntuples/Z10.txt' u ((($4**2)+($5**2)+($6**2))/(2*105.66))  bins=25 w boxes title 'z = 10 mm, Graphite 0.5 mm', \
+'run_three/0.2/zntuples/Z10.txt' u ((($4**2)+($5**2)+($6**2))/(2*105.66))  bins=25 w boxes title 'z = 10 mm, Silver 0.2 mm', \
+'run_four/0.13/zntuples/Z10.txt' u ((($4**2)+($5**2)+($6**2))/(2*105.66))  bins=25 w boxes title 'z = 10 mm, Tungsten 0.13 mm'
+
+set output 'matching_dE_4.png'
+
+set key top right
+set style fill transparent solid 0.5
+#set style fill solid 0.2
+
+p[][0:2600] 'run_one/0.8/zntuples/Z10.txt' u ((($4**2)+($5**2)+($6**2))/(2*105.66)) bins=25 w boxes title 'z = 10 mm, Mylar 0.8 mm' ,\
+'run_two/0.5/zntuples/Z10.txt' u ((($4**2)+($5**2)+($6**2))/(2*105.66))  bins=25 w boxes title 'z = 10 mm, Graphite 0.5 mm', \
+'run_three/0.208/zntuples/Z10.txt' u ((($4**2)+($5**2)+($6**2))/(2*105.66))  bins=25 w boxes title 'z = 10 mm, Silver 0.208 mm', \
+'run_four/0.137/zntuples/Z10.txt' u ((($4**2)+($5**2)+($6**2))/(2*105.66))  bins=25 w boxes title 'z = 10 mm, Tungsten 0.137 mm'
+
+set output 'matching_areal_2.png'
+
+set key top right
+set style fill transparent solid 0.5
+#set style fill solid 0.2
+
+p[][0:5500] 'run_four/0.057/zntuples/Z10.txt' u ((($4**2)+($5**2)+($6**2))/(2*105.66))  bins=25 w boxes title 'z = 10 mm, Tungsten 0.057 mm', \
+'run_three/0.1/zntuples/Z10.txt' u ((($4**2)+($5**2)+($6**2))/(2*105.66))  bins=25 w boxes title 'z = 10 mm, Silver 0.1 mm', \
+'run_one/0.4/zntuples/Z10.txt' u ((($4**2)+($5**2)+($6**2))/(2*105.66)) bins=25 w boxes title 'z = 10 mm, Mylar 0.4 mm' ,\
+'run_two/0.24/zntuples/Z10.txt' u ((($4**2)+($5**2)+($6**2))/(2*105.66))  bins=25 w boxes title 'z = 10 mm, Graphite 0.24 mm'
+
+set output 'matching_areal_2_graphite_mylar.png'
+
+p[0:3.5][] 'run_one/0.4/zntuples/Z10.txt' u ((($4**2)+($5**2)+($6**2))/(2*105.66)) bins=25 w boxes title 'z = 10 mm, Mylar 0.4 mm' ,\
+'run_two/0.24/zntuples/Z10.txt' u ((($4**2)+($5**2)+($6**2))/(2*105.66))  bins=25 w boxes title 'z = 10 mm, Graphite 0.24 mm'
+
+set output 'silver_and_tungsten.png'
+
+p[][0:5000] 'run_four/0.057/zntuples/Z10.txt' u ((($4**2)+($5**2)+($6**2))/(2*105.66))  bins=25 w boxes title 'z = 10 mm, Tungsten 0.057 mm', \
+'run_three/0.1/zntuples/Z10.txt' u ((($4**2)+($5**2)+($6**2))/(2*105.66))  bins=25 w boxes title 'z = 10 mm, Silver 0.1 mm', \

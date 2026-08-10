@@ -1,0 +1,21 @@
+# Load styles
+load "~/gpls/nature.journal"
+load "~/gpls/bluegold-sl.colour"
+
+set term pdfcairo
+
+# Set axis labels
+set ylabel "E/{/Symbol r} - S (MeV cm^{2}/g)"
+
+set xlabel "E-field (kV/m)"
+
+set output 'eqm.pdf'
+
+set palette rgb 33,13,10
+set colorbox
+
+set ytics mirror
+
+set cblabel 'Captured muons (%)'
+
+p[][] 'optimisation_trail.txt' u ($1*1e3):((($1*0.01)/(8.3e-7)) - 208.7):($4/1e2) w p palette notitle

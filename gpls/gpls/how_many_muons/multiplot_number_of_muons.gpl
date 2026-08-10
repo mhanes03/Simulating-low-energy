@@ -1,0 +1,53 @@
+# Load styles
+load "~/gpls/nature.journal"
+load "~/gpls/bluegold-sl.colour"
+
+set format x '%1.0f'
+
+set term pngcairo
+set key top right
+
+#set cblabel 'Number of muons'
+
+
+set output 'number_of_muons.png'
+
+set multiplot layout 2,2 columns
+set key samplen 2 spacing .5 font ",10"
+
+set cblabel font ",11"
+
+#set ylabel font ",11"
+
+set logscale y 
+set mytics 10
+set format y "10^{%T}"
+set ytics mirror
+
+set xtics (0,300,600,900)
+
+set logscale cb
+set format cb "10^{%T}"
+set cbrange [1e0:1e4]
+
+# Set axis labels
+set ylabel "Mean energy (eV)"
+set xlabel "z (mm)"
+
+set palette rgb 10,12,14
+set palette rgb 33,13,10
+set colorbox
+
+# Set axis labels
+set xlabel "z (mm)"
+set ylabel "Average energy (eV)"
+
+p[-10:1010][] '20/E_mean_no_muons_z.txt' u 1:(($2*1e6)):3 w p palette title 'E = 20 kV/m'
+
+p[-10:1010][] '30/E_mean_no_muons_z.txt' u 1:(($2*1e6)):3 w p palette title 'E = 30 kV/m'
+
+p[-10:1010][] '40/E_mean_no_muons_z.txt' u 1:(($2*1e6)):3 w p palette title 'E = 40 kV/m'
+
+p[-10:1010][] '50/E_mean_no_muons_z.txt' u 1:(($2*1e6)):3 w p palette title 'E = 50 kV/m'
+
+exit 

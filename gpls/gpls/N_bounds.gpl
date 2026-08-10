@@ -1,0 +1,21 @@
+# Load styles
+load "~/nature.journal"
+load "~/gpls/bluegold-sl.colour"
+
+cd 'tntuples' 
+
+set term pdfcairo
+
+set xlabel "t (ns)"
+set ylabel "Number muons (%)" 
+
+set output 'N_versus_t.pdf'
+
+p[0:2500][0:6.5] 'energy_and_number_time_bounds.txt' u 1:($5/1e2) w l title '0.1 eV - 1 keV', \
+            'energy_and_number_time_bounds.txt' u 1:($6/1e2) w l title 'Below 0.1 eV'
+
+set output 'N_versus_t_50keV.pdf'
+
+p[0:2500][0:6.5] 'energy_and_number_time_bounds.txt' u 1:($5/1e2) w l title '0.1 eV - 1 keV', \
+            'energy_and_number_time_bounds.txt' u 1:($6/1e2) w l title 'Below 0.1 eV', \
+            'energy_and_number_time_bounds.txt' u 1:($7/1e2) w l title '1 - 50 keV', \

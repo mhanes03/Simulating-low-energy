@@ -1,0 +1,27 @@
+# Load styles
+load "~/gpls/nature.journal"
+load "~/gpls/bluegold-sl.colour"
+
+set term pdfcairo
+
+# Set axis labels
+set ylabel "E/{/Symbol r} - S (MeV cm^{2}/g)"
+
+set xlabel "Pressure (mbar)"
+
+set output 'eqm_2.pdf'
+
+set palette rgb 33,13,10
+set colorbox
+set cblabel 'Paschen factor'
+
+
+set ytics mirror
+
+p[][] 'optimisation_trail.txt' u ($5*1013):((((($3*0.01)/$4) - 280))):1 w p palette notitle
+
+set output 'eqm_how_many_2.pdf'
+
+set cblabel 'Captured muons (%)'
+
+p[][] 'optimisation_trail.txt' u ($5*1013):((((($3*0.01)/$4) - 280))):($8/1e2) w p palette notitle

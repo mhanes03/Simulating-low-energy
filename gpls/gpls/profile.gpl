@@ -1,0 +1,24 @@
+# Load styles
+load "~/gpls/nature.journal"
+load "~/gpls/bluegold-sl.colour"
+
+set term pdfcairo
+set key top right
+
+set logscale y 
+set format y "10^{%T}"
+set mytics 10
+
+set xlabel 'z (mm)'
+set ylabel 'Number of muons'
+
+set output 'muons.pdf'
+
+p '1000/profile.txt' u 1:2 w l title 'p = 1000 mbar', \
+'750/profile.txt' u 1:2 w l title 'p = 750 mbar', \
+'500/profile.txt' u 1:2 w l title 'p = 500 mbar', \
+'250/profile.txt' u 1:2 w l title 'p = 250 mbar', \
+'150/profile.txt' u 1:2 w l title 'p = 150 mbar', \
+'100/profile.txt' u 1:2 w l title 'p = 100 mbar', \
+'50/profile.txt' u 1:2 w l title 'p = 50 mbar'
+

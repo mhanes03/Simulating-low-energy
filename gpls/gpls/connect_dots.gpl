@@ -1,0 +1,54 @@
+# Load styles
+load "~/gpls/nature.journal"
+load "~/gpls/bluegold-sl.colour"
+
+set term pdfcairo
+
+# Set axis labels
+set ylabel "Captured muons (%)"
+
+set output 'colour_coded_connected.pdf'
+
+set palette rgb 33,13,10
+set colorbox
+set cblabel 'Paschen factor'
+
+set xlabel "Pressure (mbar)"
+
+start = 1
+step = 0.1 
+end = 3
+
+p 'Paschen1.0.txt' u ($5*1013):($8/1E2):1 w l palette notitle, \
+'Paschen1.1.txt' u ($5*1013):($8/1E2):1 w l palette notitle, \
+'Paschen1.2.txt' u ($5*1013):($8/1E2):1 w l palette notitle, \
+'Paschen1.3.txt' u ($5*1013):($8/1E2):1 w l palette notitle, \
+'Paschen1.4.txt' u ($5*1013):($8/1E2):1 w l palette notitle, \
+'Paschen1.5.txt' u ($5*1013):($8/1E2):1 w l palette notitle, \
+'Paschen1.6.txt' u ($5*1013):($8/1E2):1 w l palette notitle, \
+'Paschen1.7.txt' u ($5*1013):($8/1E2):1 w l palette notitle, \
+'Paschen1.8.txt' u ($5*1013):($8/1E2):1 w l palette notitle, \
+'Paschen1.9.txt' u ($5*1013):($8/1E2):1 w l palette notitle, \
+'Paschen2.0.txt' u ($5*1013):($8/1E2):1 w l palette notitle, \
+'Paschen2.1.txt' u ($5*1013):($8/1E2):1 w l palette notitle, \
+'Paschen2.2.txt' u ($5*1013):($8/1E2):1 w l palette notitle, \
+'Paschen2.3.txt' u ($5*1013):($8/1E2):1 w l palette notitle, \
+'Paschen2.4.txt' u ($5*1013):($8/1E2):1 w l palette notitle, \
+'Paschen2.5.txt' u ($5*1013):($8/1E2):1 w l palette notitle, \
+'Paschen2.6.txt' u ($5*1013):($8/1E2):1 w l palette notitle, \
+'Paschen2.7.txt' u ($5*1013):($8/1E2):1 w l palette notitle, \
+'Paschen2.8.txt' u ($5*1013):($8/1E2):1 w l palette notitle, \
+'Paschen2.9.txt' u ($5*1013):($8/1E2):1 w l palette notitle, \
+'Paschen3.0.txt' u ($5*1013):($8/1E2):1 w l palette notitle, \
+
+
+
+set output 'colour_coded_density_connected.pdf'
+
+set palette rgb 33,13,10
+set colorbox
+set cblabel 'Pressure (mbar)'
+
+set xlabel "Paschen factor"
+
+p 'optimisation_trail.txt' u 1:($8/1E2):($5*1013) w p palette notitle
